@@ -7,6 +7,14 @@
   <link rel="apple-touch-icon" href="figures/logo.png?v=transparent">
   <title>AerialS2T</title>
   <style>
+    :root {
+      --heading-color: #1f5a91;
+      --subheading-color: #486b88;
+      --body-color: #34465a;
+      --muted-color: #64748b;
+      --section-tint: #f4f7fb;
+      --accent-color: #2b78c2;
+    }
     * {
       font-family: "Palatino Linotype", "Book Antiqua", Palatino, "Songti SC", serif;
       box-sizing: border-box;
@@ -15,7 +23,7 @@
       margin: 0;
       padding: 0;
       background: #fff;
-      color: #222;
+      color: var(--body-color);
     }
     .hero {
       position: relative;
@@ -151,7 +159,7 @@
     }
     .links a { text-decoration: none; }
     .pill {
-      background-color: rgba(43, 43, 43, 0.8);
+      background-color: rgba(22, 49, 80, 0.88);
       color: white;
       padding: 12px 26px;
       border-radius: 25px;
@@ -162,7 +170,7 @@
       box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
       border: 0;
     }
-    .links a:hover .pill { background-color: rgba(70, 70, 70, 0.9); }
+    .links a:hover .pill { background-color: rgba(31, 90, 145, 0.95); }
 
     /* Content sections below hero */
     .page-section {
@@ -170,7 +178,7 @@
       background: #fff;
     }
     .page-section.alt {
-      background: #f7f7f7;
+      background: var(--section-tint);
     }
     .page-section .container {
       text-align: left;
@@ -181,22 +189,24 @@
     }
     .section-title {
       text-align: center;
-      font-size: 2rem;
-      font-weight: 700;
+      font-size: 2.25rem;
+      font-weight: 800;
+      line-height: 1.2;
       margin: 0 0 1.4rem;
-      color: #1a1a1a;
+      color: var(--heading-color);
     }
     .section-subtitle {
       text-align: center;
-      font-size: 1.35rem;
-      font-weight: 700;
-      margin: 2rem 0 0.85rem;
-      color: #222;
+      font-size: 1.5rem;
+      font-weight: 600;
+      line-height: 1.3;
+      margin: 1.6rem 0 0.85rem;
+      color: var(--subheading-color);
     }
     .section-body {
       font-size: 1.08rem;
       line-height: 1.75;
-      color: #333;
+      color: var(--body-color);
       text-align: justify;
       margin: 0 0 1.1rem;
     }
@@ -216,7 +226,7 @@
     .figure-caption {
       text-align: center;
       font-size: 0.95rem;
-      color: #555;
+      color: var(--muted-color);
       margin: 0.7rem 0 0;
       font-style: italic;
     }
@@ -226,11 +236,11 @@
     }
     .viewer-title {
       text-align: center;
-      color: #e39b12;
-      font-size: 2.35rem;
-      margin: 0 0 28px;
-      font-weight: 700;
-      letter-spacing: 0.2px;
+      color: var(--subheading-color);
+      font-size: 1.5rem;
+      line-height: 1.3;
+      margin: 0 0 24px;
+      font-weight: 600;
     }
     .viewer-tabs {
       display: flex;
@@ -240,9 +250,9 @@
       margin-bottom: 8px;
     }
     .viewer-tabs button {
-      border: 1px solid #e2e2e2;
+      border: 1px solid #d8e2ec;
       background: #fff;
-      color: #333;
+      color: var(--body-color);
       border-radius: 10px;
       padding: 10px 18px;
       font-size: 1.02rem;
@@ -250,13 +260,13 @@
       box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
     }
     .viewer-tabs button.active {
-      background: #1d6fbf;
-      border-color: #1d6fbf;
+      background: var(--accent-color);
+      border-color: var(--accent-color);
       color: #fff;
     }
     .viewer-hint {
       text-align: center;
-      color: #8a8a8a;
+      color: var(--muted-color);
       font-style: italic;
       margin: 16px 0 22px;
       font-size: 1rem;
@@ -277,7 +287,7 @@
       box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
     }
     .thumb-row button.selected {
-      border-color: #1d6fbf;
+      border-color: var(--accent-color);
     }
     .thumb-row img {
       width: 100%;
@@ -288,7 +298,7 @@
     .detail-card {
       display: none;
       margin-top: 28px;
-      background: #f7f8fa;
+      background: var(--section-tint);
       border: 1px solid #eceff3;
       border-radius: 16px;
       padding: 28px 26px 24px;
@@ -296,9 +306,10 @@
     .detail-card.open { display: block; }
     .detail-heading {
       text-align: center;
-      font-size: 1.35rem;
+      font-size: 1.25rem;
       margin: 0 0 20px;
-      font-weight: 700;
+      font-weight: 600;
+      color: var(--subheading-color);
     }
     .detail-grid {
       display: grid;
@@ -327,7 +338,7 @@
     .detail-photos figcaption {
       font-size: 0.86rem;
       text-align: center;
-      color: #666;
+      color: var(--muted-color);
       padding: 6px 0 8px;
       font-style: normal;
     }
@@ -346,18 +357,18 @@
       font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
       font-size: 0.86rem;
       line-height: 1.55;
-      color: #222;
+      color: var(--body-color);
     }
     @media (max-width: 800px) {
       .detail-grid { grid-template-columns: 1fr; }
       .thumb-row { grid-template-columns: repeat(4, 1fr); gap: 8px; }
       .thumb-row img { height: 64px; }
-      .viewer-title { font-size: 1.7rem; }
+      .viewer-title { font-size: 1.25rem; }
     }
     .page-footer {
       text-align: center;
       padding: 28px 16px 40px;
-      color: #777;
+      color: var(--muted-color);
       font-size: 0.92rem;
       background: #fff;
     }
@@ -373,7 +384,8 @@
       .author-line { gap: 6px 18px; }
       .affiliation-logo { height: 64px; }
       .pill { padding: 10px 18px; font-size: 0.95rem; }
-      .section-title { font-size: 1.55rem; }
+      .section-title { font-size: 1.875rem; }
+      .section-subtitle { font-size: 1.25rem; }
       .section-body { font-size: 1rem; text-align: left; }
       .page-section { padding: 44px 0 28px; }
     }
@@ -454,7 +466,8 @@
 
   <section class="page-section" id="dataset">
     <div class="container">
-      <h2 class="section-title">AerialLIFT-10K Dataset</h2>
+      <h2 class="section-title">Dataset</h2>
+      <h3 class="section-subtitle">AerialLIFT-10K</h3>
       <div class="figure-wrap">
         <img src="figures/dataset.png" alt="AerialLIFT-10K dataset overview">
         <p class="figure-caption">Figure 2. AerialLIFT-10K dataset overview across maps, targets, weather, and acquisition statistics.</p>
@@ -489,7 +502,7 @@
   </section>
 
   <footer class="page-footer">
-    Website template adapted from <a href="https://hybridrobotics.github.io/MomaGraph/" target="_blank" style="color:#555;">MomaGraph</a>.
+    Website template adapted from <a href="https://hybridrobotics.github.io/MomaGraph/" target="_blank" style="color:var(--heading-color);">MomaGraph</a>.
   </footer>
 
   <script>
