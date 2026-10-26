@@ -3,9 +3,9 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" type="image/png" href="figures/logo.png">
-  <link rel="apple-touch-icon" href="figures/logo.png">
-  <title>AerialS2T: Learning Vision-Language-Action Policies for Aerial Search-to-Track</title>
+  <link rel="icon" type="image/png" href="figures/logo.png?v=transparent">
+  <link rel="apple-touch-icon" href="figures/logo.png?v=transparent">
+  <title>AerialS2T</title>
   <style>
     * {
       font-family: "Palatino Linotype", "Book Antiqua", Palatino, "Songti SC", serif;
@@ -69,7 +69,7 @@
       gap: 14px;
       margin-bottom: 22px;
     }
-    .brand-icon { width: 64px; height: 64px; flex: 0 0 auto; object-fit: contain; filter: url(#logo-white-knockout); }
+    .brand-icon { width: 64px; height: 64px; flex: 0 0 auto; object-fit: contain; }
     .brand-name {
       font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
       font-size: clamp(3rem, 5vw, 4rem);
@@ -370,13 +370,6 @@
   </style>
 </head>
 <body>
-  <svg xmlns="http://www.w3.org/2000/svg" width="0" height="0" aria-hidden="true" focusable="false" style="position:absolute">
-    <defs>
-      <filter id="logo-white-knockout" color-interpolation-filters="sRGB" x="0" y="0" width="100%" height="100%">
-        <feColorMatrix type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  -1 -1 -1 0 2.85"/>
-      </filter>
-    </defs>
-  </svg>
   <section class="hero">
     <div class="hero-video">
       <video class="tl" playsinline muted>
@@ -397,7 +390,7 @@
     <div class="hero-body">
       <div class="container" id="top">
         <div class="brand" aria-label="AerialS2T">
-          <img class="brand-icon" src="figures/logo.png" alt="" width="64" height="64">
+          <img class="brand-icon" src="figures/logo.png?v=transparent" alt="" width="64" height="64">
           <span class="brand-name" aria-hidden="true"><span class="brand-aerial">Aerial</span><span class="brand-s">S</span><span class="brand-two">2</span><span class="brand-t">T</span></span>
         </div>
         <h1 class="publication-title">Learning Vision-Language-Action Policies<br>for Aerial Search-to-Track</h1>
