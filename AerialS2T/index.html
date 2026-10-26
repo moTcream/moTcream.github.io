@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>AerialS2T</title>
+  <title>AerialS2T: Learning Vision-Language-Action Policies for Aerial Search-to-Track</title>
   <style>
     * {
       font-family: "Palatino Linotype", "Book Antiqua", Palatino, "Songti SC", serif;
@@ -45,7 +45,7 @@
     .hero-video .bl { bottom: 0; left: 0; }
     .hero-video .br { bottom: 0; right: 0; }
     .overlay {
-      background: rgba(0, 0, 0, 0.18);
+      background: linear-gradient(180deg, rgba(7, 16, 30, 0.35), rgba(7, 16, 30, 0.56) 55%, rgba(7, 16, 30, 0.38));
       z-index: 2;
     }
     .hero-body {
@@ -60,48 +60,61 @@
       text-align: center;
       padding: 0 24px;
     }
-    .publication-title {
-      margin: 0 0 0.7rem;
+    .brand {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      margin-bottom: 22px;
+    }
+    .brand-icon { width: 76px; height: 76px; flex: 0 0 auto; }
+    .brand-name {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(2.5rem, 5.2vw, 4.3rem);
+      font-weight: 700;
       line-height: 1;
+      letter-spacing: -0.045em;
     }
-    .wordmark {
-      height: 112px;
-      width: auto;
-      display: inline-block;
-      filter: drop-shadow(0 3px 8px rgba(0, 0, 0, 0.45));
+    .brand-aerial { color: #5798ff; }
+    .brand-s { color: #fa6089; }
+    .brand-two { color: #f5c149; }
+    .brand-t { color: #39c3b1; }
+    .publication-title {
+      max-width: 1040px;
+      margin: 0 auto 28px;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-size: clamp(1.8rem, 3.5vw, 3rem);
+      font-weight: 650;
+      line-height: 1.22;
+      letter-spacing: -0.025em;
+      color: #fff;
+      text-wrap: balance;
+      text-shadow: 0 2px 16px rgba(0, 0, 0, 0.4);
     }
-    .publication-subtitle {
-      font-size: 1.85rem;
-      font-weight: 400;
-      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
-      color: white;
-      margin: 0 auto 1.4rem;
-      line-height: 1.35;
-      max-width: 920px;
+    .author-line {
+      margin: 0 0 16px;
+      font-size: 1.45rem;
+      line-height: 1.5;
+      color: #fff;
+      text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
     }
+    .author-line sup { font-size: 0.65em; margin-left: 3px; }
     .affiliations {
       display: flex;
       justify-content: center;
-      align-items: flex-start;
-      gap: 48px;
-      margin-top: 22px;
+      gap: 12px 32px;
+      margin: 0 auto;
       flex-wrap: wrap;
+      max-width: 950px;
     }
-    .affiliation { text-align: center; width: 250px; }
-    .affiliation img {
-      height: 78px;
-      margin-bottom: 8px;
-      display: block;
-      margin-left: auto;
-      margin-right: auto;
-    }
-    .affiliation img.npu { height: 96px; margin-bottom: 2px; }
-    .affiliation p {
-      font-size: 0.92rem;
-      color: white;
+    .affiliation {
       margin: 0;
-      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+      color: #f3f5f8;
+      font-size: 1rem;
+      line-height: 1.5;
+      text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
     }
+    .affiliation sup { margin-right: 5px; font-size: 0.7em; }
     .links {
       display: flex;
       justify-content: center;
@@ -121,7 +134,7 @@
       display: inline-flex;
       align-items: center;
       box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-      border: 1px solid rgba(255, 255, 255, 0.2);
+      border: 0;
     }
     .links a:hover .pill { background-color: rgba(70, 70, 70, 0.9); }
 
@@ -324,9 +337,14 @@
     }
 
     @media (max-width: 800px) {
-      .wordmark { height: 72px; }
-      .publication-subtitle { font-size: 1.2rem; }
-      .affiliation { width: 180px; }
+      .hero-body { padding: 48px 0; }
+      .brand { gap: 10px; margin-bottom: 20px; }
+      .brand-icon { width: 56px; height: 56px; }
+      .publication-title { margin-bottom: 22px; }
+      .author-line { font-size: 1.2rem; }
+      .affiliations { flex-direction: column; gap: 6px; }
+      .affiliation { font-size: 0.9rem; }
+      .pill { padding: 10px 18px; font-size: 0.95rem; }
       .section-title { font-size: 1.55rem; }
       .section-body { font-size: 1rem; text-align: left; }
       .page-section { padding: 44px 0 28px; }
@@ -353,14 +371,16 @@
 
     <div class="hero-body">
       <div class="container" id="top">
-        <h1 class="publication-title"><img class="wordmark" src="figures/aerials2t-wordmark.png" alt="AerialS2T"></h1>
-        <h2 class="publication-subtitle">A vision-language-action dataset for AerialS2T</h2>
+        <div class="brand" aria-label="AerialS2T">
+          <img class="brand-icon" src="figures/aerials2t-icon.svg" alt="" width="76" height="76">
+          <span class="brand-name" aria-hidden="true"><span class="brand-aerial">Aerial</span><span class="brand-s">S</span><span class="brand-two">2</span><span class="brand-t">T</span></span>
+        </div>
+        <h1 class="publication-title">Learning Vision-Language-Action Policies<br>for Aerial Search-to-Track</h1>
 
-        <div class="affiliations">
-          <div class="affiliation">
-            <img src="figures/npu-badge.png" alt="Northwestern Polytechnical University">
-            <p>Northwestern Polytechnical University</p>
-          </div>
+        <p class="author-line">Ruiqiu Zhu<sup>2</sup></p>
+        <div class="affiliations" aria-label="Affiliations">
+          <p class="affiliation"><sup>1</sup>Northwestern Polytechnical University</p>
+          <p class="affiliation"><sup>2</sup>Australian National University</p>
         </div>
 
         <nav class="links" aria-label="Project navigation">
