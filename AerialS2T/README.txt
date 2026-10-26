@@ -1,5 +1,5 @@
 AerialS2T 项目页源码
-对应线上页面：https://motcream.github.io/UAV_VLA/
+对应线上页面：https://motcream.github.io/AerialS2T/
 
 index.html          页面
 cover_*_v7.mp4      首页四段循环视频

@@ -79,53 +79,6 @@
       line-height: 1.35;
       max-width: 920px;
     }
-    @keyframes badgePulse {
-      0% { box-shadow: 0 4px 12px rgba(255, 77, 79, 0.15); transform: scale(1); }
-      50% { box-shadow: 0 6px 16px rgba(255, 77, 79, 0.35); transform: scale(1.02); }
-      100% { box-shadow: 0 4px 12px rgba(255, 77, 79, 0.15); transform: scale(1); }
-    }
-    .badge-row {
-      display: flex;
-      justify-content: center;
-      margin-bottom: 1.15rem;
-    }
-    .conference-badge {
-      animation: badgePulse 1.8s ease-in-out infinite;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      background: linear-gradient(135deg, #FDB515, #f8cf5b);
-      color: #1a1a1a;
-      padding: 10px 18px;
-      border-radius: 24px;
-      font-weight: 700;
-      letter-spacing: 0.5px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
-      text-transform: uppercase;
-      font-size: 1rem;
-    }
-    .conference-badge .hot { color: #ff4d4f; }
-    .author-line {
-      font-size: 1.35rem;
-      line-height: 1.5;
-      margin: 0 0 4px;
-      text-align: center;
-      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
-      color: white;
-    }
-    .author-line a {
-      color: white;
-      text-decoration: none;
-    }
-    .author-line sup {
-      margin-right: 22px;
-      font-size: 0.72em;
-    }
-    .author-line sup img {
-      height: 22px;
-      vertical-align: middle;
-      margin-left: 3px;
-    }
     .affiliations {
       display: flex;
       justify-content: center;
@@ -147,14 +100,6 @@
       font-size: 0.92rem;
       color: white;
       margin: 0;
-      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
-    }
-    .note {
-      font-size: 0.95rem;
-      color: #eee;
-      text-align: center;
-      margin: 16px 0 0;
-      font-style: italic;
       text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
     }
     .links {
@@ -235,47 +180,6 @@
       color: #555;
       margin: 0.7rem 0 0;
       font-style: italic;
-    }
-    .finding-box {
-      background: #fff;
-      border-left: 4px solid #FDB515;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
-      padding: 16px 18px;
-      margin: 1.2rem 0;
-      border-radius: 0 8px 8px 0;
-    }
-    .finding-box strong {
-      display: block;
-      margin-bottom: 0.4rem;
-      color: #1a1a1a;
-    }
-    .bibtex-wrap {
-      position: relative;
-      background: #1e1e1e;
-      color: #f5f5f5;
-      border-radius: 10px;
-      padding: 18px 18px 16px;
-      overflow-x: auto;
-    }
-    .bibtex-wrap pre {
-      margin: 0;
-      white-space: pre-wrap;
-      word-break: break-word;
-      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-      font-size: 0.92rem;
-      line-height: 1.5;
-    }
-    .copy-btn {
-      position: absolute;
-      top: 12px;
-      right: 12px;
-      border: none;
-      background: #FDB515;
-      color: #1a1a1a;
-      font-weight: 700;
-      padding: 8px 12px;
-      border-radius: 8px;
-      cursor: pointer;
     }
     .viewer {
       margin: 64px auto 8px;
@@ -422,7 +326,6 @@
     @media (max-width: 800px) {
       .wordmark { height: 72px; }
       .publication-subtitle { font-size: 1.2rem; }
-      .author-line { font-size: 1.05rem; }
       .affiliation { width: 180px; }
       .section-title { font-size: 1.55rem; }
       .section-body { font-size: 1rem; text-align: left; }
@@ -453,85 +356,29 @@
         <h1 class="publication-title"><img class="wordmark" src="figures/aerials2t-wordmark.png" alt="AerialS2T"></h1>
         <h2 class="publication-subtitle">A vision-language-action dataset for AerialS2T</h2>
 
-        <div class="badge-row">
-          <span class="conference-badge">
-            💐 ICLR 2026 🤖 🔥 <span class="hot">Oral</span> <span class="hot">Top 1%</span>
-          </span>
-        </div>
-
-        <p class="author-line">
-          <a href="https://scholar.google.com/citations?user=jOPXmhIAAAAJ&amp;hl=en" target="_blank">Yuanchen Ju</a><sup>*<img src="figures/bkl.png" alt=""></sup>
-          <a href="https://cheryyunl.github.io/" target="_blank">Yongyuan Liang</a><sup>*<img src="figures/umd.png" alt=""></sup>
-          <a href="https://wangyenjen.github.io/" target="_blank">Yen-Jen Wang</a><sup>*<img src="figures/bkl.png" alt=""></sup>
-        </p>
-        <p class="author-line">
-          <a href="https://user432.github.io/" target="_blank">Nandiraju Gireesh</a><sup></sup>
-          <a href="https://scholar.google.com/citations?user=rG90YVAAAAAJ&amp;hl=zh-CN" target="_blank">Yuanliang Ju</a><sup><img src="figures/uoft.png" alt=""></sup>
-          <a href="https://sjlee.cc/" target="_blank">Seungjae Lee</a><sup><img src="figures/umd.png" alt=""></sup>
-          <a href="https://georgegu1997.github.io/" target="_blank">Qiao Gu</a><sup><img src="figures/uoft.png" alt=""></sup>
-          <a href="https://elvishh77.github.io/" target="_blank">Elvis Hsieh</a><sup><img src="figures/bkl.png" alt=""></sup>
-        </p>
-        <p class="author-line">
-          <a href="https://furong-huang.com/" target="_blank">Furong Huang</a><sup>†<img src="figures/umd.png" alt=""></sup>
-          <a href="https://hybrid-robotics.berkeley.edu/koushil/" target="_blank">Koushil Sreenath</a><sup>†<img src="figures/bkl.png" alt=""></sup>
-        </p>
-
         <div class="affiliations">
           <div class="affiliation">
             <img src="figures/npu-badge.png" alt="Northwestern Polytechnical University">
-            <p><sup>1</sup>Northwestern Polytechnical University</p>
-          </div>
-          <div class="affiliation">
-            <img src="figures/umd.png" alt="UMD">
-            <p><sup>2</sup>University of Maryland, College Park</p>
-          </div>
-          <div class="affiliation">
-            <img src="figures/uoft.png" alt="University of Toronto">
-            <p><sup>3</sup>University of Toronto</p>
+            <p>Northwestern Polytechnical University</p>
           </div>
         </div>
-        <p class="note">∗ Equal Contribution, † Equal Advising</p>
 
-        <div class="links">
-          <a href="https://arxiv.org/abs/2512.16909" target="_blank"><span class="pill">arXiv</span></a>
-          <a href="https://arxiv.org/pdf/2512.16909" target="_blank"><span class="pill">Paper</span></a>
-          <a href="https://x.com/ju_yuanchen/status/2003514316008419801" target="_blank"><span class="pill">Twitter / X</span></a>
-          <a href="https://github.com/HybridRobotics/MomaGraph" target="_blank"><span class="pill">Code</span></a>
-          <a href="https://huggingface.co/datasets/cheryyunl/momagraph_train" target="_blank"><span class="pill">MomaGraph-Scenes</span></a>
-          <a href="https://huggingface.co/datasets/cheryyunl/MomaGraph-Bench" target="_blank"><span class="pill">MomaGraph-Bench</span></a>
-          <a href="https://huggingface.co/datasets/cheryyunl/momagraph_correspondence" target="_blank"><span class="pill">MomaGraph-Bench (Correspondence)</span></a>
-          <a href="https://huggingface.co/cheryyunl/MomaGraph-R1" target="_blank"><span class="pill">MomaGraph-R1</span></a>
-        </div>
+        <nav class="links" aria-label="Project navigation">
+          <a href="#overview"><span class="pill">Overview</span></a>
+          <a href="#method"><span class="pill">Method</span></a>
+          <a href="#dataset"><span class="pill">Dataset</span></a>
+          <a href="https://github.com/moTcream/AerialS2T" target="_blank" rel="noopener noreferrer"><span class="pill">GitHub</span></a>
+        </nav>
       </div>
-    </div>
-  </section>
-
-  <section class="page-section" id="abstract">
-    <div class="container">
-      <h2 class="section-title">Abstract</h2>
-      <p class="section-body">
-        Mobile manipulators in households must both navigate and manipulate. This requires a compact, semantically rich scene representation that captures where objects are, how they function, and which parts are actionable. Scene graphs are a natural choice, yet prior work often separates spatial and functional relations, treats scenes as static snapshots without object states or temporal updates, and overlooks information most relevant for accomplishing the current task. To overcome these shortcomings, we introduce MomaGraph, a unified scene representation for embodied agents that integrates spatial-functional relationships and part-level interactive elements. However, advancing such a representation requires both suitable data and rigorous evaluation, which have been largely missing. To address this, we construct MomaGraph-Scenes, the first large-scale dataset of richly annotated, task-driven scene graphs in household environments, and design MomaGraph-Bench, a systematic evaluation suite spanning six reasoning capabilities from high-level planning to fine-grained scene understanding. Built upon this foundation, we further develop MomaGraph-R1, a 7B vision–language model trained with reinforcement learning on MomaGraph-Scenes. MomaGraph-R1 predicts task-oriented scene graphs and serves as a zero-shot task planner under a Graph-then-Plan framework. Extensive experiments show that our model achieves state-of-the-art results among open-source models, reaching 71.6% accuracy on the benchmark (+11.4% over the best baseline), while generalizing across public benchmarks and transferring effectively to real-robot experiments.
-      </p>
     </div>
   </section>
 
   <section class="page-section alt" id="overview">
     <div class="container">
       <h2 class="section-title">Overview</h2>
-      <p class="section-body">
-        To ground our analysis, before the full evaluations we perform two motivating experiments on the MomaGraph-Bench. These comparisons are designed to validate our motivation and design principles, and to reveal why our proposed model is essential for embodied task planning.
-      </p>
       <div class="figure-wrap">
         <img src="figures/aerials2t-teaser.jpg" alt="AerialS2T overview">
         <p class="figure-caption">Figure 1. AerialS2T task overview: takeoff, search, acquire, and track under language instructions.</p>
-      </div>
-      <div class="finding-box">
-        <strong>Preliminary Findings 1</strong>
-        In contrast to directly relying on vision-language models for task planning from raw scene images, our Graph-then-Plan strategy—which incorporates task-oriented scene graph generation as an intermediate structured representation prior to high-level planning, substantially improves both the accuracy and robustness of task planning.
-      </div>
-      <div class="finding-box">
-        <strong>Preliminary Findings 2</strong>
-        Graph representations that rely solely on spatial relationships or solely on functional relationships are insufficient. For embodied agents, a unified representation that jointly models both spatial and functional relationships provides a more complete and effective foundation for perception and action.
       </div>
     </div>
   </section>
@@ -539,27 +386,17 @@
   <section class="page-section" id="method">
     <div class="container">
       <h2 class="section-title">Method</h2>
-      <h3 class="section-subtitle">VLMs Learn Scene Graph Representations with Reinforcement Learning</h3>
-      <p class="section-body">
-        We use reinforcement learning with a graph-based reward to teach VLMs to build more accurate and task-relevant scene graphs. The reward checks action correctness, edge accuracy, and node completeness, while also enforcing proper format and concise output. This feedback helps the model learn compact, structured scene graphs that better support planning in embodied tasks.
-      </p>
+      <h3 class="section-subtitle">MoViC</h3>
       <div class="figure-wrap">
         <img src="figures/movic-architecture.jpg" alt="MoViC architecture">
         <p class="figure-caption">Figure 2. Method overview: MoViC architecture with recurrent target forecasting and geometric action refinement.</p>
       </div>
-      <h3 class="section-subtitle">State-Aware Dynamic Scene Graph Update</h3>
-      <p class="section-body">
-        The scene graph initially encodes task-relevant objects and uncertain, one-to-many functional hypotheses. After the agent executes an action and observes the resulting state change, the update function eliminates inconsistent hypotheses and reinforces confirmed correspondences. For example, only the knob that ignites the burner retains a control edge, while others are pruned, enabling the scene graph to evolve into a compact, state-aware dynamic representation.
-      </p>
     </div>
   </section>
 
   <section class="page-section alt" id="dataset">
     <div class="container">
-      <h2 class="section-title">Dataset</h2>
-      <p class="section-body">
-        We introduce MomaGraph-Scenes, the first dataset designed to provide a more comprehensive and task-relevant scene representation. Our dataset jointly encodes spatial relationships and functional relationships, which explicitly represent interactive elements such as handles and buttons. Our dataset consists of approximately 1,050 task-oriented subgraphs and 6,278 multi-view RGB images, collected from a combination of manually collected real-world data, re-annotated existing datasets, and simulated environments built with AI2-THOR. These samples span more than 350 diverse household scenes and encompass 93 distinct task instructions. Compared with prior datasets, our annotations are significantly more detailed, and capturing interaction semantics at both the object and part levels. This broad coverage ensures rich variability in scene layouts, object configurations, and interaction types, supporting robust learning and evaluation of embodied reasoning.
-      </p>
+      <h2 class="section-title">AerialLIFT-10K Dataset</h2>
       <div class="figure-wrap">
         <img src="figures/aeriallift-10k-overview.png?v=3" alt="AerialLIFT-10K dataset overview">
         <p class="figure-caption">Figure 3. AerialLIFT-10K dataset overview across maps, targets, weather, and acquisition statistics.</p>
@@ -579,49 +416,6 @@
         </div>
       </div>
 
-      <h3 class="section-subtitle">MomaGraph Benchmark and Evaluation</h3>
-      <p class="section-body">
-        We introduce MomaGraph-Bench, the first benchmark that jointly evaluates fine-grained scene understanding and task planning abilities across diverse levels of difficulty. Our design principle for MomaGraph-Bench is to evaluate whether advances in scene understanding provide tangible improvements in downstream task planning and reasoning. Our evaluation framework examines six essential reasoning capabilities in four tiers of difficulty levels: (1) Action Sequence Reasoning, (2) Spatial Reasoning, (3) Object Affordance Reasoning, (4) Precondition &amp; Effect Reasoning, (5) Goal Decomposition, and (6) Visual Correspondence. MomaGraph-Bench is formulated as a multi-choice VQA task which comprises 294 diverse indoor scenes with 1,446 multi-view images, featuring 352 task-oriented scene graphs spanning 1,315 instances that range from simple object manipulation (Tier 1) to complex multi-step planning (Tier 4) scenarios.
-      </p>
-    </div>
-  </section>
-
-  <section class="page-section" id="results">
-    <div class="container">
-      <h2 class="section-title">Experimental Results</h2>
-      <p class="section-body">
-        We compare the performance of our MomaGraph-R1 with other models across all task tiers in MomaGraph-Bench to rigorously assess embodied planning, including state-of-the-art closed source models (Claude-4-Sonnet, GPT-5, Gemini-2.5-Pro) and leading open source models (InstructBLIP, LLaVA-V1.5, DeepSeek-VL2, InternVL2.5, LLaVA-OneVision, Qwen2.5). We further examine whether Graph-then-Plan brings performance gains by evaluating each model under two controlled settings: (i) Direct Plan (w/o Graph): the model is directly evaluated on task planning in MomaGraph-Bench using multi-view observations and instructions; (ii) Graph-then-Plan (w/ Graph): the model first generates a task-oriented scene graph, capturing nodes, spatial and functional edges, and action types, and then performs task planning conditioned on the graph.
-      </p>
-      <h3 class="section-subtitle">Experiment 1: Result Analysis</h3>
-      <p class="section-body">
-        Across all models, the w/ Graph setting consistently outperforms the w/o Graph baseline, demonstrating that explicitly structuring task-oriented scene graphs provides a tangible benefit for downstream planning. Our MomaGraph-R1 achieves performance on par with closed-source giants like Claude-4-Sonnet and GPT-5, while clearly surpassing all leading open-source VLMs. Notably, MomaGraph-R1 delivers a +11.4% relative improvement over its base model (Qwen2.5-VL-7B) under w/ Graph, highlighting the effectiveness of reinforcement learning with graph-based rewards.
-      </p>
-      <h3 class="section-subtitle">Experiment 2: Benchmark Evaluation for Visual Correspondence</h3>
-      <p class="section-body">
-        As the model learns scene representations from multi-view observations, it exhibits an emergent ability of cross-view consistency, which can reason about the same point across different viewpoints. Scene graph representations enhance performance universally by reducing VLM hallucinations in visual perception. Our MomaGraph-R1 achieves state-of-the-art performance among open-source VLMs, leading by 3.8% on BLINK and 4.8% on our correspondence benchmark compared to the best competing open-source models.
-      </p>
-      <h3 class="section-subtitle">Experiment 3: Real Robot Demonstrations</h3>
-      <p class="section-body">
-        To validate the effectiveness of our model in real-world settings, we deploy on the RobotEra Q5, a bimanual humanoid platform with a mobile base. An Intel RealSense D455 camera is mounted to enhance RGB-D perception. Importantly, all evaluation scenes are unseen, ensuring that performance reflects true generalization. We evaluate our model on four representative tasks: two contact interactions (opening a cabinet, opening a microwave) and two remote interactions (e.g., turning on the TV, turning off a light).
-      </p>
-    </div>
-  </section>
-
-  <section class="page-section alt" id="citation">
-    <div class="container">
-      <h2 class="section-title">Citation</h2>
-      <p class="section-body" style="text-align:center; margin-bottom:1.2rem;">
-        If you find this work useful for your research, please consider citing:
-      </p>
-      <div class="bibtex-wrap">
-        <button class="copy-btn" type="button" onclick="copyBibtex()">📋 Copy</button>
-        <pre id="bibtex-code">@article{ju2025momagraph,
-  title={MomaGraph: State-Aware Unified Scene Graphs with Vision-Language Model for Embodied Task Planning},
-  author={Ju, Yuanchen and Liang, Yongyuan and Wang, Yen-Jen and Gireesh, Nandiraju and Ju, Yuanliang and Lee, Seungjae and Gu, Qiao and Hsieh, Elvis and Huang, Furong and Sreenath, Koushil},
-  journal={International Conference on Learning Representations (ICLR) Oral},
-  year={2026}
-}</pre>
-      </div>
     </div>
   </section>
 
@@ -725,38 +519,6 @@
         if (hint) hint.textContent = "Dataset viewer is still loading.";
       });
 
-    function copyBibtex() {
-      const bibtexText = document.getElementById("bibtex-code").textContent;
-      const button = document.querySelector(".copy-btn");
-      const originalText = button.innerHTML;
-      const done = () => {
-        button.innerHTML = "✓ Copied!";
-        button.style.background = "#27ae60";
-        setTimeout(() => {
-          button.innerHTML = originalText;
-          button.style.background = "#FDB515";
-        }, 2000);
-      };
-      if (navigator.clipboard && navigator.clipboard.writeText) {
-        navigator.clipboard.writeText(bibtexText).then(done).catch(() => {
-          const textarea = document.createElement("textarea");
-          textarea.value = bibtexText;
-          document.body.appendChild(textarea);
-          textarea.select();
-          document.execCommand("copy");
-          document.body.removeChild(textarea);
-          done();
-        });
-      } else {
-        const textarea = document.createElement("textarea");
-        textarea.value = bibtexText;
-        document.body.appendChild(textarea);
-        textarea.select();
-        document.execCommand("copy");
-        document.body.removeChild(textarea);
-        done();
-      }
-    }
   </script>
 </body>
 </html>
