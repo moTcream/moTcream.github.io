@@ -69,10 +69,10 @@
       gap: 14px;
       margin-bottom: 22px;
     }
-    .brand-icon { width: 76px; height: 76px; flex: 0 0 auto; object-fit: contain; filter: url(#logo-white-knockout); }
+    .brand-icon { width: 112px; height: 112px; flex: 0 0 auto; object-fit: contain; filter: url(#logo-white-knockout); }
     .brand-name {
       font-family: Georgia, "Times New Roman", serif;
-      font-size: clamp(2.5rem, 5.2vw, 4.3rem);
+      font-size: clamp(3rem, 8.5vw, 7rem);
       font-weight: 700;
       line-height: 1;
       letter-spacing: -0.045em;
@@ -85,7 +85,7 @@
       max-width: 1040px;
       margin: 0 auto 28px;
       font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      font-size: clamp(1.8rem, 3.5vw, 3rem);
+      font-size: clamp(1.5rem, 2.8vw, 2.5rem);
       font-weight: 650;
       line-height: 1.22;
       letter-spacing: -0.025em;
@@ -128,7 +128,7 @@
     .affiliation p { margin: 0; }
     .affiliation-logo { width: 180px; height: 74px; object-fit: contain; }
     .affiliation-logo.nwpu { width: 74px; }
-    .affiliation-logo.anu { background: #fff; padding: 6px; border-radius: 4px; }
+    .affiliation-logo.anu { width: 64px; background: transparent; padding: 0; border-radius: 0; }
     .affiliation sup { margin-right: 5px; font-size: 0.7em; }
     .links {
       display: flex;
@@ -355,7 +355,7 @@
       .hero-body { padding: 48px 0; }
       .brand { gap: 10px; margin-bottom: 20px; }
       .brand-icon { width: 56px; height: 56px; }
-      .publication-title { margin-bottom: 22px; }
+      .publication-title { font-size: clamp(1.35rem, 5.3vw, 1.65rem); margin-bottom: 22px; }
       .author-line { font-size: 1.2rem; }
       .affiliations { flex-direction: row; gap: 18px 14px; }
       .affiliation { width: min(270px, 100%); font-size: 0.9rem; }
@@ -412,7 +412,7 @@
             <p><sup>1</sup>Northwestern Polytechnical University</p>
           </div>
           <div class="affiliation">
-            <img class="affiliation-logo anu" src="figures/anu-logo.svg" alt="Australian National University logo" width="180" height="74">
+            <img class="affiliation-logo anu" src="figures/anu-logo.svg?v=crest" alt="Australian National University crest" width="64" height="74">
             <p><sup>2</sup>Australian National University</p>
           </div>
         </div>
