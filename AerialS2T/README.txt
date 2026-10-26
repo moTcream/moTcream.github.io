@@ -15,3 +15,6 @@ figures/logo.png    项目 Logo
 浏览器打开 http://127.0.0.1:8765
 
 figures/anu-logo.svg 澳洲国立大学官网 Logo：https://d1blp3aor2iuhp.cloudfront.net/images/logos/logo-ANU-black.svg
+
+figures/whu-badge.png 武汉大学官网标准双色校徽，来自：https://www.whu.edu.cn/xxgk/wdbs.htm
+官方素材包：https://www.whu.edu.cn/new2024/wdbsxz/xiaohui.zip

@@ -106,13 +106,23 @@
       text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
     }
     .author-line sup { font-size: 0.65em; margin-left: 3px; }
+    .author-line span { white-space: nowrap; }
+    .author-line.primary { margin-bottom: 8px; }
+    .author-note {
+      margin: 20px 0 0;
+      font-size: 0.95rem;
+      font-style: italic;
+      line-height: 1.5;
+      color: #eee;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+    }
     .affiliations {
       display: flex;
       justify-content: center;
       gap: 12px 32px;
       margin: 0 auto;
       flex-wrap: wrap;
-      max-width: 950px;
+      max-width: 1000px;
     }
     .affiliation {
       display: flex;
@@ -128,7 +138,7 @@
     }
     .affiliation p { margin: 0; }
     .affiliation-logo { width: 180px; height: 74px; object-fit: contain; }
-    .affiliation-logo.nwpu { width: 74px; }
+    .affiliation-logo.nwpu, .affiliation-logo.whu { width: 74px; }
     .affiliation-logo.anu { width: 64px; background: transparent; padding: 0; border-radius: 0; }
     .affiliation sup { margin-right: 5px; font-size: 0.7em; }
     .links {
@@ -395,10 +405,16 @@
         </div>
         <h1 class="publication-title">Learning Vision-Language-Action Policies<br>for Aerial Search-to-Track</h1>
 
+        <p class="author-line primary">
+          <span>Jiaxu Tian<sup>1,*</sup></span>
+          <span>Ruibiao Zhu<sup>2,*</sup></span>
+          <span>Chaowei Wang<sup>1,*</sup></span>
+        </p>
         <p class="author-line">
-          <span>Jiaxu Tian<sup>1</sup></span>
-          <span>Ruibiao Zhu<sup>2</sup></span>
-          <span>Chaowei Wang<sup>1</sup></span>
+          <span>Tingyu Zhang<sup>1</sup></span>
+          <span>Jingjun Sun<sup>1</sup></span>
+          <span>Hongguang Zhang<sup>3</sup></span>
+          <span>Shan Gao<sup>1,†</sup></span>
         </p>
         <div class="affiliations" aria-label="Affiliations">
           <div class="affiliation">
@@ -409,7 +425,12 @@
             <img class="affiliation-logo anu" src="figures/anu-logo.svg?v=crest" alt="Australian National University crest" width="64" height="74">
             <p><sup>2</sup>Australian National University</p>
           </div>
+          <div class="affiliation">
+            <img class="affiliation-logo whu" src="figures/whu-badge.png" alt="Wuhan University logo" width="74" height="74">
+            <p><sup>3</sup>Wuhan University</p>
+          </div>
         </div>
+        <p class="author-note"><sup>*</sup> Equal Contribution, <sup>†</sup> Corresponding Author</p>
 
         <nav class="links" aria-label="Project navigation">
           <a href="#overview"><span class="pill">Overview</span></a>
