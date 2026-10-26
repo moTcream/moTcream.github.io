@@ -13,3 +13,5 @@ figures/logo.png    项目 Logo
 本地预览：
   python3 -m http.server 8765
 浏览器打开 http://127.0.0.1:8765
+
+figures/anu-logo.svg 澳洲国立大学官网 Logo：https://d1blp3aor2iuhp.cloudfront.net/images/logos/logo-ANU-black.svg

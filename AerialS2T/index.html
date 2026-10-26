@@ -92,7 +92,11 @@
       text-shadow: 0 2px 16px rgba(0, 0, 0, 0.4);
     }
     .author-line {
-      margin: 0 0 16px;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 8px 30px;
+      margin: 0 0 20px;
       font-size: 1.45rem;
       line-height: 1.5;
       color: #fff;
@@ -108,12 +112,21 @@
       max-width: 950px;
     }
     .affiliation {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      width: 300px;
       margin: 0;
       color: #f3f5f8;
       font-size: 1rem;
       line-height: 1.5;
       text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
     }
+    .affiliation p { margin: 0; }
+    .affiliation-logo { width: 180px; height: 74px; object-fit: contain; }
+    .affiliation-logo.nwpu { width: 74px; }
+    .affiliation-logo.anu { background: #fff; padding: 6px; border-radius: 4px; }
     .affiliation sup { margin-right: 5px; font-size: 0.7em; }
     .links {
       display: flex;
@@ -342,8 +355,10 @@
       .brand-icon { width: 56px; height: 56px; }
       .publication-title { margin-bottom: 22px; }
       .author-line { font-size: 1.2rem; }
-      .affiliations { flex-direction: column; gap: 6px; }
-      .affiliation { font-size: 0.9rem; }
+      .affiliations { flex-direction: row; gap: 18px 14px; }
+      .affiliation { width: min(270px, 100%); font-size: 0.9rem; }
+      .author-line { gap: 6px 18px; }
+      .affiliation-logo { height: 64px; }
       .pill { padding: 10px 18px; font-size: 0.95rem; }
       .section-title { font-size: 1.55rem; }
       .section-body { font-size: 1rem; text-align: left; }
@@ -384,10 +399,20 @@
         </div>
         <h1 class="publication-title">Learning Vision-Language-Action Policies<br>for Aerial Search-to-Track</h1>
 
-        <p class="author-line">Ruiqiu Zhu<sup>2</sup></p>
+        <p class="author-line">
+          <span>Jiaxu Tian<sup>1</sup></span>
+          <span>Ruibiao Zhu<sup>2</sup></span>
+          <span>Chaowei Wang<sup>1</sup></span>
+        </p>
         <div class="affiliations" aria-label="Affiliations">
-          <p class="affiliation"><sup>1</sup>Northwestern Polytechnical University</p>
-          <p class="affiliation"><sup>2</sup>Australian National University</p>
+          <div class="affiliation">
+            <img class="affiliation-logo nwpu" src="figures/npu-badge.png" alt="Northwestern Polytechnical University logo" width="74" height="74">
+            <p><sup>1</sup>Northwestern Polytechnical University</p>
+          </div>
+          <div class="affiliation">
+            <img class="affiliation-logo anu" src="figures/anu-logo.svg" alt="Australian National University logo" width="180" height="74">
+            <p><sup>2</sup>Australian National University</p>
+          </div>
         </div>
 
         <nav class="links" aria-label="Project navigation">
