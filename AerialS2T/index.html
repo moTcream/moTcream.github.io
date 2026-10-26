@@ -1,20 +1,762 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>AerialS2T</title>
   <style>
-    body { margin: 0; min-height: 100vh; display: grid; place-items: center; font-family: system-ui, sans-serif; color: #17243b; background: #f7f9fc; }
-    main { padding: 2rem; text-align: center; }
-    h1 { font-size: clamp(3rem, 10vw, 6rem); letter-spacing: -0.05em; margin: 0 0 1rem; }
-    p { color: #66758a; font-size: 1.15rem; }
+    * {
+      font-family: "Palatino Linotype", "Book Antiqua", Palatino, "Songti SC", serif;
+      box-sizing: border-box;
+    }
+    html, body {
+      margin: 0;
+      padding: 0;
+      background: #fff;
+      color: #222;
+    }
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      background: #000;
+    }
+    .hero-video,
+    .overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+    .hero-video { z-index: 1; }
+    .hero-video video {
+      position: absolute;
+      width: 50%;
+      height: 50%;
+      object-fit: cover;
+      background: #111;
+    }
+    .hero-video .tl { top: 0; left: 0; }
+    .hero-video .tr { top: 0; right: 0; }
+    .hero-video .bl { bottom: 0; left: 0; }
+    .hero-video .br { bottom: 0; right: 0; }
+    .overlay {
+      background: rgba(0, 0, 0, 0.18);
+      z-index: 2;
+    }
+    .hero-body {
+      z-index: 10;
+      position: relative;
+      width: 100%;
+      padding: 36px 0 28px;
+    }
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      text-align: center;
+      padding: 0 24px;
+    }
+    .publication-title {
+      margin: 0 0 0.7rem;
+      line-height: 1;
+    }
+    .wordmark {
+      height: 112px;
+      width: auto;
+      display: inline-block;
+      filter: drop-shadow(0 3px 8px rgba(0, 0, 0, 0.45));
+    }
+    .publication-subtitle {
+      font-size: 1.85rem;
+      font-weight: 400;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+      color: white;
+      margin: 0 auto 1.4rem;
+      line-height: 1.35;
+      max-width: 920px;
+    }
+    @keyframes badgePulse {
+      0% { box-shadow: 0 4px 12px rgba(255, 77, 79, 0.15); transform: scale(1); }
+      50% { box-shadow: 0 6px 16px rgba(255, 77, 79, 0.35); transform: scale(1.02); }
+      100% { box-shadow: 0 4px 12px rgba(255, 77, 79, 0.15); transform: scale(1); }
+    }
+    .badge-row {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 1.15rem;
+    }
+    .conference-badge {
+      animation: badgePulse 1.8s ease-in-out infinite;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: linear-gradient(135deg, #FDB515, #f8cf5b);
+      color: #1a1a1a;
+      padding: 10px 18px;
+      border-radius: 24px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+      text-transform: uppercase;
+      font-size: 1rem;
+    }
+    .conference-badge .hot { color: #ff4d4f; }
+    .author-line {
+      font-size: 1.35rem;
+      line-height: 1.5;
+      margin: 0 0 4px;
+      text-align: center;
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+      color: white;
+    }
+    .author-line a {
+      color: white;
+      text-decoration: none;
+    }
+    .author-line sup {
+      margin-right: 22px;
+      font-size: 0.72em;
+    }
+    .author-line sup img {
+      height: 22px;
+      vertical-align: middle;
+      margin-left: 3px;
+    }
+    .affiliations {
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      gap: 48px;
+      margin-top: 22px;
+      flex-wrap: wrap;
+    }
+    .affiliation { text-align: center; width: 250px; }
+    .affiliation img {
+      height: 78px;
+      margin-bottom: 8px;
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .affiliation img.npu { height: 96px; margin-bottom: 2px; }
+    .affiliation p {
+      font-size: 0.92rem;
+      color: white;
+      margin: 0;
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+    }
+    .note {
+      font-size: 0.95rem;
+      color: #eee;
+      text-align: center;
+      margin: 16px 0 0;
+      font-style: italic;
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+    }
+    .links {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 12px;
+      margin-top: 22px;
+      flex-wrap: wrap;
+    }
+    .links a { text-decoration: none; }
+    .pill {
+      background-color: rgba(43, 43, 43, 0.8);
+      color: white;
+      padding: 12px 26px;
+      border-radius: 25px;
+      font-size: 1.02rem;
+      font-weight: 500;
+      display: inline-flex;
+      align-items: center;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+    .links a:hover .pill { background-color: rgba(70, 70, 70, 0.9); }
+
+    /* Content sections below hero */
+    .page-section {
+      padding: 64px 0 40px;
+      background: #fff;
+    }
+    .page-section.alt {
+      background: #f7f7f7;
+    }
+    .page-section .container {
+      text-align: left;
+      max-width: 980px;
+    }
+    #dataset .container {
+      max-width: 1120px;
+    }
+    .section-title {
+      text-align: center;
+      font-size: 2rem;
+      font-weight: 700;
+      margin: 0 0 1.4rem;
+      color: #1a1a1a;
+    }
+    .section-subtitle {
+      text-align: center;
+      font-size: 1.35rem;
+      font-weight: 700;
+      margin: 2rem 0 0.85rem;
+      color: #222;
+    }
+    .section-body {
+      font-size: 1.08rem;
+      line-height: 1.75;
+      color: #333;
+      text-align: justify;
+      margin: 0 0 1.1rem;
+    }
+    .figure-wrap {
+      margin: 1.4rem auto 0.4rem;
+      text-align: center;
+    }
+    .figure-wrap img {
+      width: 100%;
+      max-width: 980px;
+      height: auto;
+      display: block;
+      margin: 0 auto;
+      border-radius: 6px;
+      box-shadow: 0 4px 18px rgba(0, 0, 0, 0.08);
+    }
+    .figure-caption {
+      text-align: center;
+      font-size: 0.95rem;
+      color: #555;
+      margin: 0.7rem 0 0;
+      font-style: italic;
+    }
+    .finding-box {
+      background: #fff;
+      border-left: 4px solid #FDB515;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
+      padding: 16px 18px;
+      margin: 1.2rem 0;
+      border-radius: 0 8px 8px 0;
+    }
+    .finding-box strong {
+      display: block;
+      margin-bottom: 0.4rem;
+      color: #1a1a1a;
+    }
+    .bibtex-wrap {
+      position: relative;
+      background: #1e1e1e;
+      color: #f5f5f5;
+      border-radius: 10px;
+      padding: 18px 18px 16px;
+      overflow-x: auto;
+    }
+    .bibtex-wrap pre {
+      margin: 0;
+      white-space: pre-wrap;
+      word-break: break-word;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: 0.92rem;
+      line-height: 1.5;
+    }
+    .copy-btn {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      border: none;
+      background: #FDB515;
+      color: #1a1a1a;
+      font-weight: 700;
+      padding: 8px 12px;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    .viewer {
+      margin: 64px auto 8px;
+      max-width: 1080px;
+    }
+    .viewer-title {
+      text-align: center;
+      color: #e39b12;
+      font-size: 2.35rem;
+      margin: 0 0 28px;
+      font-weight: 700;
+      letter-spacing: 0.2px;
+    }
+    .viewer-tabs {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 14px 16px;
+      margin-bottom: 8px;
+    }
+    .viewer-tabs button {
+      border: 1px solid #e2e2e2;
+      background: #fff;
+      color: #333;
+      border-radius: 10px;
+      padding: 10px 18px;
+      font-size: 1.02rem;
+      cursor: pointer;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+    }
+    .viewer-tabs button.active {
+      background: #1d6fbf;
+      border-color: #1d6fbf;
+      color: #fff;
+    }
+    .viewer-hint {
+      text-align: center;
+      color: #8a8a8a;
+      font-style: italic;
+      margin: 16px 0 22px;
+      font-size: 1rem;
+    }
+    .thumb-row {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 16px;
+    }
+    .thumb-row button {
+      padding: 0;
+      border: 3px solid transparent;
+      border-radius: 6px;
+      background: #fff;
+      cursor: pointer;
+      line-height: 0;
+      overflow: hidden;
+      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+    }
+    .thumb-row button.selected {
+      border-color: #1d6fbf;
+    }
+    .thumb-row img {
+      width: 100%;
+      height: 96px;
+      object-fit: cover;
+      display: block;
+    }
+    .detail-card {
+      display: none;
+      margin-top: 28px;
+      background: #f7f8fa;
+      border: 1px solid #eceff3;
+      border-radius: 16px;
+      padding: 28px 26px 24px;
+    }
+    .detail-card.open { display: block; }
+    .detail-heading {
+      text-align: center;
+      font-size: 1.35rem;
+      margin: 0 0 20px;
+      font-weight: 700;
+    }
+    .detail-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 22px;
+      align-items: stretch;
+    }
+    .detail-photos {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+    .detail-photos figure {
+      margin: 0;
+      background: #fff;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    }
+    .detail-photos img {
+      width: 100%;
+      height: 168px;
+      object-fit: cover;
+      display: block;
+    }
+    .detail-photos figcaption {
+      font-size: 0.86rem;
+      text-align: center;
+      color: #666;
+      padding: 6px 0 8px;
+      font-style: normal;
+    }
+    .record-box {
+      background: #fff;
+      border: 1px solid #ececec;
+      border-radius: 10px;
+      padding: 16px 18px;
+      max-height: 400px;
+      overflow: auto;
+    }
+    .record-box pre {
+      margin: 0;
+      white-space: pre-wrap;
+      word-break: break-word;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: 0.86rem;
+      line-height: 1.55;
+      color: #222;
+    }
+    @media (max-width: 800px) {
+      .detail-grid { grid-template-columns: 1fr; }
+      .thumb-row { grid-template-columns: repeat(4, 1fr); gap: 8px; }
+      .thumb-row img { height: 64px; }
+      .viewer-title { font-size: 1.7rem; }
+    }
+    .page-footer {
+      text-align: center;
+      padding: 28px 16px 40px;
+      color: #777;
+      font-size: 0.92rem;
+      background: #fff;
+    }
+
+    @media (max-width: 800px) {
+      .wordmark { height: 72px; }
+      .publication-subtitle { font-size: 1.2rem; }
+      .author-line { font-size: 1.05rem; }
+      .affiliation { width: 180px; }
+      .section-title { font-size: 1.55rem; }
+      .section-body { font-size: 1rem; text-align: left; }
+      .page-section { padding: 44px 0 28px; }
+    }
   </style>
 </head>
 <body>
-  <main>
-    <h1>AerialS2T</h1>
-    <p>Project page coming soon.</p>
-  </main>
+  <section class="hero">
+    <div class="hero-video">
+      <video class="tl" playsinline muted>
+        <source src="cover_tl_v7.mp4?v=9" type="video/mp4">
+      </video>
+      <video class="tr" playsinline muted>
+        <source src="cover_tr_v7.mp4?v=9" type="video/mp4">
+      </video>
+      <video class="bl" playsinline muted>
+        <source src="cover_bl_v7.mp4?v=9" type="video/mp4">
+      </video>
+      <video class="br" playsinline muted>
+        <source src="cover_br_v7.mp4?v=9" type="video/mp4">
+      </video>
+    </div>
+    <div class="overlay"></div>
+
+    <div class="hero-body">
+      <div class="container" id="top">
+        <h1 class="publication-title"><img class="wordmark" src="figures/aerials2t-wordmark.png" alt="AerialS2T"></h1>
+        <h2 class="publication-subtitle">A vision-language-action dataset for AerialS2T</h2>
+
+        <div class="badge-row">
+          <span class="conference-badge">
+            💐 ICLR 2026 🤖 🔥 <span class="hot">Oral</span> <span class="hot">Top 1%</span>
+          </span>
+        </div>
+
+        <p class="author-line">
+          <a href="https://scholar.google.com/citations?user=jOPXmhIAAAAJ&amp;hl=en" target="_blank">Yuanchen Ju</a><sup>*<img src="figures/bkl.png" alt=""></sup>
+          <a href="https://cheryyunl.github.io/" target="_blank">Yongyuan Liang</a><sup>*<img src="figures/umd.png" alt=""></sup>
+          <a href="https://wangyenjen.github.io/" target="_blank">Yen-Jen Wang</a><sup>*<img src="figures/bkl.png" alt=""></sup>
+        </p>
+        <p class="author-line">
+          <a href="https://user432.github.io/" target="_blank">Nandiraju Gireesh</a><sup></sup>
+          <a href="https://scholar.google.com/citations?user=rG90YVAAAAAJ&amp;hl=zh-CN" target="_blank">Yuanliang Ju</a><sup><img src="figures/uoft.png" alt=""></sup>
+          <a href="https://sjlee.cc/" target="_blank">Seungjae Lee</a><sup><img src="figures/umd.png" alt=""></sup>
+          <a href="https://georgegu1997.github.io/" target="_blank">Qiao Gu</a><sup><img src="figures/uoft.png" alt=""></sup>
+          <a href="https://elvishh77.github.io/" target="_blank">Elvis Hsieh</a><sup><img src="figures/bkl.png" alt=""></sup>
+        </p>
+        <p class="author-line">
+          <a href="https://furong-huang.com/" target="_blank">Furong Huang</a><sup>†<img src="figures/umd.png" alt=""></sup>
+          <a href="https://hybrid-robotics.berkeley.edu/koushil/" target="_blank">Koushil Sreenath</a><sup>†<img src="figures/bkl.png" alt=""></sup>
+        </p>
+
+        <div class="affiliations">
+          <div class="affiliation">
+            <img src="figures/npu-badge.png" alt="Northwestern Polytechnical University">
+            <p><sup>1</sup>Northwestern Polytechnical University</p>
+          </div>
+          <div class="affiliation">
+            <img src="figures/umd.png" alt="UMD">
+            <p><sup>2</sup>University of Maryland, College Park</p>
+          </div>
+          <div class="affiliation">
+            <img src="figures/uoft.png" alt="University of Toronto">
+            <p><sup>3</sup>University of Toronto</p>
+          </div>
+        </div>
+        <p class="note">∗ Equal Contribution, † Equal Advising</p>
+
+        <div class="links">
+          <a href="https://arxiv.org/abs/2512.16909" target="_blank"><span class="pill">arXiv</span></a>
+          <a href="https://arxiv.org/pdf/2512.16909" target="_blank"><span class="pill">Paper</span></a>
+          <a href="https://x.com/ju_yuanchen/status/2003514316008419801" target="_blank"><span class="pill">Twitter / X</span></a>
+          <a href="https://github.com/HybridRobotics/MomaGraph" target="_blank"><span class="pill">Code</span></a>
+          <a href="https://huggingface.co/datasets/cheryyunl/momagraph_train" target="_blank"><span class="pill">MomaGraph-Scenes</span></a>
+          <a href="https://huggingface.co/datasets/cheryyunl/MomaGraph-Bench" target="_blank"><span class="pill">MomaGraph-Bench</span></a>
+          <a href="https://huggingface.co/datasets/cheryyunl/momagraph_correspondence" target="_blank"><span class="pill">MomaGraph-Bench (Correspondence)</span></a>
+          <a href="https://huggingface.co/cheryyunl/MomaGraph-R1" target="_blank"><span class="pill">MomaGraph-R1</span></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="page-section" id="abstract">
+    <div class="container">
+      <h2 class="section-title">Abstract</h2>
+      <p class="section-body">
+        Mobile manipulators in households must both navigate and manipulate. This requires a compact, semantically rich scene representation that captures where objects are, how they function, and which parts are actionable. Scene graphs are a natural choice, yet prior work often separates spatial and functional relations, treats scenes as static snapshots without object states or temporal updates, and overlooks information most relevant for accomplishing the current task. To overcome these shortcomings, we introduce MomaGraph, a unified scene representation for embodied agents that integrates spatial-functional relationships and part-level interactive elements. However, advancing such a representation requires both suitable data and rigorous evaluation, which have been largely missing. To address this, we construct MomaGraph-Scenes, the first large-scale dataset of richly annotated, task-driven scene graphs in household environments, and design MomaGraph-Bench, a systematic evaluation suite spanning six reasoning capabilities from high-level planning to fine-grained scene understanding. Built upon this foundation, we further develop MomaGraph-R1, a 7B vision–language model trained with reinforcement learning on MomaGraph-Scenes. MomaGraph-R1 predicts task-oriented scene graphs and serves as a zero-shot task planner under a Graph-then-Plan framework. Extensive experiments show that our model achieves state-of-the-art results among open-source models, reaching 71.6% accuracy on the benchmark (+11.4% over the best baseline), while generalizing across public benchmarks and transferring effectively to real-robot experiments.
+      </p>
+    </div>
+  </section>
+
+  <section class="page-section alt" id="overview">
+    <div class="container">
+      <h2 class="section-title">Overview</h2>
+      <p class="section-body">
+        To ground our analysis, before the full evaluations we perform two motivating experiments on the MomaGraph-Bench. These comparisons are designed to validate our motivation and design principles, and to reveal why our proposed model is essential for embodied task planning.
+      </p>
+      <div class="figure-wrap">
+        <img src="figures/aerials2t-teaser.jpg" alt="AerialS2T overview">
+        <p class="figure-caption">Figure 1. AerialS2T task overview: takeoff, search, acquire, and track under language instructions.</p>
+      </div>
+      <div class="finding-box">
+        <strong>Preliminary Findings 1</strong>
+        In contrast to directly relying on vision-language models for task planning from raw scene images, our Graph-then-Plan strategy—which incorporates task-oriented scene graph generation as an intermediate structured representation prior to high-level planning, substantially improves both the accuracy and robustness of task planning.
+      </div>
+      <div class="finding-box">
+        <strong>Preliminary Findings 2</strong>
+        Graph representations that rely solely on spatial relationships or solely on functional relationships are insufficient. For embodied agents, a unified representation that jointly models both spatial and functional relationships provides a more complete and effective foundation for perception and action.
+      </div>
+    </div>
+  </section>
+
+  <section class="page-section" id="method">
+    <div class="container">
+      <h2 class="section-title">Method</h2>
+      <h3 class="section-subtitle">VLMs Learn Scene Graph Representations with Reinforcement Learning</h3>
+      <p class="section-body">
+        We use reinforcement learning with a graph-based reward to teach VLMs to build more accurate and task-relevant scene graphs. The reward checks action correctness, edge accuracy, and node completeness, while also enforcing proper format and concise output. This feedback helps the model learn compact, structured scene graphs that better support planning in embodied tasks.
+      </p>
+      <div class="figure-wrap">
+        <img src="figures/movic-architecture.jpg" alt="MoViC architecture">
+        <p class="figure-caption">Figure 2. Method overview: MoViC architecture with recurrent target forecasting and geometric action refinement.</p>
+      </div>
+      <h3 class="section-subtitle">State-Aware Dynamic Scene Graph Update</h3>
+      <p class="section-body">
+        The scene graph initially encodes task-relevant objects and uncertain, one-to-many functional hypotheses. After the agent executes an action and observes the resulting state change, the update function eliminates inconsistent hypotheses and reinforces confirmed correspondences. For example, only the knob that ignites the burner retains a control edge, while others are pruned, enabling the scene graph to evolve into a compact, state-aware dynamic representation.
+      </p>
+    </div>
+  </section>
+
+  <section class="page-section alt" id="dataset">
+    <div class="container">
+      <h2 class="section-title">Dataset</h2>
+      <p class="section-body">
+        We introduce MomaGraph-Scenes, the first dataset designed to provide a more comprehensive and task-relevant scene representation. Our dataset jointly encodes spatial relationships and functional relationships, which explicitly represent interactive elements such as handles and buttons. Our dataset consists of approximately 1,050 task-oriented subgraphs and 6,278 multi-view RGB images, collected from a combination of manually collected real-world data, re-annotated existing datasets, and simulated environments built with AI2-THOR. These samples span more than 350 diverse household scenes and encompass 93 distinct task instructions. Compared with prior datasets, our annotations are significantly more detailed, and capturing interaction semantics at both the object and part levels. This broad coverage ensures rich variability in scene layouts, object configurations, and interaction types, supporting robust learning and evaluation of embodied reasoning.
+      </p>
+      <div class="figure-wrap">
+        <img src="figures/aeriallift-10k-overview.png?v=3" alt="AerialLIFT-10K dataset overview">
+        <p class="figure-caption">Figure 3. AerialLIFT-10K dataset overview across maps, targets, weather, and acquisition statistics.</p>
+      </div>
+
+      <div class="viewer" id="dataset-viewer">
+        <h3 class="viewer-title">Dataset Viewer</h3>
+        <div class="viewer-tabs" id="viewer-tabs"></div>
+        <p class="viewer-hint">💡 Click on any thumbnail to view the episode record</p>
+        <div class="thumb-row" id="viewer-thumbs"></div>
+        <div class="detail-card" id="viewer-detail">
+          <h4 class="detail-heading">Episode Record</h4>
+          <div class="detail-grid">
+            <div class="detail-photos" id="viewer-photos"></div>
+            <div class="record-box"><pre id="viewer-record"></pre></div>
+          </div>
+        </div>
+      </div>
+
+      <h3 class="section-subtitle">MomaGraph Benchmark and Evaluation</h3>
+      <p class="section-body">
+        We introduce MomaGraph-Bench, the first benchmark that jointly evaluates fine-grained scene understanding and task planning abilities across diverse levels of difficulty. Our design principle for MomaGraph-Bench is to evaluate whether advances in scene understanding provide tangible improvements in downstream task planning and reasoning. Our evaluation framework examines six essential reasoning capabilities in four tiers of difficulty levels: (1) Action Sequence Reasoning, (2) Spatial Reasoning, (3) Object Affordance Reasoning, (4) Precondition &amp; Effect Reasoning, (5) Goal Decomposition, and (6) Visual Correspondence. MomaGraph-Bench is formulated as a multi-choice VQA task which comprises 294 diverse indoor scenes with 1,446 multi-view images, featuring 352 task-oriented scene graphs spanning 1,315 instances that range from simple object manipulation (Tier 1) to complex multi-step planning (Tier 4) scenarios.
+      </p>
+    </div>
+  </section>
+
+  <section class="page-section" id="results">
+    <div class="container">
+      <h2 class="section-title">Experimental Results</h2>
+      <p class="section-body">
+        We compare the performance of our MomaGraph-R1 with other models across all task tiers in MomaGraph-Bench to rigorously assess embodied planning, including state-of-the-art closed source models (Claude-4-Sonnet, GPT-5, Gemini-2.5-Pro) and leading open source models (InstructBLIP, LLaVA-V1.5, DeepSeek-VL2, InternVL2.5, LLaVA-OneVision, Qwen2.5). We further examine whether Graph-then-Plan brings performance gains by evaluating each model under two controlled settings: (i) Direct Plan (w/o Graph): the model is directly evaluated on task planning in MomaGraph-Bench using multi-view observations and instructions; (ii) Graph-then-Plan (w/ Graph): the model first generates a task-oriented scene graph, capturing nodes, spatial and functional edges, and action types, and then performs task planning conditioned on the graph.
+      </p>
+      <h3 class="section-subtitle">Experiment 1: Result Analysis</h3>
+      <p class="section-body">
+        Across all models, the w/ Graph setting consistently outperforms the w/o Graph baseline, demonstrating that explicitly structuring task-oriented scene graphs provides a tangible benefit for downstream planning. Our MomaGraph-R1 achieves performance on par with closed-source giants like Claude-4-Sonnet and GPT-5, while clearly surpassing all leading open-source VLMs. Notably, MomaGraph-R1 delivers a +11.4% relative improvement over its base model (Qwen2.5-VL-7B) under w/ Graph, highlighting the effectiveness of reinforcement learning with graph-based rewards.
+      </p>
+      <h3 class="section-subtitle">Experiment 2: Benchmark Evaluation for Visual Correspondence</h3>
+      <p class="section-body">
+        As the model learns scene representations from multi-view observations, it exhibits an emergent ability of cross-view consistency, which can reason about the same point across different viewpoints. Scene graph representations enhance performance universally by reducing VLM hallucinations in visual perception. Our MomaGraph-R1 achieves state-of-the-art performance among open-source VLMs, leading by 3.8% on BLINK and 4.8% on our correspondence benchmark compared to the best competing open-source models.
+      </p>
+      <h3 class="section-subtitle">Experiment 3: Real Robot Demonstrations</h3>
+      <p class="section-body">
+        To validate the effectiveness of our model in real-world settings, we deploy on the RobotEra Q5, a bimanual humanoid platform with a mobile base. An Intel RealSense D455 camera is mounted to enhance RGB-D perception. Importantly, all evaluation scenes are unseen, ensuring that performance reflects true generalization. We evaluate our model on four representative tasks: two contact interactions (opening a cabinet, opening a microwave) and two remote interactions (e.g., turning on the TV, turning off a light).
+      </p>
+    </div>
+  </section>
+
+  <section class="page-section alt" id="citation">
+    <div class="container">
+      <h2 class="section-title">Citation</h2>
+      <p class="section-body" style="text-align:center; margin-bottom:1.2rem;">
+        If you find this work useful for your research, please consider citing:
+      </p>
+      <div class="bibtex-wrap">
+        <button class="copy-btn" type="button" onclick="copyBibtex()">📋 Copy</button>
+        <pre id="bibtex-code">@article{ju2025momagraph,
+  title={MomaGraph: State-Aware Unified Scene Graphs with Vision-Language Model for Embodied Task Planning},
+  author={Ju, Yuanchen and Liang, Yongyuan and Wang, Yen-Jen and Gireesh, Nandiraju and Ju, Yuanliang and Lee, Seungjae and Gu, Qiao and Hsieh, Elvis and Huang, Furong and Sreenath, Koushil},
+  journal={International Conference on Learning Representations (ICLR) Oral},
+  year={2026}
+}</pre>
+      </div>
+    </div>
+  </section>
+
+  <footer class="page-footer">
+    Website template adapted from <a href="https://hybridrobotics.github.io/MomaGraph/" target="_blank" style="color:#555;">MomaGraph</a>.
+  </footer>
+
+  <script>
+    const clips = Array.from(document.querySelectorAll(".hero-video video"));
+    function startTogether() {
+      clips.forEach((clip) => { clip.currentTime = 0; });
+      clips.forEach((clip) => { clip.play(); });
+    }
+    let ready = 0;
+    let restarting = false;
+    clips.forEach((clip) => {
+      const mark = () => {
+        ready += 1;
+        if (ready === clips.length) startTogether();
+      };
+      if (clip.readyState >= 3) mark();
+      else clip.addEventListener("canplaythrough", mark, { once: true });
+      clip.addEventListener("ended", () => {
+        if (restarting) return;
+        restarting = true;
+        startTogether();
+        setTimeout(() => { restarting = false; }, 250);
+      });
+    });
+
+    let viewerData = null;
+    let viewerCategory = null;
+    let viewerItem = null;
+
+    function renderViewerTabs() {
+      const bar = document.getElementById("viewer-tabs");
+      bar.innerHTML = "";
+      viewerData.order.forEach((key) => {
+        const btn = document.createElement("button");
+        btn.type = "button";
+        btn.textContent = viewerData.categories[key].label;
+        btn.className = key === viewerCategory ? "active" : "";
+        btn.addEventListener("click", () => showViewerCategory(key, true));
+        bar.appendChild(btn);
+      });
+    }
+
+    function showViewerCategory(key, openFirst) {
+      viewerCategory = key;
+      renderViewerTabs();
+      const row = document.getElementById("viewer-thumbs");
+      row.innerHTML = "";
+      const items = viewerData.categories[key].items.slice(0, 7);
+      items.forEach((item, index) => {
+        const btn = document.createElement("button");
+        btn.type = "button";
+        btn.className = item.id === viewerItem ? "selected" : "";
+        const img = document.createElement("img");
+        img.src = item.thumb;
+        img.alt = item.record.task_instruction;
+        btn.appendChild(img);
+        btn.addEventListener("click", () => showViewerDetail(item, true));
+        row.appendChild(btn);
+        if (openFirst && index === 0) showViewerDetail(item, false);
+      });
+    }
+
+    function showViewerDetail(item, scroll) {
+      viewerItem = item.id;
+      document.querySelectorAll("#viewer-thumbs button").forEach((btn, i) => {
+        const current = viewerData.categories[viewerCategory].items[i];
+        btn.classList.toggle("selected", current && current.id === item.id);
+      });
+      const photos = document.getElementById("viewer-photos");
+      photos.innerHTML = "";
+      item.images.forEach((frame) => {
+        const fig = document.createElement("figure");
+        const img = document.createElement("img");
+        img.src = frame.src;
+        img.alt = frame.label;
+        const cap = document.createElement("figcaption");
+        cap.textContent = frame.label;
+        fig.appendChild(img);
+        fig.appendChild(cap);
+        photos.appendChild(fig);
+      });
+      document.getElementById("viewer-record").textContent = JSON.stringify(item.record, null, 2);
+      const card = document.getElementById("viewer-detail");
+      card.classList.add("open");
+      if (scroll) card.scrollIntoView({ behavior: "smooth", block: "nearest" });
+    }
+
+    fetch("figures/viewer/data.json")
+      .then((res) => res.json())
+      .then((data) => {
+        viewerData = data;
+        showViewerCategory(data.order[0], true);
+      })
+      .catch(() => {
+        const hint = document.querySelector(".viewer-hint");
+        if (hint) hint.textContent = "Dataset viewer is still loading.";
+      });
+
+    function copyBibtex() {
+      const bibtexText = document.getElementById("bibtex-code").textContent;
+      const button = document.querySelector(".copy-btn");
+      const originalText = button.innerHTML;
+      const done = () => {
+        button.innerHTML = "✓ Copied!";
+        button.style.background = "#27ae60";
+        setTimeout(() => {
+          button.innerHTML = originalText;
+          button.style.background = "#FDB515";
+        }, 2000);
+      };
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(bibtexText).then(done).catch(() => {
+          const textarea = document.createElement("textarea");
+          textarea.value = bibtexText;
+          document.body.appendChild(textarea);
+          textarea.select();
+          document.execCommand("copy");
+          document.body.removeChild(textarea);
+          done();
+        });
+      } else {
+        const textarea = document.createElement("textarea");
+        textarea.value = bibtexText;
+        document.body.appendChild(textarea);
+        textarea.select();
+        document.execCommand("copy");
+        document.body.removeChild(textarea);
+        done();
+      }
+    }
+  </script>
 </body>
 </html>

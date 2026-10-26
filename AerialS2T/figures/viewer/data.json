@@ -1,0 +1,2394 @@
+{
+  "order": [
+    "town01",
+    "town03",
+    "town04",
+    "town05",
+    "town07",
+    "town10"
+  ],
+  "categories": {
+    "town01": {
+      "label": "Town01 · Van",
+      "items": [
+        {
+          "id": "town01-1",
+          "thumb": "figures/viewer/town01/01/thumb.jpg?v=2",
+          "images": [
+            {
+              "src": "figures/viewer/town01/01/takeoff.jpg?v=2",
+              "label": "Takeoff"
+            },
+            {
+              "src": "figures/viewer/town01/01/search.jpg?v=2",
+              "label": "Search"
+            },
+            {
+              "src": "figures/viewer/town01/01/acquire.jpg?v=2",
+              "label": "Acquire"
+            },
+            {
+              "src": "figures/viewer/town01/01/track.jpg?v=2",
+              "label": "Track"
+            }
+          ],
+          "record": {
+            "episode_index": 449,
+            "task_instruction": "Find and track the black van to your rear-left, beside the bridge at the initial sighting.",
+            "town": "Town01",
+            "weather": "ClearNoon",
+            "target": {
+              "category": "van",
+              "color": "black"
+            },
+            "initial_direction": "rear-left",
+            "landmark": "bridge",
+            "duration_s": 32.6,
+            "phases_s": {
+              "SEARCH": [
+                0.0,
+                6.2
+              ],
+              "ACQUIRE": [
+                6.4,
+                7.8
+              ],
+              "TRACK": [
+                8.0,
+                32.8
+              ]
+            }
+          }
+        },
+        {
+          "id": "town01-2",
+          "thumb": "figures/viewer/town01/02/thumb.jpg?v=2",
+          "images": [
+            {
+              "src": "figures/viewer/town01/02/takeoff.jpg?v=2",
+              "label": "Takeoff"
+            },
+            {
+              "src": "figures/viewer/town01/02/search.jpg?v=2",
+              "label": "Search"
+            },
+            {
+              "src": "figures/viewer/town01/02/acquire.jpg?v=2",
+              "label": "Acquire"
+            },
+            {
+              "src": "figures/viewer/town01/02/track.jpg?v=2",
+              "label": "Track"
+            }
+          ],
+          "record": {
+            "episode_index": 6315,
+            "task_instruction": "Find and track the black van to your rear-left.",
+            "town": "Town01",
+            "weather": "ClearNoon",
+            "target": {
+              "category": "van",
+              "color": "black"
+            },
+            "initial_direction": "rear-left",
+            "landmark": "building",
+            "duration_s": 42.2,
+            "phases_s": {
+              "SEARCH": [
+                0.0,
+                13.4
+              ],
+              "ACQUIRE": [
+                13.6,
+                17.4
+              ],
+              "TRACK": [
+                17.6,
+                42.4
+              ]
+            }
+          }
+        },
+        {
+          "id": "town01-3",
+          "thumb": "figures/viewer/town01/03/thumb.jpg?v=2",
+          "images": [
+            {
+              "src": "figures/viewer/town01/03/takeoff.jpg?v=2",
+              "label": "Takeoff"
+            },
+            {
+              "src": "figures/viewer/town01/03/search.jpg?v=2",
+              "label": "Search"
+            },
+            {
+              "src": "figures/viewer/town01/03/acquire.jpg?v=2",
+              "label": "Acquire"
+            },
+            {
+              "src": "figures/viewer/town01/03/track.jpg?v=2",
+              "label": "Track"
+            }
+          ],
+          "record": {
+            "episode_index": 381,
+            "task_instruction": "Find and track the white van to your rear-left.",
+            "town": "Town01",
+            "weather": "ClearSunset",
+            "target": {
+              "category": "van",
+              "color": "white"
+            },
+            "initial_direction": "rear-left",
+            "landmark": "building",
+            "duration_s": 33.0,
+            "phases_s": {
+              "SEARCH": [
+                0.0,
+                6.6
+              ],
+              "ACQUIRE": [
+                6.8,
+                8.2
+              ],
+              "TRACK": [
+                8.4,
+                33.2
+              ]
+            }
+          }
+        },
+        {
+          "id": "town01-4",
+          "thumb": "figures/viewer/town01/04/thumb.jpg?v=2",
+          "images": [
+            {
+              "src": "figures/viewer/town01/04/takeoff.jpg?v=2",
+              "label": "Takeoff"
+            },
+            {
+              "src": "figures/viewer/town01/04/search.jpg?v=2",
+              "label": "Search"
+            },
+            {
+              "src": "figures/viewer/town01/04/acquire.jpg?v=2",
+              "label": "Acquire"
+            },
+            {
+              "src": "figures/viewer/town01/04/track.jpg?v=2",
+              "label": "Track"
+            }
+          ],
+          "record": {
+            "episode_index": 4785,
+            "task_instruction": "Find and track the black van to your right, near the building at the initial sighting.",
+            "town": "Town01",
+            "weather": "ClearSunset",
+            "target": {
+              "category": "van",
+              "color": "black"
+            },
+            "initial_direction": "right",
+            "landmark": "building",
+            "duration_s": 33.0,
+            "phases_s": {
+              "SEARCH": [
+                0.0,
+                6.6
+              ],
+              "ACQUIRE": [
+                6.8,
+                8.2
+              ],
+              "TRACK": [
+                8.4,
+                33.2
+              ]
+            }
+          }
+        },
+        {
+          "id": "town01-5",
+          "thumb": "figures/viewer/town01/05/thumb.jpg?v=2",
+          "images": [
+            {
+              "src": "figures/viewer/town01/05/takeoff.jpg?v=2",
+              "label": "Takeoff"
+            },
+            {
+              "src": "figures/viewer/town01/05/search.jpg?v=2",
+              "label": "Search"
+            },
+            {
+              "src": "figures/viewer/town01/05/acquire.jpg?v=2",
+              "label": "Acquire"
+            },
+            {
+              "src": "figures/viewer/town01/05/track.jpg?v=2",
+              "label": "Track"
+            }
+          ],
+          "record": {
+            "episode_index": 2970,
+            "task_instruction": "Find and track the white van to your right.",
+            "town": "Town01",
+            "weather": "CloudyNoon",
+            "target": {
+              "category": "van",
+              "color": "white"
+            },
+            "initial_direction": "right",
+            "landmark": "bridge",
+            "duration_s": 33.4,
+            "phases_s": {
+              "SEARCH": [
+                0.0,
+                7.0
+              ],
+              "ACQUIRE": [
+                7.2,
+                8.6
+              ],
+              "TRACK": [
+                8.8,
+                33.6
+              ]
+            }
+          }
+        },
+        {
+          "id": "town01-6",
+          "thumb": "figures/viewer/town01/06/thumb.jpg?v=2",
+          "images": [
+            {
+              "src": "figures/viewer/town01/06/takeoff.jpg?v=2",
+              "label": "Takeoff"
+            },
+            {
+              "src": "figures/viewer/town01/06/search.jpg?v=2",
+              "label": "Search"
+            },
+            {
+              "src": "figures/viewer/town01/06/acquire.jpg?v=2",
+              "label": "Acquire"
+            },
+            {
+              "src": "figures/viewer/town01/06/track.jpg?v=2",
+              "label": "Track"
+            }
+          ],
+          "record": {
+            "episode_index": 480,
+            "task_instruction": "Find and track the gray van behind you, beside the building at the initial sighting.",
+            "town": "Town01",
+            "weather": "WetNoon",
+            "target": {
+              "category": "van",
+              "color": "gray"
+            },
+            "initial_direction": "behind",
+            "landmark": "building",
+            "duration_s": 34.0,
+            "phases_s": {
+              "SEARCH": [
+                0.0,
+                7.6
+              ],
+              "ACQUIRE": [
+                7.8,
+                9.2
+              ],
+              "TRACK": [
+                9.4,
+                34.2
+              ]
+            }
+          }
+        },
+        {
+          "id": "town01-7",
+          "thumb": "figures/viewer/town01/07/thumb.jpg?v=2",
+          "images": [
+            {
+              "src": "figures/viewer/town01/07/takeoff.jpg?v=2",
+              "label": "Takeoff"
+            },
+            {
+              "src": "figures/viewer/town01/07/search.jpg?v=2",
+              "label": "Search"
+            },
+            {
+              "src": "figures/viewer/town01/07/acquire.jpg?v=2",
+              "label": "Acquire"
+            },
+            {
+              "src": "figures/viewer/town01/07/track.jpg?v=2",
+              "label": "Track"
+            }
+          ],
+          "record": {
+            "episode_index": 3060,
+            "task_instruction": "Find and track the black van to your front-right, near the building at the initial sighting.",
+            "town": "Town01",
+            "weather": "WetNoon",
+            "target": {
+              "category": "van",
+              "color": "black"
+            },
+            "initial_direction": "front-right",
+            "landmark": "building",
+            "duration_s": 32.2,
+            "phases_s": {
+              "SEARCH": [
+                0.0,
+                5.8
+              ],
+              "ACQUIRE": [
+                6.0,
+                7.4
+              ],
+              "TRACK": [
+                7.6,
+                32.4
+              ]
+            }
+          }
+        },
+        {
+          "id": "town01-8",
+          "thumb": "figures/viewer/town01/08/thumb.jpg?v=2",
+          "images": [
+            {
+              "src": "figures/viewer/town01/08/takeoff.jpg?v=2",
+              "label": "Takeoff"
+            },
+            {
+              "src": "figures/viewer/town01/08/search.jpg?v=2",
+              "label": "Search"
+            },
+            {
+              "src": "figures/viewer/town01/08/acquire.jpg?v=2",
+              "label": "Acquire"
+            },
+            {
+              "src": "figures/viewer/town01/08/track.jpg?v=2",
+              "label": "Track"
+            }
+          ],
+          "record": {
+            "episode_index": 9278,
+            "task_instruction": "Find and track the silver van to your rear-right, just past the bridge at the initial sighting.",
+            "town": "Town01",
+            "weather": "WetNoon",
+            "target": {
+              "category": "van",
+              "color": "silver"
+            },
+            "initial_direction": "rear-right",
+            "landmark": "bridge",
+            "duration_s": 36.4,
+            "phases_s": {
+              "SEARCH": [
+                0.0,
+                10.0
+              ],
+              "ACQUIRE": [
+                10.2,
+                11.6
+              ],
+              "TRACK": [
+                11.8,
+                36.6
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "town03": {
+      "label": "Town03 · Bicycle",
+      "items": [
+        {
+          "id": "town03-1",
+          "thumb": "figures/viewer/town03/01/thumb.jpg?v=2",
+          "images": [
+            {
+              "src": "figures/viewer/town03/01/takeoff.jpg?v=2",
+              "label": "Takeoff"
+            },
+            {
+              "src": "figures/viewer/town03/01/search.jpg?v=2",
+              "label": "Search"
+            },
+            {
+              "src": "figures/viewer/town03/01/acquire.jpg?v=2",
+              "label": "Acquire"
+            },
+            {
+              "src": "figures/viewer/town03/01/track.jpg?v=2",
+              "label": "Track"
+            }
+          ],
+          "record": {
+            "episode_index": 32,
+            "task_instruction": "Find and track the blue bicycle to your rear-right, beside the building at the initial sighting.",
+            "town": "Town03",
+            "weather": "ClearNoon",
+            "target": {
+              "category": "bicycle",
+              "color": "blue"
+            },
+            "initial_direction": "rear-right",
+            "landmark": "building",
+            "duration_s": 34.4,
+            "phases_s": {
+              "SEARCH": [
+                0.0,
+                7.2
+              ],
+              "ACQUIRE": [
+                7.4,
+                9.6
+              ],
+              "TRACK": [
+                9.8,
+                34.6
+              ]
+            }
+          }
+        },
+        {
+          "id": "town03-2",
+          "thumb": "figures/viewer/town03/02/thumb.jpg?v=2",
+          "images": [
+            {
+              "src": "figures/viewer/town03/02/takeoff.jpg?v=2",
+              "label": "Takeoff"
+            },
+            {
+              "src": "figures/viewer/town03/02/search.jpg?v=2",
+              "label": "Search"
+            },
+            {
+              "src": "figures/viewer/town03/02/acquire.jpg?v=2",
+              "label": "Acquire"
+            },
+            {
+              "src": "figures/viewer/town03/02/track.jpg?v=2",
+              "label": "Track"
+            }
+          ],
+          "record": {
+            "episode_index": 5319,
+            "task_instruction": "Find and track the red bicycle to your rear-left, near the building at the initial sighting.",
+            "town": "Town03",
+            "weather": "ClearNoon",
+            "target": {
+              "category": "bicycle",
+              "color": "red"
+            },
+            "initial_direction": "rear-left",
+            "landmark": "building",
+            "duration_s": 35.2,
+            "phases_s": {
+              "SEARCH": [
+                0.0,
+                7.2
+              ],
+              "ACQUIRE": [
+                7.4,
+                10.4
+              ],
+              "TRACK": [
+                10.6,
+                35.4
+              ]
+            }
+          }
+        },
+        {
+          "id": "town03-3",
+          "thumb": "figures/viewer/town03/03/thumb.jpg?v=2",
+          "images": [
+            {
+              "src": "figures/viewer/town03/03/takeoff.jpg?v=2",
+              "label": "Takeoff"
+            },
+            {
+              "src": "figures/viewer/town03/03/search.jpg?v=2",
+              "label": "Search"
+            },
+            {
+              "src": "figures/viewer/town03/03/acquire.jpg?v=2",
+              "label": "Acquire"
+            },
+            {
+              "src": "figures/viewer/town03/03/track.jpg?v=2",
+              "label": "Track"
+            }
+          ],
+          "record": {
+            "episode_index": 406,
+            "task_instruction": "Find and track the blue bicycle behind you, near the building at the initial sighting.",
+            "town": "Town03",
+            "weather": "ClearSunset",
+            "target": {
+              "category": "bicycle",
+              "color": "blue"
+            },
+            "initial_direction": "behind",
+            "landmark": "building",
+            "duration_s": 38.8,
+            "phases_s": {
+              "SEARCH": [
+                0.0,
+                12.4
+              ],
+              "ACQUIRE": [
+                12.6,
+                14.0
+              ],
+              "TRACK": [
+                14.2,
+                39.0
+              ]
+            }
+          }
+        },
+        {
+          "id": "town03-4",
+          "thumb": "figures/viewer/town03/04/thumb.jpg?v=2",
+          "images": [
+            {
+              "src": "figures/viewer/town03/04/takeoff.jpg?v=2",
+              "label": "Takeoff"
+            },
+            {
+              "src": "figures/viewer/town03/04/search.jpg?v=2",
+              "label": "Search"
+            },
+            {
+              "src": "figures/viewer/town03/04/acquire.jpg?v=2",
+              "label": "Acquire"
+            },
+            {
+              "src": "figures/viewer/town03/04/track.jpg?v=2",
+              "label": "Track"
+            }
+          ],
+          "record": {
+            "episode_index": 5356,
+            "task_instruction": "Find and track the red bicycle ahead of you.",
+            "town": "Town03",
+            "weather": "ClearSunset",
+            "target": {
+              "category": "bicycle",
+              "color": "red"
+            },
+            "initial_direction": "ahead",
+            "landmark": "building",
+            "duration_s": 40.2,
+            "phases_s": {
+              "SEARCH": [
+                0.0,
+                13.8
+              ],
+              "ACQUIRE": [
+                14.0,
+                15.4
+              ],
+              "TRACK": [
+                15.6,
+                40.4
+              ]
+            }
+          }
+        },
+        {
+          "id": "town03-5",
+          "thumb": "figures/viewer/town03/05/thumb.jpg?v=2",
+          "images": [
+            {
+              "src": "figures/viewer/town03/05/takeoff.jpg?v=2",
+              "label": "Takeoff"
+            },
+            {
+              "src": "figures/viewer/town03/05/search.jpg?v=2",
+              "label": "Search"
+            },
+            {
+              "src": "figures/viewer/town03/05/acquire.jpg?v=2",
+              "label": "Acquire"
+            },
+            {
+              "src": "figures/viewer/town03/05/track.jpg?v=2",
+              "label": "Track"
+            }
+          ],
+          "record": {
+            "episode_index": 2789,
+            "task_instruction": "Find and track the blue bicycle behind you.",
+            "town": "Town03",
+            "weather": "CloudyNoon",
+            "target": {
+              "category": "bicycle",
+              "color": "blue"
+            },
+            "initial_direction": "behind",
+            "landmark": "building",
+            "duration_s": 39.8,
+            "phases_s": {
+              "SEARCH": [
+                0.0,
+                13.4
+              ],
+              "ACQUIRE": [
+                13.6,
+                15.0
+              ],
+              "TRACK": [
+                15.2,
+                40.0
+              ]
+            }
+          }
+        },
+        {
+          "id": "town03-6",
+          "thumb": "figures/viewer/town03/06/thumb.jpg?v=2",
+          "images": [
+            {
+              "src": "figures/viewer/town03/06/takeoff.jpg?v=2",
+              "label": "Takeoff"
+            },
+            {
+              "src": "figures/viewer/town03/06/search.jpg?v=2",
+              "label": "Search"
+            },
+            {
+              "src": "figures/viewer/town03/06/acquire.jpg?v=2",
+              "label": "Acquire"
+            },
+            {
+              "src": "figures/viewer/town03/06/track.jpg?v=2",
+              "label": "Track"
+            }
+          ],
+          "record": {
+            "episode_index": 7012,
+            "task_instruction": "Find and track the red bicycle to your right, near the intersection at the initial sighting.",
+            "town": "Town03",
+            "weather": "CloudyNoon",
+            "target": {
+              "category": "bicycle",
+              "color": "red"
+            },
+            "initial_direction": "right",
+            "landmark": "intersection",
+            "duration_s": 41.8,
+            "phases_s": {
+              "SEARCH": [
+                0.0,
+                15.4
+              ],
+              "ACQUIRE": [
+                15.6,
+                17.0
+              ],
+              "TRACK": [
+                17.2,
+                42.0
+              ]
+            }
+          }
+        },
+        {
+          "id": "town03-7",
+          "thumb": "figures/viewer/town03/07/thumb.jpg?v=2",
+          "images": [
+            {
+              "src": "figures/viewer/town03/07/takeoff.jpg?v=2",
+              "label": "Takeoff"
+            },
+            {
+              "src": "figures/viewer/town03/07/search.jpg?v=2",
+              "label": "Search"
+            },
+            {
+              "src": "figures/viewer/town03/07/acquire.jpg?v=2",
+              "label": "Acquire"
+            },
+            {
+              "src": "figures/viewer/town03/07/track.jpg?v=2",
+              "label": "Track"
+            }
+          ],
+          "record": {
+            "episode_index": 3658,
+            "task_instruction": "Find and track the red bicycle behind you, beside the building at the initial sighting.",
+            "town": "Town03",
+            "weather": "WetNoon",
+            "target": {
+              "category": "bicycle",
+              "color": "red"
+            },
+            "initial_direction": "behind",
+            "landmark": "building",
+            "duration_s": 43.6,
+            "phases_s": {
+              "SEARCH": [
+                0.0,
+                17.2
+              ],
+              "ACQUIRE": [
+                17.4,
+                18.8
+              ],
+              "TRACK": [
+                19.0,
+                43.8
+              ]
+            }
+          }
+        },
+        {
+          "id": "town03-8",
+          "thumb": "figures/viewer/town03/08/thumb.jpg?v=2",
+          "images": [
+            {
+              "src": "figures/viewer/town03/08/takeoff.jpg?v=2",
+              "label": "Takeoff"
+            },
+            {
+              "src": "figures/viewer/town03/08/search.jpg?v=2",
+              "label": "Search"
+            },
+            {
+              "src": "figures/viewer/town03/08/acquire.jpg?v=2",
+              "label": "Acquire"
+            },
+            {
+              "src": "figures/viewer/town03/08/track.jpg?v=2",
+              "label": "Track"
+            }
+          ],
+          "record": {
+            "episode_index": 9341,
+            "task_instruction": "Find and track the blue bicycle to your rear-left, near the building at the initial sighting.",
+            "town": "Town03",
+            "weather": "WetNoon",
+            "target": {
+              "category": "bicycle",
+              "color": "blue"
+            },
+            "initial_direction": "rear-left",
+            "landmark": "building",
+            "duration_s": 38.2,
+            "phases_s": {
+              "SEARCH": [
+                0.0,
+                8.6
+              ],
+              "ACQUIRE": [
+                8.8,
+                13.4
+              ],
+              "TRACK": [
+                13.6,
+                38.4
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "town04": {
+      "label": "Town04 · Adult",
+      "items": [
+        {
+          "id": "town04-1",
+          "thumb": "figures/viewer/town04/01/thumb.jpg?v=2",
+          "images": [
+            {
+              "src": "figures/viewer/town04/01/takeoff.jpg?v=2",
+              "label": "Takeoff"
+            },
+            {
+              "src": "figures/viewer/town04/01/search.jpg?v=2",
+              "label": "Search"
+            },
+            {
+              "src": "figures/viewer/town04/01/acquire.jpg?v=2",
+              "label": "Acquire"
+            },
+            {
+              "src": "figures/viewer/town04/01/track.jpg?v=2",
+              "label": "Track"
+            }
+          ],
+          "record": {
+            "episode_index": 169,
+            "task_instruction": "Find and track the female adult pedestrian to your rear-left, near the building at the initial sighting.",
+            "town": "Town04",
+            "weather": "ClearNoon",
+            "target": {
+              "category": "adult",
+              "color": ""
+            },
+            "initial_direction": "rear-left",
+            "landmark": "building",
+            "duration_s": 43.0,
+            "phases_s": {
+              "SEARCH": [
+                0.0,
+                16.6
+              ],
+              "ACQUIRE": [
+                16.8,
+                18.2
+              ],
+              "TRACK": [
+                18.4,
+                43.2
+              ]
+            }
+          }
+        },
+        {
+          "id": "town04-2",
+          "thumb": "figures/viewer/town04/02/thumb.jpg?v=2",
+          "images": [
+            {
+              "src": "figures/viewer/town04/02/takeoff.jpg?v=2",
+              "label": "Takeoff"
+            },
+            {
+              "src": "figures/viewer/town04/02/search.jpg?v=2",
+              "label": "Search"
+            },
+            {
+              "src": "figures/viewer/town04/02/acquire.jpg?v=2",
+              "label": "Acquire"
+            },
+            {
+              "src": "figures/viewer/town04/02/track.jpg?v=2",
+              "label": "Track"
+            }
+          ],
+          "record": {
+            "episode_index": 5892,
+            "task_instruction": "Find and track the male adult pedestrian to your rear-right.",
+            "town": "Town04",
+            "weather": "ClearNoon",
+            "target": {
+              "category": "adult",
+              "color": ""
+            },
+            "initial_direction": "rear-right",
+            "landmark": "building",
+            "duration_s": 37.4,
+            "phases_s": {
+              "SEARCH": [
+                0.0,
+                11.0
+              ],
+              "ACQUIRE": [
+                11.2,
+                12.6
+              ],
+              "TRACK": [
+                12.8,
+                37.6
+              ]
+            }
+          }
+        },
+        {
+          "id": "town04-3",
+          "thumb": "figures/viewer/town04/03/thumb.jpg?v=2",
+          "images": [
+            {
+              "src": "figures/viewer/town04/03/takeoff.jpg?v=2",
+              "label": "Takeoff"
+            },
+            {
+              "src": "figures/viewer/town04/03/search.jpg?v=2",
+              "label": "Search"
+            },
+            {
+              "src": "figures/viewer/town04/03/acquire.jpg?v=2",
+              "label": "Acquire"
+            },
+            {
+              "src": "figures/viewer/town04/03/track.jpg?v=2",
+              "label": "Track"
+            }
+          ],
+          "record": {
+            "episode_index": 4170,
+            "task_instruction": "Find and track the female adult pedestrian to your left.",
+            "town": "Town04",
+            "weather": "ClearSunset",
+            "target": {
+              "category": "adult",
+              "color": ""
+            },
+            "initial_direction": "left",
+            "landmark": "building",
+            "duration_s": 41.8,
+            "phases_s": {
+              "SEARCH": [
+                0.0,
+                13.8
+              ],
+              "ACQUIRE": [
+                14.0,
+                17.0
+              ],
+              "TRACK": [
+                17.2,
+                42.0
+              ]
+            }
+          }
+        },
+        {
+          "id": "town04-4",
+          "thumb": "figures/viewer/town04/04/thumb.jpg?v=2",
+          "images": [
+            {
+              "src": "figures/viewer/town04/04/takeoff.jpg?v=2",
+              "label": "Takeoff"
+            },
+            {
+              "src": "figures/viewer/town04/04/search.jpg?v=2",
+              "label": "Search"
+            },
+            {
+              "src": "figures/viewer/town04/04/acquire.jpg?v=2",
+              "label": "Acquire"
+            },
+            {
+              "src": "figures/viewer/town04/04/track.jpg?v=2",
+              "label": "Track"
+            }
+          ],
+          "record": {
+            "episode_index": 8852,
+            "task_instruction": "Find and track the male adult pedestrian to your right.",
+            "town": "Town04",
+            "weather": "ClearSunset",
+            "target": {
+              "category": "adult",
+              "color": ""
+            },
+            "initial_direction": "right",
+            "landmark": "building",
+            "duration_s": 40.8,
+            "phases_s": {
+              "SEARCH": [
+                0.0,
+                13.6
+              ],
+              "ACQUIRE": [
+                13.8,
+                16.0
+              ],
+              "TRACK": [
+                16.2,
+                41.0
+              ]
+            }
+          }
+        },
+        {
+          "id": "town04-5",
+          "thumb": "figures/viewer/town04/05/thumb.jpg?v=2",
+          "images": [
+            {
+              "src": "figures/viewer/town04/05/takeoff.jpg?v=2",
+              "label": "Takeoff"
+            },
+            {
+              "src": "figures/viewer/town04/05/search.jpg?v=2",
+              "label": "Search"
+            },
+            {
+              "src": "figures/viewer/town04/05/acquire.jpg?v=2",
+              "label": "Acquire"
+            },
+            {
+              "src": "figures/viewer/town04/05/track.jpg?v=2",
+              "label": "Track"
+            }
+          ],
+          "record": {
+            "episode_index": 5814,
+            "task_instruction": "Find and track the male adult pedestrian to your left, near the building at the initial sighting.",
+            "town": "Town04",
+            "weather": "CloudyNoon",
+            "target": {
+              "category": "adult",
+              "color": ""
+            },
+            "initial_direction": "left",
+            "landmark": "building",
+            "duration_s": 41.8,
+            "phases_s": {
+              "SEARCH": [
+                0.0,
+                15.4
+              ],
+              "ACQUIRE": [
+                15.6,
+                17.0
+              ],
+              "TRACK": [
+                17.2,
+                42.0
+              ]
+            }
+          }
+        },
+        {
+          "id": "town04-6",
+          "thumb": "figures/viewer/town04/06/thumb.jpg?v=2",
+          "images": [
+            {
+              "src": "figures/viewer/town04/06/takeoff.jpg?v=2",
+              "label": "Takeoff"
+            },
+            {
+              "src": "figures/viewer/town04/06/search.jpg?v=2",
+              "label": "Search"
+            },
+            {
+              "src": "figures/viewer/town04/06/acquire.jpg?v=2",
+              "label": "Acquire"
+            },
+            {
+              "src": "figures/viewer/town04/06/track.jpg?v=2",
+              "label": "Track"
+            }
+          ],
+          "record": {
+            "episode_index": 689,
+            "task_instruction": "Find and track the male adult pedestrian behind you, near the building at the initial sighting.",
+            "town": "Town04",
+            "weather": "WetNoon",
+            "target": {
+              "category": "adult",
+              "color": ""
+            },
+            "initial_direction": "behind",
+            "landmark": "building",
+            "duration_s": 43.8,
+            "phases_s": {
+              "SEARCH": [
+                0.0,
+                17.4
+              ],
+              "ACQUIRE": [
+                17.6,
+                19.0
+              ],
+              "TRACK": [
+                19.2,
+                44.0
+              ]
+            }
+          }
+        },
+        {
+          "id": "town04-7",
+          "thumb": "figures/viewer/town04/07/thumb.jpg?v=2",
+          "images": [
+            {
+              "src": "figures/viewer/town04/07/takeoff.jpg?v=2",
+              "label": "Takeoff"
+            },
+            {
+              "src": "figures/viewer/town04/07/search.jpg?v=2",
+              "label": "Search"
+            },
+            {
+              "src": "figures/viewer/town04/07/acquire.jpg?v=2",
+              "label": "Acquire"
+            },
+            {
+              "src": "figures/viewer/town04/07/track.jpg?v=2",
+              "label": "Track"
+            }
+          ],
+          "record": {
+            "episode_index": 5828,
+            "task_instruction": "Find and track the male adult pedestrian ahead of you, near the building at the initial sighting.",
+            "town": "Town04",
+            "weather": "WetNoon",
+            "target": {
+              "category": "adult",
+              "color": ""
+            },
+            "initial_direction": "ahead",
+            "landmark": "building",
+            "duration_s": 38.6,
+            "phases_s": {
+              "SEARCH": [
+                0.0,
+                10.6
+              ],
+              "ACQUIRE": [
+                10.8,
+                13.8
+              ],
+              "TRACK": [
+                14.0,
+                38.8
+              ]
+            }
+          }
+        },
+        {
+          "id": "town04-8",
+          "thumb": "figures/viewer/town04/08/thumb.jpg?v=2",
+          "images": [
+            {
+              "src": "figures/viewer/town04/08/takeoff.jpg?v=2",
+              "label": "Takeoff"
+            },
+            {
+              "src": "figures/viewer/town04/08/search.jpg?v=2",
+              "label": "Search"
+            },
+            {
+              "src": "figures/viewer/town04/08/acquire.jpg?v=2",
+              "label": "Acquire"
+            },
+            {
+              "src": "figures/viewer/town04/08/track.jpg?v=2",
+              "label": "Track"
+            }
+          ],
+          "record": {
+            "episode_index": 9386,
+            "task_instruction": "Find and track the male adult pedestrian behind you, near the building at the initial sighting.",
+            "town": "Town04",
+            "weather": "WetNoon",
+            "target": {
+              "category": "adult",
+              "color": ""
+            },
+            "initial_direction": "behind",
+            "landmark": "building",
+            "duration_s": 40.0,
+            "phases_s": {
+              "SEARCH": [
+                0.0,
+                13.6
+              ],
+              "ACQUIRE": [
+                13.8,
+                15.2
+              ],
+              "TRACK": [
+                15.4,
+                40.2
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "town05": {
+      "label": "Town05 · Car",
+      "items": [
+        {
+          "id": "town05-1",
+          "thumb": "figures/viewer/town05/01/thumb.jpg?v=2",
+          "images": [
+            {
+              "src": "figures/viewer/town05/01/takeoff.jpg?v=2",
+              "label": "Takeoff"
+            },
+            {
+              "src": "figures/viewer/town05/01/search.jpg?v=2",
+              "label": "Search"
+            },
+            {
+              "src": "figures/viewer/town05/01/acquire.jpg?v=2",
+              "label": "Acquire"
+            },
+            {
+              "src": "figures/viewer/town05/01/track.jpg?v=2",
+              "label": "Track"
+            }
+          ],
+          "record": {
+            "episode_index": 9430,
+            "task_instruction": "Find and track the silver car ahead of you.",
+            "town": "Town05",
+            "weather": "ClearNoon",
+            "target": {
+              "category": "car",
+              "color": "silver"
+            },
+            "initial_direction": "ahead",
+            "landmark": "building",
+            "duration_s": 32.0,
+            "phases_s": {
+              "SEARCH": [
+                0.0,
+                5.6
+              ],
+              "ACQUIRE": [
+                5.8,
+                7.2
+              ],
+              "TRACK": [
+                7.4,
+                32.2
+              ]
+            }
+          }
+        },
+        {
+          "id": "town05-2",
+          "thumb": "figures/viewer/town05/02/thumb.jpg?v=2",
+          "images": [
+            {
+              "src": "figures/viewer/town05/02/takeoff.jpg?v=2",
+              "label": "Takeoff"
+            },
+            {
+              "src": "figures/viewer/town05/02/search.jpg?v=2",
+              "label": "Search"
+            },
+            {
+              "src": "figures/viewer/town05/02/acquire.jpg?v=2",
+              "label": "Acquire"
+            },
+            {
+              "src": "figures/viewer/town05/02/track.jpg?v=2",
+              "label": "Track"
+            }
+          ],
+          "record": {
+            "episode_index": 9612,
+            "task_instruction": "Find and track the black car to your left, near the building at the initial sighting.",
+            "town": "Town05",
+            "weather": "ClearNoon",
+            "target": {
+              "category": "car",
+              "color": "black"
+            },
+            "initial_direction": "left",
+            "landmark": "building",
+            "duration_s": 34.6,
+            "phases_s": {
+              "SEARCH": [
+                0.0,
+                8.2
+              ],
+              "ACQUIRE": [
+                8.4,
+                9.8
+              ],
+              "TRACK": [
+                10.0,
+                34.8
+              ]
+            }
+          }
+        },
+        {
+          "id": "town05-3",
+          "thumb": "figures/viewer/town05/03/thumb.jpg?v=2",
+          "images": [
+            {
+              "src": "figures/viewer/town05/03/takeoff.jpg?v=2",
+              "label": "Takeoff"
+            },
+            {
+              "src": "figures/viewer/town05/03/search.jpg?v=2",
+              "label": "Search"
+            },
+            {
+              "src": "figures/viewer/town05/03/acquire.jpg?v=2",
+              "label": "Acquire"
+            },
+            {
+              "src": "figures/viewer/town05/03/track.jpg?v=2",
+              "label": "Track"
+            }
+          ],
+          "record": {
+            "episode_index": 9446,
+            "task_instruction": "Find and track the gray car to your front-right.",
+            "town": "Town05",
+            "weather": "ClearSunset",
+            "target": {
+              "category": "car",
+              "color": "gray"
+            },
+            "initial_direction": "front-right",
+            "landmark": "bridge",
+            "duration_s": 34.8,
+            "phases_s": {
+              "SEARCH": [
+                0.0,
+                6.8
+              ],
+              "ACQUIRE": [
+                7.0,
+                10.0
+              ],
+              "TRACK": [
+                10.2,
+                35.0
+              ]
+            }
+          }
+        },
+        {
+          "id": "town05-4",
+          "thumb": "figures/viewer/town05/04/thumb.jpg?v=2",
+          "images": [
+            {
+              "src": "figures/viewer/town05/04/takeoff.jpg?v=2",
+              "label": "Takeoff"
+            },
+            {
+              "src": "figures/viewer/town05/04/search.jpg?v=2",
+              "label": "Search"
+            },
+            {
+              "src": "figures/viewer/town05/04/acquire.jpg?v=2",
+              "label": "Acquire"
+            },
+            {
+              "src": "figures/viewer/town05/04/track.jpg?v=2",
+              "label": "Track"
+            }
+          ],
+          "record": {
+            "episode_index": 9624,
+            "task_instruction": "Find and track the red car ahead of you, beside the bridge at the initial sighting.",
+            "town": "Town05",
+            "weather": "ClearSunset",
+            "target": {
+              "category": "car",
+              "color": "red"
+            },
+            "initial_direction": "ahead",
+            "landmark": "bridge",
+            "duration_s": 34.2,
+            "phases_s": {
+              "SEARCH": [
+                0.0,
+                5.4
+              ],
+              "ACQUIRE": [
+                5.6,
+                9.4
+              ],
+              "TRACK": [
+                9.6,
+                34.4
+              ]
+            }
+          }
+        },
+        {
+          "id": "town05-5",
+          "thumb": "figures/viewer/town05/05/thumb.jpg?v=2",
+          "images": [
+            {
+              "src": "figures/viewer/town05/05/takeoff.jpg?v=2",
+              "label": "Takeoff"
+            },
+            {
+              "src": "figures/viewer/town05/05/search.jpg?v=2",
+              "label": "Search"
+            },
+            {
+              "src": "figures/viewer/town05/05/acquire.jpg?v=2",
+              "label": "Acquire"
+            },
+            {
+              "src": "figures/viewer/town05/05/track.jpg?v=2",
+              "label": "Track"
+            }
+          ],
+          "record": {
+            "episode_index": 9442,
+            "task_instruction": "Find and track the red car to your front-left, beside the bridge at the initial sighting.",
+            "town": "Town05",
+            "weather": "CloudyNoon",
+            "target": {
+              "category": "car",
+              "color": "red"
+            },
+            "initial_direction": "front-left",
+            "landmark": "bridge",
+            "duration_s": 40.8,
+            "phases_s": {
+              "SEARCH": [
+                0.0,
+                12.0
+              ],
+              "ACQUIRE": [
+                12.2,
+                16.0
+              ],
+              "TRACK": [
+                16.2,
+                41.0
+              ]
+            }
+          }
+        },
+        {
+          "id": "town05-6",
+          "thumb": "figures/viewer/town05/06/thumb.jpg?v=2",
+          "images": [
+            {
+              "src": "figures/viewer/town05/06/takeoff.jpg?v=2",
+              "label": "Takeoff"
+            },
+            {
+              "src": "figures/viewer/town05/06/search.jpg?v=2",
+              "label": "Search"
+            },
+            {
+              "src": "figures/viewer/town05/06/acquire.jpg?v=2",
+              "label": "Acquire"
+            },
+            {
+              "src": "figures/viewer/town05/06/track.jpg?v=2",
+              "label": "Track"
+            }
+          ],
+          "record": {
+            "episode_index": 9632,
+            "task_instruction": "Find and track the black car to your rear-left, beside the bridge at the initial sighting.",
+            "town": "Town05",
+            "weather": "CloudyNoon",
+            "target": {
+              "category": "car",
+              "color": "black"
+            },
+            "initial_direction": "rear-left",
+            "landmark": "bridge",
+            "duration_s": 33.6,
+            "phases_s": {
+              "SEARCH": [
+                0.0,
+                7.2
+              ],
+              "ACQUIRE": [
+                7.4,
+                8.8
+              ],
+              "TRACK": [
+                9.0,
+                33.8
+              ]
+            }
+          }
+        },
+        {
+          "id": "town05-7",
+          "thumb": "figures/viewer/town05/07/thumb.jpg?v=2",
+          "images": [
+            {
+              "src": "figures/viewer/town05/07/takeoff.jpg?v=2",
+              "label": "Takeoff"
+            },
+            {
+              "src": "figures/viewer/town05/07/search.jpg?v=2",
+              "label": "Search"
+            },
+            {
+              "src": "figures/viewer/town05/07/acquire.jpg?v=2",
+              "label": "Acquire"
+            },
+            {
+              "src": "figures/viewer/town05/07/track.jpg?v=2",
+              "label": "Track"
+            }
+          ],
+          "record": {
+            "episode_index": 9435,
+            "task_instruction": "Find and track the black car to your rear-right.",
+            "town": "Town05",
+            "weather": "WetNoon",
+            "target": {
+              "category": "car",
+              "color": "black"
+            },
+            "initial_direction": "rear-right",
+            "landmark": "intersection",
+            "duration_s": 36.6,
+            "phases_s": {
+              "SEARCH": [
+                0.0,
+                10.2
+              ],
+              "ACQUIRE": [
+                10.4,
+                11.8
+              ],
+              "TRACK": [
+                12.0,
+                36.8
+              ]
+            }
+          }
+        },
+        {
+          "id": "town05-8",
+          "thumb": "figures/viewer/town05/08/thumb.jpg?v=2",
+          "images": [
+            {
+              "src": "figures/viewer/town05/08/takeoff.jpg?v=2",
+              "label": "Takeoff"
+            },
+            {
+              "src": "figures/viewer/town05/08/search.jpg?v=2",
+              "label": "Search"
+            },
+            {
+              "src": "figures/viewer/town05/08/acquire.jpg?v=2",
+              "label": "Acquire"
+            },
+            {
+              "src": "figures/viewer/town05/08/track.jpg?v=2",
+              "label": "Track"
+            }
+          ],
+          "record": {
+            "episode_index": 9806,
+            "task_instruction": "Find and track the white car ahead of you.",
+            "town": "Town05",
+            "weather": "WetNoon",
+            "target": {
+              "category": "car",
+              "color": "white"
+            },
+            "initial_direction": "ahead",
+            "landmark": "intersection",
+            "duration_s": 33.8,
+            "phases_s": {
+              "SEARCH": [
+                0.0,
+                5.8
+              ],
+              "ACQUIRE": [
+                6.0,
+                9.0
+              ],
+              "TRACK": [
+                9.2,
+                34.0
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "town07": {
+      "label": "Town07 · Motorcycle",
+      "items": [
+        {
+          "id": "town07-1",
+          "thumb": "figures/viewer/town07/01/thumb.jpg?v=2",
+          "images": [
+            {
+              "src": "figures/viewer/town07/01/takeoff.jpg?v=2",
+              "label": "Takeoff"
+            },
+            {
+              "src": "figures/viewer/town07/01/search.jpg?v=2",
+              "label": "Search"
+            },
+            {
+              "src": "figures/viewer/town07/01/acquire.jpg?v=2",
+              "label": "Acquire"
+            },
+            {
+              "src": "figures/viewer/town07/01/track.jpg?v=2",
+              "label": "Track"
+            }
+          ],
+          "record": {
+            "episode_index": 9568,
+            "task_instruction": "Find and track the black motorcycle to your left.",
+            "town": "Town07",
+            "weather": "ClearNoon",
+            "target": {
+              "category": "motorcycle",
+              "color": "black"
+            },
+            "initial_direction": "left",
+            "landmark": "building",
+            "duration_s": 32.8,
+            "phases_s": {
+              "SEARCH": [
+                0.0,
+                6.4
+              ],
+              "ACQUIRE": [
+                6.6,
+                8.0
+              ],
+              "TRACK": [
+                8.2,
+                33.0
+              ]
+            }
+          }
+        },
+        {
+          "id": "town07-2",
+          "thumb": "figures/viewer/town07/02/thumb.jpg?v=2",
+          "images": [
+            {
+              "src": "figures/viewer/town07/02/takeoff.jpg?v=2",
+              "label": "Takeoff"
+            },
+            {
+              "src": "figures/viewer/town07/02/search.jpg?v=2",
+              "label": "Search"
+            },
+            {
+              "src": "figures/viewer/town07/02/acquire.jpg?v=2",
+              "label": "Acquire"
+            },
+            {
+              "src": "figures/viewer/town07/02/track.jpg?v=2",
+              "label": "Track"
+            }
+          ],
+          "record": {
+            "episode_index": 9733,
+            "task_instruction": "Find and track the gray motorcycle to your rear-left, beside the building at the initial sighting.",
+            "town": "Town07",
+            "weather": "ClearNoon",
+            "target": {
+              "category": "motorcycle",
+              "color": "gray"
+            },
+            "initial_direction": "rear-left",
+            "landmark": "building",
+            "duration_s": 35.0,
+            "phases_s": {
+              "SEARCH": [
+                0.0,
+                8.6
+              ],
+              "ACQUIRE": [
+                8.8,
+                10.2
+              ],
+              "TRACK": [
+                10.4,
+                35.2
+              ]
+            }
+          }
+        },
+        {
+          "id": "town07-3",
+          "thumb": "figures/viewer/town07/03/thumb.jpg?v=2",
+          "images": [
+            {
+              "src": "figures/viewer/town07/03/takeoff.jpg?v=2",
+              "label": "Takeoff"
+            },
+            {
+              "src": "figures/viewer/town07/03/search.jpg?v=2",
+              "label": "Search"
+            },
+            {
+              "src": "figures/viewer/town07/03/acquire.jpg?v=2",
+              "label": "Acquire"
+            },
+            {
+              "src": "figures/viewer/town07/03/track.jpg?v=2",
+              "label": "Track"
+            }
+          ],
+          "record": {
+            "episode_index": 9913,
+            "task_instruction": "Find and track the gray motorcycle to your rear-left, beside the building at the initial sighting.",
+            "town": "Town07",
+            "weather": "ClearNoon",
+            "target": {
+              "category": "motorcycle",
+              "color": "gray"
+            },
+            "initial_direction": "rear-left",
+            "landmark": "building",
+            "duration_s": 35.8,
+            "phases_s": {
+              "SEARCH": [
+                0.0,
+                7.8
+              ],
+              "ACQUIRE": [
+                8.0,
+                11.0
+              ],
+              "TRACK": [
+                11.2,
+                36.0
+              ]
+            }
+          }
+        },
+        {
+          "id": "town07-4",
+          "thumb": "figures/viewer/town07/04/thumb.jpg?v=2",
+          "images": [
+            {
+              "src": "figures/viewer/town07/04/takeoff.jpg?v=2",
+              "label": "Takeoff"
+            },
+            {
+              "src": "figures/viewer/town07/04/search.jpg?v=2",
+              "label": "Search"
+            },
+            {
+              "src": "figures/viewer/town07/04/acquire.jpg?v=2",
+              "label": "Acquire"
+            },
+            {
+              "src": "figures/viewer/town07/04/track.jpg?v=2",
+              "label": "Track"
+            }
+          ],
+          "record": {
+            "episode_index": 9564,
+            "task_instruction": "Find and track the gray motorcycle to your rear-right.",
+            "town": "Town07",
+            "weather": "ClearSunset",
+            "target": {
+              "category": "motorcycle",
+              "color": "gray"
+            },
+            "initial_direction": "rear-right",
+            "landmark": "building",
+            "duration_s": 48.0,
+            "phases_s": {
+              "SEARCH": [
+                0.0,
+                21.6
+              ],
+              "ACQUIRE": [
+                21.8,
+                23.2
+              ],
+              "TRACK": [
+                23.4,
+                48.2
+              ]
+            }
+          }
+        },
+        {
+          "id": "town07-5",
+          "thumb": "figures/viewer/town07/05/thumb.jpg?v=2",
+          "images": [
+            {
+              "src": "figures/viewer/town07/05/takeoff.jpg?v=2",
+              "label": "Takeoff"
+            },
+            {
+              "src": "figures/viewer/town07/05/search.jpg?v=2",
+              "label": "Search"
+            },
+            {
+              "src": "figures/viewer/town07/05/acquire.jpg?v=2",
+              "label": "Acquire"
+            },
+            {
+              "src": "figures/viewer/town07/05/track.jpg?v=2",
+              "label": "Track"
+            }
+          ],
+          "record": {
+            "episode_index": 9567,
+            "task_instruction": "Find and track the silver motorcycle to your right, beside the building at the initial sighting.",
+            "town": "Town07",
+            "weather": "CloudyNoon",
+            "target": {
+              "category": "motorcycle",
+              "color": "silver"
+            },
+            "initial_direction": "right",
+            "landmark": "building",
+            "duration_s": 34.8,
+            "phases_s": {
+              "SEARCH": [
+                0.0,
+                7.6
+              ],
+              "ACQUIRE": [
+                7.8,
+                10.0
+              ],
+              "TRACK": [
+                10.2,
+                35.0
+              ]
+            }
+          }
+        },
+        {
+          "id": "town07-6",
+          "thumb": "figures/viewer/town07/06/thumb.jpg?v=2",
+          "images": [
+            {
+              "src": "figures/viewer/town07/06/takeoff.jpg?v=2",
+              "label": "Takeoff"
+            },
+            {
+              "src": "figures/viewer/town07/06/search.jpg?v=2",
+              "label": "Search"
+            },
+            {
+              "src": "figures/viewer/town07/06/acquire.jpg?v=2",
+              "label": "Acquire"
+            },
+            {
+              "src": "figures/viewer/town07/06/track.jpg?v=2",
+              "label": "Track"
+            }
+          ],
+          "record": {
+            "episode_index": 9740,
+            "task_instruction": "Find and track the gray motorcycle behind you.",
+            "town": "Town07",
+            "weather": "CloudyNoon",
+            "target": {
+              "category": "motorcycle",
+              "color": "gray"
+            },
+            "initial_direction": "behind",
+            "landmark": "building",
+            "duration_s": 34.2,
+            "phases_s": {
+              "SEARCH": [
+                0.0,
+                7.8
+              ],
+              "ACQUIRE": [
+                8.0,
+                9.4
+              ],
+              "TRACK": [
+                9.6,
+                34.4
+              ]
+            }
+          }
+        },
+        {
+          "id": "town07-7",
+          "thumb": "figures/viewer/town07/07/thumb.jpg?v=2",
+          "images": [
+            {
+              "src": "figures/viewer/town07/07/takeoff.jpg?v=2",
+              "label": "Takeoff"
+            },
+            {
+              "src": "figures/viewer/town07/07/search.jpg?v=2",
+              "label": "Search"
+            },
+            {
+              "src": "figures/viewer/town07/07/acquire.jpg?v=2",
+              "label": "Acquire"
+            },
+            {
+              "src": "figures/viewer/town07/07/track.jpg?v=2",
+              "label": "Track"
+            }
+          ],
+          "record": {
+            "episode_index": 9727,
+            "task_instruction": "Find and track the black motorcycle behind you, beside the bridge at the initial sighting.",
+            "town": "Town07",
+            "weather": "WetNoon",
+            "target": {
+              "category": "motorcycle",
+              "color": "black"
+            },
+            "initial_direction": "behind",
+            "landmark": "bridge",
+            "duration_s": 41.0,
+            "phases_s": {
+              "SEARCH": [
+                0.0,
+                14.6
+              ],
+              "ACQUIRE": [
+                14.8,
+                16.2
+              ],
+              "TRACK": [
+                16.4,
+                41.2
+              ]
+            }
+          }
+        },
+        {
+          "id": "town07-8",
+          "thumb": "figures/viewer/town07/08/thumb.jpg?v=2",
+          "images": [
+            {
+              "src": "figures/viewer/town07/08/takeoff.jpg?v=2",
+              "label": "Takeoff"
+            },
+            {
+              "src": "figures/viewer/town07/08/search.jpg?v=2",
+              "label": "Search"
+            },
+            {
+              "src": "figures/viewer/town07/08/acquire.jpg?v=2",
+              "label": "Acquire"
+            },
+            {
+              "src": "figures/viewer/town07/08/track.jpg?v=2",
+              "label": "Track"
+            }
+          ],
+          "record": {
+            "episode_index": 9904,
+            "task_instruction": "Find and track the black motorcycle to your rear-right, near the intersection at the initial sighting.",
+            "town": "Town07",
+            "weather": "WetNoon",
+            "target": {
+              "category": "motorcycle",
+              "color": "black"
+            },
+            "initial_direction": "rear-right",
+            "landmark": "intersection",
+            "duration_s": 44.0,
+            "phases_s": {
+              "SEARCH": [
+                0.0,
+                17.6
+              ],
+              "ACQUIRE": [
+                17.8,
+                19.2
+              ],
+              "TRACK": [
+                19.4,
+                44.2
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "town10": {
+      "label": "Town10HD · Teenager",
+      "items": [
+        {
+          "id": "town10-1",
+          "thumb": "figures/viewer/town10/01/thumb.jpg?v=2",
+          "images": [
+            {
+              "src": "figures/viewer/town10/01/takeoff.jpg?v=2",
+              "label": "Takeoff"
+            },
+            {
+              "src": "figures/viewer/town10/01/search.jpg?v=2",
+              "label": "Search"
+            },
+            {
+              "src": "figures/viewer/town10/01/acquire.jpg?v=2",
+              "label": "Acquire"
+            },
+            {
+              "src": "figures/viewer/town10/01/track.jpg?v=2",
+              "label": "Track"
+            }
+          ],
+          "record": {
+            "episode_index": 4654,
+            "task_instruction": "Find and track the male teenager pedestrian to your rear-right.",
+            "town": "Town10HD",
+            "weather": "ClearNoon",
+            "target": {
+              "category": "teenager",
+              "color": ""
+            },
+            "initial_direction": "rear-right",
+            "landmark": "building",
+            "duration_s": 44.4,
+            "phases_s": {
+              "SEARCH": [
+                0.0,
+                18.0
+              ],
+              "ACQUIRE": [
+                18.2,
+                19.6
+              ],
+              "TRACK": [
+                19.8,
+                44.6
+              ]
+            }
+          }
+        },
+        {
+          "id": "town10-2",
+          "thumb": "figures/viewer/town10/02/thumb.jpg?v=2",
+          "images": [
+            {
+              "src": "figures/viewer/town10/02/takeoff.jpg?v=2",
+              "label": "Takeoff"
+            },
+            {
+              "src": "figures/viewer/town10/02/search.jpg?v=2",
+              "label": "Search"
+            },
+            {
+              "src": "figures/viewer/town10/02/acquire.jpg?v=2",
+              "label": "Acquire"
+            },
+            {
+              "src": "figures/viewer/town10/02/track.jpg?v=2",
+              "label": "Track"
+            }
+          ],
+          "record": {
+            "episode_index": 6264,
+            "task_instruction": "Find and track the male teenager pedestrian to your left, near the building at the initial sighting.",
+            "town": "Town10HD",
+            "weather": "ClearNoon",
+            "target": {
+              "category": "teenager",
+              "color": ""
+            },
+            "initial_direction": "left",
+            "landmark": "building",
+            "duration_s": 40.2,
+            "phases_s": {
+              "SEARCH": [
+                0.0,
+                13.8
+              ],
+              "ACQUIRE": [
+                14.0,
+                15.4
+              ],
+              "TRACK": [
+                15.6,
+                40.4
+              ]
+            }
+          }
+        },
+        {
+          "id": "town10-3",
+          "thumb": "figures/viewer/town10/03/thumb.jpg?v=2",
+          "images": [
+            {
+              "src": "figures/viewer/town10/03/takeoff.jpg?v=2",
+              "label": "Takeoff"
+            },
+            {
+              "src": "figures/viewer/town10/03/search.jpg?v=2",
+              "label": "Search"
+            },
+            {
+              "src": "figures/viewer/town10/03/acquire.jpg?v=2",
+              "label": "Acquire"
+            },
+            {
+              "src": "figures/viewer/town10/03/track.jpg?v=2",
+              "label": "Track"
+            }
+          ],
+          "record": {
+            "episode_index": 94,
+            "task_instruction": "Find and track the male teenager pedestrian to your rear-left, near the building at the initial sighting.",
+            "town": "Town10HD",
+            "weather": "ClearSunset",
+            "target": {
+              "category": "teenager",
+              "color": ""
+            },
+            "initial_direction": "rear-left",
+            "landmark": "building",
+            "duration_s": 41.0,
+            "phases_s": {
+              "SEARCH": [
+                0.0,
+                13.8
+              ],
+              "ACQUIRE": [
+                14.0,
+                16.2
+              ],
+              "TRACK": [
+                16.4,
+                41.2
+              ]
+            }
+          }
+        },
+        {
+          "id": "town10-4",
+          "thumb": "figures/viewer/town10/04/thumb.jpg?v=2",
+          "images": [
+            {
+              "src": "figures/viewer/town10/04/takeoff.jpg?v=2",
+              "label": "Takeoff"
+            },
+            {
+              "src": "figures/viewer/town10/04/search.jpg?v=2",
+              "label": "Search"
+            },
+            {
+              "src": "figures/viewer/town10/04/acquire.jpg?v=2",
+              "label": "Acquire"
+            },
+            {
+              "src": "figures/viewer/town10/04/track.jpg?v=2",
+              "label": "Track"
+            }
+          ],
+          "record": {
+            "episode_index": 2726,
+            "task_instruction": "Find and track the male teenager pedestrian to your front-left.",
+            "town": "Town10HD",
+            "weather": "ClearSunset",
+            "target": {
+              "category": "teenager",
+              "color": ""
+            },
+            "initial_direction": "front-left",
+            "landmark": "building",
+            "duration_s": 43.2,
+            "phases_s": {
+              "SEARCH": [
+                0.0,
+                16.8
+              ],
+              "ACQUIRE": [
+                17.0,
+                18.4
+              ],
+              "TRACK": [
+                18.6,
+                43.4
+              ]
+            }
+          }
+        },
+        {
+          "id": "town10-5",
+          "thumb": "figures/viewer/town10/05/thumb.jpg?v=2",
+          "images": [
+            {
+              "src": "figures/viewer/town10/05/takeoff.jpg?v=2",
+              "label": "Takeoff"
+            },
+            {
+              "src": "figures/viewer/town10/05/search.jpg?v=2",
+              "label": "Search"
+            },
+            {
+              "src": "figures/viewer/town10/05/acquire.jpg?v=2",
+              "label": "Acquire"
+            },
+            {
+              "src": "figures/viewer/town10/05/track.jpg?v=2",
+              "label": "Track"
+            }
+          ],
+          "record": {
+            "episode_index": 9419,
+            "task_instruction": "Find and track the male teenager pedestrian to your front-left, beside the building at the initial sighting.",
+            "town": "Town10HD",
+            "weather": "ClearSunset",
+            "target": {
+              "category": "teenager",
+              "color": ""
+            },
+            "initial_direction": "front-left",
+            "landmark": "building",
+            "duration_s": 38.8,
+            "phases_s": {
+              "SEARCH": [
+                0.0,
+                10.8
+              ],
+              "ACQUIRE": [
+                11.0,
+                14.0
+              ],
+              "TRACK": [
+                14.2,
+                39.0
+              ]
+            }
+          }
+        },
+        {
+          "id": "town10-6",
+          "thumb": "figures/viewer/town10/06/thumb.jpg?v=2",
+          "images": [
+            {
+              "src": "figures/viewer/town10/06/takeoff.jpg?v=2",
+              "label": "Takeoff"
+            },
+            {
+              "src": "figures/viewer/town10/06/search.jpg?v=2",
+              "label": "Search"
+            },
+            {
+              "src": "figures/viewer/town10/06/acquire.jpg?v=2",
+              "label": "Acquire"
+            },
+            {
+              "src": "figures/viewer/town10/06/track.jpg?v=2",
+              "label": "Track"
+            }
+          ],
+          "record": {
+            "episode_index": 1611,
+            "task_instruction": "Find and track the male teenager pedestrian ahead of you, beside the building at the initial sighting.",
+            "town": "Town10HD",
+            "weather": "CloudyNoon",
+            "target": {
+              "category": "teenager",
+              "color": ""
+            },
+            "initial_direction": "ahead",
+            "landmark": "building",
+            "duration_s": 40.4,
+            "phases_s": {
+              "SEARCH": [
+                0.0,
+                12.4
+              ],
+              "ACQUIRE": [
+                12.6,
+                15.6
+              ],
+              "TRACK": [
+                15.8,
+                40.6
+              ]
+            }
+          }
+        },
+        {
+          "id": "town10-7",
+          "thumb": "figures/viewer/town10/07/thumb.jpg?v=2",
+          "images": [
+            {
+              "src": "figures/viewer/town10/07/takeoff.jpg?v=2",
+              "label": "Takeoff"
+            },
+            {
+              "src": "figures/viewer/town10/07/search.jpg?v=2",
+              "label": "Search"
+            },
+            {
+              "src": "figures/viewer/town10/07/acquire.jpg?v=2",
+              "label": "Acquire"
+            },
+            {
+              "src": "figures/viewer/town10/07/track.jpg?v=2",
+              "label": "Track"
+            }
+          ],
+          "record": {
+            "episode_index": 7885,
+            "task_instruction": "Find and track the female teenager pedestrian to your front-right.",
+            "town": "Town10HD",
+            "weather": "CloudyNoon",
+            "target": {
+              "category": "teenager",
+              "color": ""
+            },
+            "initial_direction": "front-right",
+            "landmark": "building",
+            "duration_s": 52.2,
+            "phases_s": {
+              "SEARCH": [
+                0.0,
+                25.8
+              ],
+              "ACQUIRE": [
+                26.0,
+                27.4
+              ],
+              "TRACK": [
+                27.6,
+                52.4
+              ]
+            }
+          }
+        },
+        {
+          "id": "town10-8",
+          "thumb": "figures/viewer/town10/08/thumb.jpg?v=2",
+          "images": [
+            {
+              "src": "figures/viewer/town10/08/takeoff.jpg?v=2",
+              "label": "Takeoff"
+            },
+            {
+              "src": "figures/viewer/town10/08/search.jpg?v=2",
+              "label": "Search"
+            },
+            {
+              "src": "figures/viewer/town10/08/acquire.jpg?v=2",
+              "label": "Acquire"
+            },
+            {
+              "src": "figures/viewer/town10/08/track.jpg?v=2",
+              "label": "Track"
+            }
+          ],
+          "record": {
+            "episode_index": 6269,
+            "task_instruction": "Find and track the female teenager pedestrian to your left, near the building at the initial sighting.",
+            "town": "Town10HD",
+            "weather": "WetNoon",
+            "target": {
+              "category": "teenager",
+              "color": ""
+            },
+            "initial_direction": "left",
+            "landmark": "building",
+            "duration_s": 43.0,
+            "phases_s": {
+              "SEARCH": [
+                0.0,
+                16.6
+              ],
+              "ACQUIRE": [
+                16.8,
+                18.2
+              ],
+              "TRACK": [
+                18.4,
+                43.2
+              ]
+            }
+          }
+        }
+      ]
+    }
+  }
+}
