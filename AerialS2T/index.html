@@ -69,13 +69,14 @@
       gap: 14px;
       margin-bottom: 22px;
     }
-    .brand-icon { width: 96px; height: 96px; flex: 0 0 auto; object-fit: contain; filter: url(#logo-white-knockout); }
+    .brand-icon { width: 64px; height: 64px; flex: 0 0 auto; object-fit: contain; filter: url(#logo-white-knockout); }
     .brand-name {
-      font-family: Georgia, "Times New Roman", serif;
-      font-size: clamp(3rem, 7.5vw, 6rem);
+      font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+      font-size: clamp(3rem, 5vw, 4rem);
       font-weight: 700;
-      line-height: 1;
-      letter-spacing: -0.045em;
+      line-height: normal;
+      letter-spacing: normal;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
     }
     .brand-aerial { color: #5798ff; }
     .brand-s { color: #fa6089; }
@@ -84,14 +85,14 @@
     .publication-title {
       max-width: 1040px;
       margin: 0 auto 28px;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      font-size: clamp(1.65rem, 2.8vw, 2.25rem);
-      font-weight: 650;
-      line-height: 1.22;
-      letter-spacing: -0.025em;
+      font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+      font-size: clamp(1.5rem, 2.5vw, 2rem);
+      font-weight: 700;
+      line-height: normal;
+      letter-spacing: normal;
       color: #fff;
       text-wrap: balance;
-      text-shadow: 0 2px 16px rgba(0, 0, 0, 0.4);
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
     }
     .author-line {
       display: flex;
@@ -102,7 +103,7 @@
       font-size: 1.45rem;
       line-height: 1.5;
       color: #fff;
-      text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
     }
     .author-line sup { font-size: 0.65em; margin-left: 3px; }
     .affiliations {
@@ -123,7 +124,7 @@
       color: #f3f5f8;
       font-size: 1rem;
       line-height: 1.5;
-      text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
     }
     .affiliation p { margin: 0; }
     .affiliation-logo { width: 180px; height: 74px; object-fit: contain; }
@@ -396,7 +397,7 @@
     <div class="hero-body">
       <div class="container" id="top">
         <div class="brand" aria-label="AerialS2T">
-          <img class="brand-icon" src="figures/logo.png" alt="" width="96" height="96">
+          <img class="brand-icon" src="figures/logo.png" alt="" width="64" height="64">
           <span class="brand-name" aria-hidden="true"><span class="brand-aerial">Aerial</span><span class="brand-s">S</span><span class="brand-two">2</span><span class="brand-t">T</span></span>
         </div>
         <h1 class="publication-title">Learning Vision-Language-Action Policies<br>for Aerial Search-to-Track</h1>
