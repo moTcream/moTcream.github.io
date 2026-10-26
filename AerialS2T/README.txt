@@ -3,7 +3,11 @@ AerialS2T 项目页源码
 
 index.html          页面
 cover_*_v7.mp4      首页四段循环视频
-figures/            配图、校徽、Dataset Viewer 图片和 data.json
+figures/            配图、Logo、Dataset Viewer 图片和 data.json
+figures/teaser.pdf  任务总览原图（网页预览为 teaser.png）
+figures/model.pdf   方法原图（网页预览为 model.png）
+figures/dataset.pdf 数据集原图（网页预览为 dataset.png）
+figures/logo.png    项目 Logo
 .nojekyll           静态托管用，本地预览可忽略
 
 本地预览：
