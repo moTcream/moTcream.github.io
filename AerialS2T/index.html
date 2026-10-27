@@ -382,24 +382,214 @@
       .page-section { padding: 44px 0 28px; }
     }
   </style>
+
+  <style>
+    /* Hero presentation. */
+    .hero {
+      min-height: 100vh;
+      flex-direction: column;
+      justify-content: center;
+      background: radial-gradient(ellipse at 5% 8%, #e5efff 0, transparent 48%),
+                  radial-gradient(ellipse at 95% 92%, #e4f6f2 0, transparent 44%), #fbfdff;
+      padding: 28px 0 26px;
+      border-bottom: 1px solid #dce7ef;
+    }
+    .overlay { display: none; }
+    .hero-body { order: 0; padding: 0 0 26px; }
+    .hero .container { max-width: 1160px; }
+    .brand { gap: 14px; margin-bottom: 13px; }
+    .brand-name { font-size: clamp(3rem, 6.25vw, 5rem); text-shadow: none; }
+    .brand-icon { width: 72px; height: 72px; }
+    .brand-aerial { color: #3079dc; }
+    .brand-s { color: #e64d7d; }
+    .brand-two { color: #d89d23; }
+    .brand-t { color: #149e92; }
+    .publication-title { color: #243d59; text-shadow: none; margin-bottom: 20px; font-size: clamp(1.5rem, 2.5vw, 2rem); }
+    .author-line { color: #344b62; text-shadow: none; font-size: 1.25rem; margin-bottom: 17px; }
+    .author-line.primary { margin-bottom: 7px; }
+    .affiliations { gap: 12px 28px; }
+    .affiliation { font-size: 0.92rem; color: #526b81; text-shadow: none; gap: 7px; }
+    .affiliation-logo { height: 54px; }
+    .affiliation-logo.nwpu, .affiliation-logo.whu { width: 54px; }
+    .affiliation-logo.anu { width: 47px; }
+    .author-note { margin-top: 13px; font-size: 0.86rem; color: #6d8296; text-shadow: none; }
+    .links { margin-top: 18px; gap: 12px; }
+    .pill {
+      color: #305a82;
+      background: rgba(255,255,255,0.85);
+      border: 1px solid #cdddeb;
+      box-shadow: 0 3px 10px rgba(52,94,138,0.04);
+      padding: 9px 24px;
+      border-radius: 10px;
+      transition: transform 160ms ease, background 160ms ease, box-shadow 160ms ease;
+    }
+    .links a:last-child .pill { background: #2f70b4; color: #fff; border-color: #2f70b4; }
+    .links a:hover .pill { background: #e8f1fb; transform: translateY(-2px); box-shadow: 0 5px 14px rgba(52,94,138,0.1); }
+    .links a:last-child:hover .pill { background: #245f9d; }
+    .hero-video {
+      order: 1;
+      position: relative;
+      inset: auto;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0,1fr));
+      gap: 8px;
+      width: min(1120px, calc(100% - 64px));
+      height: 160px;
+      padding: 7px;
+      border-radius: 18px;
+      border: 1px solid rgba(189,211,228,0.75);
+      background: rgba(255,255,255,0.85);
+      box-shadow: 0 14px 36px rgba(52,94,138,0.1);
+      overflow: hidden;
+    }
+    .hero-video video {
+      position: relative;
+      top: auto; left: auto; right: auto; bottom: auto;
+      width: 100%; height: 100%; min-width: 0;
+      object-fit: cover; border-radius: 10px; background: #e3edf2;
+    }
+    .hero-video .tl, .hero-video .tr, .hero-video .bl, .hero-video .br { top:auto;left:auto;right:auto;bottom:auto; }
+    @media (max-width:800px) {
+      .hero { padding-top: 34px; }
+      .brand-icon { width:56px;height:56px; }
+      .publication-title { font-size: clamp(1.35rem,5.3vw,1.65rem); }
+      .author-line { font-size:1.1rem; }
+      .affiliation { width:min(270px,100%);font-size:0.85rem; }
+      .hero-video { grid-template-columns:repeat(2,minmax(0,1fr));height:260px;width:calc(100% - 32px); }
+      .pill { padding:9px 18px; }
+    }
+  </style>
+
+  <style>
+    /* Full-screen video background. */
+    .hero { min-height:100vh; padding:40px 0; }
+    .hero-body { padding:0; }
+    .hero-video {
+      position:absolute; inset:0; width:100%; height:100%; padding:0;
+      display:block; border:0; border-radius:0; box-shadow:none;
+      background:#e3edf2;
+    }
+    .hero-video video { display:none; border-radius:0; }
+    .hero-video video.tl { display:block; position:absolute; inset:0; width:100%; height:100%; object-fit:cover; filter:none; }
+    .overlay {
+      display:block; z-index:2;
+      background:linear-gradient(180deg,rgba(7,16,30,.35),rgba(7,16,30,.56) 55%,rgba(7,16,30,.38));
+    }
+    .hero-body { position:relative; z-index:10; }
+    .publication-title { color:#213b57; }
+    .author-line { color:#2d465e; }
+    .affiliation { color:#344f68; }
+    .author-note { color:#526c83; }
+    .pill { background:rgba(255,255,255,.8); }
+    @media(max-width:800px) {
+      .hero { padding:40px 0; }
+      .hero-video { width:100%;height:100%; }
+    }
+  </style>
+
+  <style>
+    /* Hero contrast. */
+    .brand-aerial { color:#5798ff; }
+    .brand-s { color:#fa6089; }
+    .brand-two { color:#f5c149; }
+    .brand-t { color:#39c3b1; }
+    .brand-name, .publication-title, .author-line, .affiliation, .author-note { text-shadow:2px 2px 4px rgba(0,0,0,.8); }
+    .publication-title, .author-line { color:#fff; }
+    .affiliation { color:#f3f5f8; }
+    .author-note { color:#eee; }
+  </style>
+
+  <style>
+    .brand-name { font-size:clamp(3.5rem,7.5vw,6rem); }
+    .brand-icon { width:88px;height:88px; }
+    @media(max-width:800px) {
+      .brand-name { font-size:clamp(3rem,10.2vw,4rem); }
+      .brand-icon { width:64px;height:64px; }
+    }
+  </style>
+
+  <style>
+    /* Scale the remaining hero content by the same 1.2 factor as the title. */
+    .publication-title { font-size:clamp(1.8rem,3vw,2.4rem); margin-bottom:24px; }
+    .author-line { font-size:1.5rem; gap:9.6px 36px; margin-bottom:20.4px; }
+    .author-line.primary { margin-bottom:8.4px; }
+    .affiliations { gap:14.4px 33.6px; max-width:1100px; }
+    .affiliation { width:330px;font-size:1.104rem;gap:8.4px; }
+    .affiliation-logo { height:64.8px; }
+    .affiliation-logo.nwpu,.affiliation-logo.whu { width:64.8px; }
+    .affiliation-logo.anu { width:56.4px; }
+    .author-note { margin-top:15.6px;font-size:1.032rem; }
+    .links { margin-top:21.6px;gap:14.4px; }
+    .pill { font-size:1.224rem;padding:10.8px 28.8px;border-radius:12px; }
+    @media(max-width:800px) {
+      .publication-title { font-size:clamp(1.62rem,6.36vw,1.98rem); }
+      .author-line { font-size:1.32rem;gap:7.2px 21.6px; }
+      .affiliation { width:min(324px,100%);font-size:1.02rem; }
+      .pill { font-size:1.14rem;padding:10.8px 21.6px; }
+      .links { gap:12px; }
+    }
+  </style>
+
+  <style>
+    .hero { padding-bottom:62px; }
+    .hero-video video, .hero-video video.tl {
+      display:block;position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+      opacity:0;filter:none;transition:opacity 1000ms ease;pointer-events:none;
+    }
+    .hero-video video.is-active { opacity:1; }
+    .carousel-arrow {
+      position:absolute;top:50%;transform:translateY(-50%);z-index:30;
+      display:grid;place-items:center;width:46px;height:60px;padding:10px;
+      border:1px solid rgba(255,255,255,.3);border-radius:14px;
+      background:rgba(15,36,60,.28);color:#fff;cursor:pointer;
+      backdrop-filter:blur(8px);transition:background 180ms ease,border-color 180ms ease;
+    }
+    .carousel-prev { left:18px; }
+    .carousel-next { right:18px; }
+    .carousel-arrow svg { width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round; }
+    .carousel-arrow:hover { background:rgba(31,90,145,.65);border-color:rgba(255,255,255,.7); }
+    .carousel-pagination { position:absolute;z-index:30;bottom:19px;left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:13px; }
+    .carousel-dots { display:flex;align-items:center;gap:8px; }
+    .carousel-dot { width:25px;height:5px;border:0;border-radius:6px;padding:0;background:rgba(255,255,255,.42);cursor:pointer;transition:width 220ms ease,background 220ms ease; }
+    .carousel-dot.is-active { width:42px;background:#fff; }
+    .carousel-toggle { display:grid;place-items:center;width:26px;height:26px;background:rgba(15,36,60,.32);border:1px solid rgba(255,255,255,.3);border-radius:50%;color:white;padding:0;font:12px system-ui;cursor:pointer; }
+    .carousel-arrow:focus-visible,.carousel-dot:focus-visible,.carousel-toggle:focus-visible { outline:2px solid white;outline-offset:5px; }
+    @media(max-width:800px) {
+      .carousel-arrow { width:30px;height:44px;padding:4px;border-radius:9px; }
+      .carousel-prev { left:6px; }.carousel-next { right:6px; }
+      .carousel-arrow svg { width:20px;height:20px; }
+    }
+    @media(prefers-reduced-motion:reduce) { .hero-video video { transition:none; } }
+  </style>
 </head>
 <body>
   <section class="hero">
-    <div class="hero-video">
-      <video class="tl" playsinline muted>
+    <div class="hero-video" aria-hidden="true">
+      <video class="tl is-active" playsinline muted loop preload="auto" aria-hidden="true">
         <source src="cover_tl_v7.mp4?v=9" type="video/mp4">
       </video>
-      <video class="tr" playsinline muted>
+      <video class="tr" playsinline muted loop preload="auto" aria-hidden="true">
         <source src="cover_tr_v7.mp4?v=9" type="video/mp4">
       </video>
-      <video class="bl" playsinline muted>
+      <video class="bl" playsinline muted loop preload="auto" aria-hidden="true">
         <source src="cover_bl_v7.mp4?v=9" type="video/mp4">
       </video>
-      <video class="br" playsinline muted>
+      <video class="br" playsinline muted loop preload="auto" aria-hidden="true">
         <source src="cover_br_v7.mp4?v=9" type="video/mp4">
       </video>
     </div>
     <div class="overlay"></div>
+    <button class="carousel-arrow carousel-prev" type="button" aria-label="Previous background video">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m14.5 5-7 7 7 7"/></svg>
+    </button>
+    <button class="carousel-arrow carousel-next" type="button" aria-label="Next background video">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9.5 5 7 7-7 7"/></svg>
+    </button>
+    <div class="carousel-pagination" aria-label="Background video controls">
+      <div class="carousel-dots" aria-label="Select background video"><button type="button" class="carousel-dot is-active" aria-label="Show background video 1" aria-pressed="true"></button><button type="button" class="carousel-dot" aria-label="Show background video 2" aria-pressed="false"></button><button type="button" class="carousel-dot" aria-label="Show background video 3" aria-pressed="false"></button><button type="button" class="carousel-dot" aria-label="Show background video 4" aria-pressed="false"></button></div>
+      <button class="carousel-toggle" type="button" aria-label="Pause automatic video switching" aria-pressed="false">Ⅱ</button>
+    </div>
 
     <div class="hero-body">
       <div class="container" id="top">
@@ -497,26 +687,62 @@
 
   <script>
     const clips = Array.from(document.querySelectorAll(".hero-video video"));
-    function startTogether() {
-      clips.forEach((clip) => { clip.currentTime = 0; });
-      clips.forEach((clip) => { clip.play(); });
+    const dots = Array.from(document.querySelectorAll(".carousel-dot"));
+    const toggle = document.querySelector(".carousel-toggle");
+    let currentSlide = 0;
+    let autoplay = !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    let carouselTimer = null;
+    let slideRequest = 0;
+    function restartCarouselTimer() {
+      clearTimeout(carouselTimer);
+      if (autoplay && !document.hidden) carouselTimer = setTimeout(() => showSlide(currentSlide + 1), 3000);
     }
-    let ready = 0;
-    let restarting = false;
-    clips.forEach((clip) => {
-      const mark = () => {
-        ready += 1;
-        if (ready === clips.length) startTogether();
-      };
-      if (clip.readyState >= 3) mark();
-      else clip.addEventListener("canplaythrough", mark, { once: true });
-      clip.addEventListener("ended", () => {
-        if (restarting) return;
-        restarting = true;
-        startTogether();
-        setTimeout(() => { restarting = false; }, 250);
+    function updatePlaybackControl() {
+      toggle.textContent = autoplay ? "Ⅱ" : "▶";
+      toggle.setAttribute("aria-label", autoplay ? "Pause automatic video switching" : "Resume automatic video switching");
+      toggle.setAttribute("aria-pressed", String(!autoplay));
+    }
+    async function showSlide(index) {
+      const next = (index + clips.length) % clips.length;
+      if (next === currentSlide) { restartCarouselTimer(); return; }
+      const request = ++slideRequest;
+      clearTimeout(carouselTimer);
+      const previous = clips[currentSlide];
+      const incoming = clips[next];
+      incoming.currentTime = 0;
+      try { await incoming.play(); } catch (_) { /* Keep the first available frame visible. */ }
+      if (request !== slideRequest) return;
+      previous.classList.remove("is-active");
+      incoming.classList.add("is-active");
+      currentSlide = next;
+      dots.forEach((dot, i) => {
+        dot.classList.toggle("is-active", i === next);
+        dot.setAttribute("aria-pressed", String(i === next));
       });
+      setTimeout(() => { if (!previous.classList.contains("is-active")) previous.pause(); }, 1050);
+      restartCarouselTimer();
+    }
+    document.querySelector(".carousel-prev").addEventListener("click", () => showSlide(currentSlide - 1));
+    document.querySelector(".carousel-next").addEventListener("click", () => showSlide(currentSlide + 1));
+    dots.forEach((dot, i) => dot.addEventListener("click", () => showSlide(i)));
+    toggle.addEventListener("click", () => {
+      autoplay = !autoplay;
+      updatePlaybackControl();
+      if (!autoplay) {
+        // Stop rotation; the selected video continues looping normally.
+        ++slideRequest;
+        clips.forEach((clip, i) => { if (i !== currentSlide) clip.pause(); });
+      }
+      clips[currentSlide].play().catch(() => {});
+      restartCarouselTimer();
     });
+    document.addEventListener("visibilitychange", () => {
+      if (document.hidden) { clearTimeout(carouselTimer); clips.forEach(clip => clip.pause()); }
+      else { clips[currentSlide].play().catch(() => {}); restartCarouselTimer(); }
+    });
+    updatePlaybackControl();
+    clips[0].play().catch(() => {});
+    restartCarouselTimer();
 
     let viewerData = null;
     let viewerCategory = null;
