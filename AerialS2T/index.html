@@ -630,24 +630,12 @@
 <body>
   <section class="hero">
     <div class="hero-video" aria-hidden="true">
-      <video class="tl is-active" playsinline muted loop preload="auto" aria-hidden="true">
-        <source src="cover_tl_v7.mp4?v=9" type="video/mp4">
-      </video>
-      <video class="tr" playsinline muted loop preload="auto" aria-hidden="true">
-        <source src="cover_tr_v7.mp4?v=9" type="video/mp4">
-      </video>
-      <video class="bl" playsinline muted loop preload="auto" aria-hidden="true">
-        <source src="cover_bl_v7.mp4?v=9" type="video/mp4">
-      </video>
-      <video class="br" playsinline muted loop preload="auto" aria-hidden="true">
-        <source src="cover_br_v7.mp4?v=9" type="video/mp4">
-      </video>
-      <video playsinline muted loop preload="auto" aria-hidden="true">
-        <source src="cover_05_town07_v7.mp4?v=1" type="video/mp4">
-      </video>
-      <video playsinline muted loop preload="auto" aria-hidden="true">
-        <source src="cover_06_town10_v7.mp4?v=1" type="video/mp4">
-      </video>
+      <video class="tl is-active" playsinline muted loop preload="auto" aria-hidden="true" data-src="cover_tl_v7.mp4?v=9" src="cover_tl_v7.mp4?v=9"></video>
+      <video class="tr" playsinline muted loop preload="none" aria-hidden="true" data-src="cover_tr_v7.mp4?v=9"></video>
+      <video class="bl" playsinline muted loop preload="none" aria-hidden="true" data-src="cover_bl_v7.mp4?v=9"></video>
+      <video class="br" playsinline muted loop preload="none" aria-hidden="true" data-src="cover_br_v7.mp4?v=9"></video>
+      <video playsinline muted loop preload="none" aria-hidden="true" data-src="cover_05_town07_v7.mp4?v=1"></video>
+      <video playsinline muted loop preload="none" aria-hidden="true" data-src="cover_06_town10_v7.mp4?v=1"></video>
     </div>
     <div class="overlay"></div>
     <button class="carousel-arrow carousel-prev" type="button" aria-label="Previous background video">
@@ -713,7 +701,7 @@
       <p class="scene-kicker" id="scene-label">Town01 · Van</p>
       <p class="scene-caption" style="margin:0 0 16px">Drag to rotate · Scroll to zoom · Move the timeline to inspect a recorded frame</p>
       <div class="traj-stage" id="traj-stage">
-        <video id="traj-video" playsinline muted></video>
+        <video id="traj-video" playsinline muted preload="none"></video>
         <div class="traj-viewport">
           <canvas id="traj-canvas"></canvas>
           <div class="traj-legend" id="traj-legend"></div>
@@ -752,7 +740,7 @@
     <div class="container">
       <h2 class="section-title">Overview</h2>
       <div class="figure-wrap">
-        <img src="figures/teaser.png" alt="AerialS2T overview">
+        <img loading="lazy" decoding="async" src="figures/teaser.png" width="3200" height="1586" alt="AerialS2T overview">
         <p class="figure-caption">Figure 1. AerialS2T task overview: takeoff, search, acquire, and track under language instructions.</p>
       </div>
     </div>
@@ -763,7 +751,7 @@
       <h2 class="section-title">Dataset</h2>
       <h3 class="section-subtitle">AerialLIFT-10K</h3>
       <div class="figure-wrap">
-        <img src="figures/dataset.png" alt="AerialLIFT-10K dataset overview">
+        <img loading="lazy" decoding="async" src="figures/dataset.png" width="3200" height="1880" alt="AerialLIFT-10K dataset overview">
         <p class="figure-caption">Figure 2. AerialLIFT-10K dataset overview across maps, targets, weather, and acquisition statistics.</p>
       </div>
 
@@ -789,7 +777,7 @@
       <h2 class="section-title">Method</h2>
       <h3 class="section-subtitle">MoViC</h3>
       <div class="figure-wrap">
-        <img src="figures/model.png?v=20261027" alt="MoViC architecture">
+        <img loading="lazy" decoding="async" src="figures/model.png?v=20261027" width="3200" height="1514" alt="MoViC architecture">
         <p class="figure-caption">Figure 3. Method overview: MoViC architecture with recurrent target forecasting and geometric action refinement.</p>
       </div>
     </div>
@@ -797,7 +785,7 @@
 
   <!-- Website template adapted from MomaGraph: https://hybridrobotics.github.io/MomaGraph/ -->
 
-  <script src="figures/trajectory.js?v=19"></script>
+  <script src="figures/trajectory.js?v=20"></script>
   <script>
     const SCENES = [
       { ep: 817, town: "Town01", label: "Town01 · Van", clip: "fly_01_town01.mp4?v=1", seconds: 43 },
@@ -808,29 +796,57 @@
       { ep: 9419, town: "Town10HD", label: "Town10HD · Teenager", clip: "fly_06_town10.mp4?v=1", seconds: 40 }
     ];
     const motionOK = !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    function showScene(index) {
-      const scene = SCENES[index];
-      const label = document.getElementById("scene-label");
-      if (label) label.textContent = scene.label;
-      if (!window.TrajectoryView) return;
-      TrajectoryView.show(scene.ep, scene.clip, { episode_index: scene.ep, town: scene.town });
-      const play = document.getElementById("traj-play");
-      if (play && motionOK && play.textContent !== "Pause") play.click();
-    }
-
     const clips = Array.from(document.querySelectorAll(".hero-video video"));
     const dots = Array.from(document.querySelectorAll(".hero .carousel-dot"));
     const sceneDots = Array.from(document.querySelectorAll(".scene-dot"));
     const toggles = Array.from(document.querySelectorAll(".carousel-toggle, .scene-toggle"));
     let currentSlide = 0;
-    let autoplay = !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    let autoplay = motionOK;
     let carouselTimer = null;
+    let warmTimer = null;
     let slideRequest = 0;
+    let heroVisible = false;
+    let trajectoryVisible = false;
+    let trajectoryReady = false;
+    let trajectoryLoading = null;
+    let trajectoryScene = -1;
+
+    // Keep only the current background; warm the next clip shortly before switching.
+    // Dormant videos have no src, so opening the page does not fetch all six MP4s.
+    function prepareClip(index, preload = "auto") {
+      const clip = clips[index];
+      clip.preload = preload;
+      if (!clip.getAttribute("src")) {
+        clip.src = clip.dataset.src;
+        clip.load();
+      }
+      return clip;
+    }
+    function releaseUnusedClips(keepNext = false) {
+      const next = (currentSlide + 1) % clips.length;
+      clips.forEach((clip, index) => {
+        if (index === currentSlide || (keepNext && index === next)) return;
+        clip.pause();
+        if (clip.getAttribute("src")) {
+          clip.removeAttribute("src");
+          clip.preload = "none";
+          clip.load();
+        }
+      });
+    }
+    function warmNextClip() {
+      clearTimeout(warmTimer);
+      if (!heroVisible || document.hidden || !autoplay || navigator.connection?.saveData) return;
+      warmTimer = setTimeout(() => {
+        if (!heroVisible || document.hidden || !autoplay) return;
+        prepareClip((currentSlide + 1) % clips.length);
+      }, Math.max(2000, (SCENES[currentSlide].seconds - 5) * 1000));
+    }
     function restartCarouselTimer() {
       clearTimeout(carouselTimer);
-      if (autoplay && !document.hidden) {
+      if (autoplay && !document.hidden && (heroVisible || trajectoryVisible)) {
         const scene = SCENES[currentSlide] || SCENES[0];
-        carouselTimer = setTimeout(() => showSlide(currentSlide + 1), (scene.seconds || 15) * 1000);
+        carouselTimer = setTimeout(() => showSlide(currentSlide + 1), scene.seconds * 1000);
       }
     }
     function updatePlaybackControl() {
@@ -840,15 +856,69 @@
         toggle.setAttribute("aria-pressed", String(!autoplay));
       });
     }
+    function showScene(index) {
+      const scene = SCENES[index];
+      document.getElementById("scene-label").textContent = scene.label;
+      if (!trajectoryReady || !trajectoryVisible || document.hidden || trajectoryScene === index) return;
+      trajectoryScene = index;
+      TrajectoryView.show(scene.ep, scene.clip, { episode_index: scene.ep, town: scene.town });
+      const play = document.getElementById("traj-play");
+      if (motionOK && play.textContent !== "Pause") play.click();
+    }
+    function ensureTrajectory() {
+      if (trajectoryLoading) return trajectoryLoading;
+      trajectoryLoading = fetch("figures/scenes.json?v=14")
+        .then((response) => {
+          if (!response.ok) throw new Error("Trajectory data could not be loaded");
+          return response.json();
+        })
+        .then((pack) => {
+          if (!window.TrajectoryView) throw new Error("Trajectory viewer could not be loaded");
+          TrajectoryView.boot(pack);
+          trajectoryReady = true;
+          TrajectoryView.setVisible(trajectoryVisible && !document.hidden);
+          showScene(currentSlide);
+        })
+        .catch((error) => {
+          document.getElementById("traj-stage").hidden = true;
+          document.querySelector(".scene-nav").hidden = true;
+          const label = document.getElementById("scene-label");
+          label.textContent = "The trajectory viewer could not be loaded. Please refresh to try again.";
+          label.setAttribute("role", "status");
+          console.error(error);
+        });
+      return trajectoryLoading;
+    }
+    function syncMediaVisibility() {
+      clearTimeout(warmTimer);
+      clips.forEach((clip, i) => {
+        if (document.hidden || !heroVisible || i !== currentSlide) clip.pause();
+      });
+      if (heroVisible && !document.hidden) {
+        prepareClip(currentSlide).play().catch(() => {});
+        warmNextClip();
+      }
+      if (trajectoryReady) TrajectoryView.setVisible(trajectoryVisible && !document.hidden);
+      if (trajectoryVisible && !document.hidden) {
+        ensureTrajectory();
+        showScene(currentSlide);
+      }
+      restartCarouselTimer();
+    }
     async function showSlide(index) {
       const next = (index + clips.length) % clips.length;
       if (next === currentSlide) { restartCarouselTimer(); return; }
       const request = ++slideRequest;
       clearTimeout(carouselTimer);
+      clearTimeout(warmTimer);
       const previous = clips[currentSlide];
       const incoming = clips[next];
-      incoming.currentTime = 0;
-      try { await incoming.play(); } catch (_) { /* Keep the first available frame visible. */ }
+      // Below the hero, switching trajectories must not start a hidden background.
+      if (heroVisible && !document.hidden) {
+        prepareClip(next);
+        incoming.currentTime = 0;
+        try { await incoming.play(); } catch (_) { /* Preserve navigation if autoplay is blocked. */ }
+      }
       if (request !== slideRequest) return;
       previous.classList.remove("is-active");
       incoming.classList.add("is-active");
@@ -862,7 +932,12 @@
         dot.setAttribute("aria-pressed", String(i === next));
       });
       showScene(next);
-      setTimeout(() => { if (!previous.classList.contains("is-active")) previous.pause(); }, 1050);
+      if (!heroVisible || document.hidden) incoming.pause();
+      setTimeout(() => {
+        if (request !== slideRequest) return;
+        releaseUnusedClips(heroVisible && autoplay && !document.hidden);
+        warmNextClip();
+      }, 1050);
       restartCarouselTimer();
     }
     document.querySelector(".carousel-prev").addEventListener("click", () => showSlide(currentSlide - 1));
@@ -875,44 +950,37 @@
       autoplay = enabled;
       updatePlaybackControl();
       if (!autoplay) {
-        // Stop rotation; the selected video continues looping normally.
         ++slideRequest;
-        clips.forEach((clip, i) => { if (i !== currentSlide) clip.pause(); });
+        clearTimeout(warmTimer);
+        releaseUnusedClips();
       }
-      clips[currentSlide].play().catch(() => {});
+      // This control stops rotation only; the visible selected video keeps playing.
+      if (heroVisible && !document.hidden) prepareClip(currentSlide).play().catch(() => {});
+      warmNextClip();
       restartCarouselTimer();
     }
     toggles.forEach((toggle) => toggle.addEventListener("click", () => setAutomaticSwitching(!autoplay)));
-    // Keep the selected scene while the visitor explores its trajectory.
     document.getElementById("traj-stage").addEventListener("pointerdown", (event) => {
       if (event.target.closest("canvas, button, input, .traj-phasebar")) setAutomaticSwitching(false);
     });
     document.getElementById("traj-time").addEventListener("input", () => setAutomaticSwitching(false));
-    document.addEventListener("visibilitychange", () => {
-      if (document.hidden) { clearTimeout(carouselTimer); clips.forEach(clip => clip.pause()); }
-      else { clips[currentSlide].play().catch(() => {}); restartCarouselTimer(); }
-    });
+    document.addEventListener("visibilitychange", syncMediaVisibility);
     updatePlaybackControl();
-    clips[0].play().catch(() => {});
-    restartCarouselTimer();
-    fetch("figures/scenes.json?v=14")
-      .then((response) => {
-        if (!response.ok) throw new Error("Trajectory data could not be loaded");
-        return response.json();
-      })
-      .then((pack) => {
-        if (!window.TrajectoryView) throw new Error("Trajectory viewer could not be loaded");
-        TrajectoryView.boot(pack);
-        showScene(currentSlide);
-      })
-      .catch((error) => {
-        document.getElementById("traj-stage").hidden = true;
-        document.querySelector(".scene-nav").hidden = true;
-        const label = document.getElementById("scene-label");
-        label.textContent = "The trajectory viewer could not be loaded. Please refresh to try again.";
-        label.setAttribute("role", "status");
-        console.error(error);
-      });
+    if ("IntersectionObserver" in window) {
+      const mediaObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          const visible = entry.isIntersecting && entry.intersectionRatio >= 0.01;
+          if (entry.target.matches(".hero")) heroVisible = visible;
+          else trajectoryVisible = visible;
+        });
+        syncMediaVisibility();
+      }, { threshold: 0.01 });
+      mediaObserver.observe(document.querySelector(".hero"));
+      mediaObserver.observe(document.querySelector(".traj-viewport"));
+    } else {
+      heroVisible = trajectoryVisible = true;
+      syncMediaVisibility();
+    }
 
     let viewerData = null;
     let viewerCategory = null;
@@ -942,6 +1010,8 @@
         btn.type = "button";
         btn.className = item.id === viewerItem ? "selected" : "";
         const img = document.createElement("img");
+        img.loading = "lazy";
+        img.decoding = "async";
         img.src = item.thumb;
         img.alt = item.record.task_instruction;
         btn.appendChild(img);
@@ -962,6 +1032,8 @@
       item.images.forEach((frame) => {
         const fig = document.createElement("figure");
         const img = document.createElement("img");
+        img.loading = "lazy";
+        img.decoding = "async";
         img.src = frame.src;
         img.alt = frame.label;
         const cap = document.createElement("figcaption");
@@ -976,16 +1048,26 @@
       if (scroll) card.scrollIntoView({ behavior: "smooth", block: "nearest" });
     }
 
-    fetch("figures/viewer/data.json")
-      .then((res) => res.json())
-      .then((data) => {
-        viewerData = data;
-        showViewerCategory(data.order[0], true);
-      })
-      .catch(() => {
-        const hint = document.querySelector(".viewer-hint");
-        if (hint) hint.textContent = "Dataset viewer is still loading.";
-      });
+    function loadDatasetViewer() {
+      fetch("figures/viewer/data.json")
+        .then((res) => { if (!res.ok) throw new Error("Dataset could not be loaded"); return res.json(); })
+        .then((data) => {
+          viewerData = data;
+          showViewerCategory(data.order[0], true);
+        })
+        .catch(() => {
+          const hint = document.querySelector(".viewer-hint");
+          if (hint) hint.textContent = "Dataset viewer is still loading.";
+        });
+    }
+    if ("IntersectionObserver" in window) {
+      const datasetObserver = new IntersectionObserver((entries, observer) => {
+        if (!entries.some((entry) => entry.isIntersecting)) return;
+        observer.disconnect();
+        loadDatasetViewer();
+      }, { rootMargin: "300px" });
+      datasetObserver.observe(document.getElementById("dataset"));
+    } else loadDatasetViewer();
 
   </script>
 </body>

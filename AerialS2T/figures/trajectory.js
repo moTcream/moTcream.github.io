@@ -17,6 +17,7 @@
     index: 0,
     cursor: 0,
     playing: false,
+    visible: false,
     raf: 0,
     lastTick: 0,
     az: -0.85,
@@ -84,6 +85,8 @@
       return;
     }
     state.loadedClip = clip;
+    state.grab = null;
+    state.grabTime = null;
     state.seeking = false;
     video.src = clip;
     video.load();
@@ -91,7 +94,8 @@
 
   function grabVideoFrame() {
     const video = document.getElementById("traj-video");
-    if (!video || video.readyState < 2 || !video.videoWidth) return;
+    if (!state.visible || !video || video.readyState < 2 || !video.videoWidth) return;
+    if (state.grab && state.grabTime === video.currentTime) return;
     if (!state.grab) {
       state.grab = document.createElement("canvas");
       state.grab.width = 640;
@@ -108,7 +112,7 @@
 
   function syncVideo() {
     const video = document.getElementById("traj-video");
-    if (!video || !state.ep || !video.src || video.readyState < 1) return false;
+    if (!state.visible || !video || !state.ep || !video.src || video.readyState < 1) return false;
     const limit = Number.isFinite(video.duration) && video.duration > 0.1
       ? Math.max(0, video.duration - 0.04)
       : desiredTime();
@@ -141,7 +145,8 @@
     const video = document.getElementById("traj-video");
     state.seeking = false;
     grabVideoFrame();
-    if (!video || !state.ep) return;
+    if (!state.visible || !video || !state.ep) return;
+    if (!state.playing) draw();
     if (state.playing) {
       const wait = Math.max(0, (state.stepStarted || 0) + state.ep.dt * 1000 - performance.now());
       clearTimeout(state.playTimer);
@@ -152,7 +157,7 @@
   }
 
   function advanceFrame() {
-    if (!state.playing || !state.ep) return;
+    if (!state.visible || !state.playing || !state.ep) return;
     const video = document.getElementById("traj-video");
     const maxFrame = count() - 1;
     const clip = video && Number.isFinite(video.duration) && video.duration > 0.2 ? video.duration : 0;
@@ -167,7 +172,6 @@
     }
     state.index = Math.round(state.cursor);
     renderChrome();
-    draw();
     syncVideo();
     clearTimeout(state.playTimer);
     state.playTimer = setTimeout(advanceFrame, 80);
@@ -879,7 +883,7 @@
 
   function resize() {
     const c = canvas();
-    if (!c || !state.ep) return;
+    if (!state.visible || !c || !state.ep) return;
     const rect = c.getBoundingClientRect();
     if (rect.width < 2 || rect.height < 2) return;
     const dpr = Math.min(window.devicePixelRatio || 1, 2);
@@ -909,7 +913,7 @@
   }
 
   function draw() {
-    if (!ctx || !state.ep) return;
+    if (!state.visible || !ctx || !state.ep) return;
     const w = state.w;
     const h = state.h;
     state.ms = performance.now();
@@ -1728,25 +1732,28 @@
   function renderChrome() {
     const ep = state.ep;
     const s = currentSample();
-    const legend = document.getElementById("traj-legend");
-    const present = ORDER.filter((key) => ep.phase.indexOf(key) >= 0);
-    legend.innerHTML = present.map((key) => {
-      return '<span><i style="background:' + PHASES[key].color + '"></i>' + PHASES[key].name + "</span>";
-    }).join("") + '<span><i style="background:#ff5d8f"></i>Target</span>';
+    if (state.chromeEpisode !== ep) {
+      state.chromeEpisode = ep;
+      const legend = document.getElementById("traj-legend");
+      const present = ORDER.filter((key) => ep.phase.indexOf(key) >= 0);
+      legend.innerHTML = present.map((key) => {
+        return '<span><i style="background:' + PHASES[key].color + '"></i>' + PHASES[key].name + "</span>";
+      }).join("") + '<span><i style="background:#ff5d8f"></i>Target</span>';
 
-    const bar = document.getElementById("traj-phasebar");
-    let html = "";
-    let run = 1;
-    for (let i = 1; i <= ep.phase.length; i += 1) {
-      if (i < ep.phase.length && ep.phase.charAt(i) === ep.phase.charAt(i - 1)) {
-        run += 1;
-      } else {
-        const key = ep.phase.charAt(i - 1);
-        html += '<i style="width:' + (run / ep.phase.length) * 100 + "%;background:" + PHASES[key].color + '"></i>';
-        run = 1;
+      const bar = document.getElementById("traj-phasebar");
+      let html = "";
+      let run = 1;
+      for (let i = 1; i <= ep.phase.length; i += 1) {
+        if (i < ep.phase.length && ep.phase.charAt(i) === ep.phase.charAt(i - 1)) {
+          run += 1;
+        } else {
+          const key = ep.phase.charAt(i - 1);
+          html += '<i style="width:' + (run / ep.phase.length) * 100 + "%;background:" + PHASES[key].color + '"></i>';
+          run = 1;
+        }
       }
+      bar.innerHTML = html;
     }
-    bar.innerHTML = html;
 
     const slider = document.getElementById("traj-time");
     slider.max = String(count() - 1);
@@ -1765,18 +1772,29 @@
       const where = rec.town ? rec.town + " · " : "";
       cap.textContent = where + "episode " + who + " · recorded frame " + s.time.toFixed(1) + " s";
     }
-    document.getElementById("traj-readout").innerHTML = [
-      stat("Phase", PHASES[s.phase].name),
-      stat("Altitude", s.z.toFixed(1) + " m"),
-      stat("Yaw", wrap(s.yaw).toFixed(0) + "°"),
-      stat("Pitch", s.pitch.toFixed(0) + "°"),
-      stat("Range", dist.toFixed(1) + " m"),
-      stat("From start", "ΔX " + signed(s.x - origin.x) + " m, ΔY " + signed(s.y - origin.y) + " m")
-    ].join("");
-  }
-
-  function stat(name, value) {
-    return '<span><em>' + name + '</em>' + value + "</span>";
+    const values = [
+      PHASES[s.phase].name,
+      s.z.toFixed(1) + " m",
+      wrap(s.yaw).toFixed(0) + "°",
+      s.pitch.toFixed(0) + "°",
+      dist.toFixed(1) + " m",
+      "ΔX " + signed(s.x - origin.x) + " m, ΔY " + signed(s.y - origin.y) + " m"
+    ];
+    if (!state.readoutNodes) {
+      const readout = document.getElementById("traj-readout");
+      state.readoutNodes = ["Phase", "Altitude", "Yaw", "Pitch", "Range", "From start"].map((name) => {
+        const item = document.createElement("span");
+        const label = document.createElement("em");
+        label.textContent = name;
+        const value = document.createTextNode("");
+        item.append(label, value);
+        readout.appendChild(item);
+        return value;
+      });
+    }
+    state.readoutNodes.forEach((node, i) => {
+      if (node.nodeValue !== values[i]) node.nodeValue = values[i];
+    });
   }
 
   function signed(value) {
@@ -1794,25 +1812,47 @@
     if (!state.playing) syncVideo();
   }
 
-  function pump() {
+  // Visibility suspends work without changing the visitor's play/pause choice.
+  function setVisible(visible) {
+    visible = Boolean(visible);
+    if (state.visible === visible) return;
+    state.visible = visible;
+    const video = document.getElementById("traj-video");
+    clearTimeout(state.playTimer);
+    cancelAnimationFrame(state.raf);
+    state.raf = 0;
+    if (!visible) {
+      if (video) video.pause();
+      state.hiddenAt = performance.now();
+      return;
+    }
+    if (state.intro && state.hiddenAt) state.intro.t0 += performance.now() - state.hiddenAt;
+    state.hiddenAt = null;
+    if (!state.ep) return;
+    resize();
+    syncVideo();
+    if (state.playing) state.playTimer = setTimeout(advanceFrame, 80);
+    ensurePump();
+  }
+
+  function pump(timestamp) {
     const stage = document.getElementById("traj-stage");
-    if (!state.ep || !stage || stage.hidden) {
+    if (!state.visible || !state.ep || !stage || stage.hidden) {
       state.raf = 0;
       return;
     }
-    const surface = canvas();
-    if (surface) {
-      const rect = surface.getBoundingClientRect();
-      const dpr = Math.min(window.devicePixelRatio || 1, 2);
-      if (rect.width > 2 && Math.abs(surface.width - rect.width * dpr) > 4) resize();
+    // One drawing loop, capped at 30 fps. ResizeObserver handles layout changes.
+    if (timestamp - state.lastTick >= 1000 / 30 - 1) {
+      state.lastTick = timestamp;
+      easeIntro();
+      draw();
     }
-    easeIntro();
-    draw();
-    state.raf = requestAnimationFrame(pump);
+    if (state.playing || state.intro) state.raf = requestAnimationFrame(pump);
+    else state.raf = 0;
   }
 
   function ensurePump() {
-    if (state.raf) return;
+    if (!state.visible || state.raf) return;
     state.raf = requestAnimationFrame(pump);
   }
 
@@ -1823,6 +1863,7 @@
     const video = document.getElementById("traj-video");
     if (video) {
       video.addEventListener("loadedmetadata", () => syncVideo());
+      video.addEventListener("loadeddata", () => { draw(); ensurePump(); });
       video.addEventListener("seeked", finishSeek);
       video.addEventListener("timeupdate", grabVideoFrame);
     }
@@ -1919,7 +1960,7 @@
       state.playing = !state.playing;
       clearTimeout(state.playTimer);
       if (video && !state.playing) video.pause();
-      if (state.playing) {
+      if (state.playing && state.visible) {
         syncVideo();
         state.stepStarted = performance.now();
         state.playTimer = setTimeout(advanceFrame, (state.ep ? state.ep.dt : 0.2) * 1000);
@@ -1947,5 +1988,5 @@
     return clamp(value, 12, 900);
   }
 
-  window.TrajectoryView = { boot, show, resize };
+  window.TrajectoryView = { boot, show, resize, setVisible };
 })();
