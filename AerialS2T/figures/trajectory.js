@@ -33,6 +33,36 @@
 
   const canvas = () => document.getElementById("traj-canvas");
   let ctx = null;
+  let sharedVideo = null;
+  let detachVideo = null;
+  const media = () => sharedVideo || document.getElementById("traj-video");
+
+  function attachVideo(video) {
+    if (sharedVideo === video) return;
+    if (detachVideo) detachVideo();
+    sharedVideo = video;
+    state.grab = null;
+    state.grabTime = null;
+    const refresh = () => {
+      if (!state.ep) return;
+      adoptVideoClock();
+      state.playing = !video.paused && !video.ended;
+      clearTimeout(state.playTimer);
+      if (state.visible) {
+        renderChrome();
+        draw();
+        if (state.playing) state.playTimer = setTimeout(advanceFrame, 80);
+        ensurePump();
+      }
+    };
+    const events = ["play", "pause", "ended", "loadeddata", "seeked"];
+    events.forEach((event) => video.addEventListener(event, refresh));
+    detachVideo = () => events.forEach((event) => video.removeEventListener(event, refresh));
+  }
+
+  function notifyPlayback(playing) {
+    document.dispatchEvent(new CustomEvent("missionplaybackchange", { detail: { playing } }));
+  }
 
   function boot(pack) {
     state.pack = pack;
@@ -53,7 +83,7 @@
     }
     stage.hidden = false;
     state.ep = ep;
-    state.playing = false;
+    state.playing = sharedVideo ? !sharedVideo.paused && !sharedVideo.ended : false;
     clearTimeout(state.playTimer);
     cancelAnimationFrame(state.raf);
     state.raf = 0;
@@ -62,18 +92,26 @@
     state.index = 0;
     state.needsFrame = false;
     loadClip();
+    if (sharedVideo) adoptVideoClock();
     fit(true);
-    resetPlate();
+    if (!sharedVideo) resetPlate();
     tighten();
     renderChrome();
     requestAnimationFrame(resize);
     ensurePump();
+    if (sharedVideo && state.playing && state.visible) state.playTimer = setTimeout(advanceFrame, 80);
   }
 
   function loadClip() {
-    const video = document.getElementById("traj-video");
+    const video = media();
     if (!video) return;
     const clip = state.clip;
+    if (sharedVideo) {
+      state.loadedClip = clip;
+      state.grab = null;
+      state.grabTime = null;
+      return;
+    }
     if (!clip) {
       video.removeAttribute("src");
       video.load();
@@ -93,7 +131,7 @@
   }
 
   function grabVideoFrame() {
-    const video = document.getElementById("traj-video");
+    const video = media();
     if (!state.visible || !video || video.readyState < 2 || !video.videoWidth) return;
     if (state.grab && state.grabTime === video.currentTime) return;
     if (!state.grab) {
@@ -111,7 +149,8 @@
   }
 
   function syncVideo() {
-    const video = document.getElementById("traj-video");
+    const video = media();
+    if (sharedVideo) return false;
     if (!state.visible || !video || !state.ep || !video.src || video.readyState < 1) return false;
     const limit = Number.isFinite(video.duration) && video.duration > 0.1
       ? Math.max(0, video.duration - 0.04)
@@ -130,8 +169,14 @@
   }
 
   function adoptVideoClock() {
-    if (!state.playing || !state.ep) return;
-    const video = document.getElementById("traj-video");
+    if (!state.ep) return;
+    const video = media();
+    if (sharedVideo) {
+      state.cursor = Math.max(0, Math.min(count() - 1, (video.currentTime || 0) / state.ep.dt));
+      state.index = Math.round(state.cursor);
+      return;
+    }
+    if (!state.playing) return;
     if (!video || video.readyState < 2 || video.ended) return;
     const clip = Number.isFinite(video.duration) && video.duration > 0.2 ? video.duration : 0;
     if (!clip || state.cursor * state.ep.dt > clip - 0.05) return;
@@ -142,7 +187,7 @@
   }
 
   function finishSeek() {
-    const video = document.getElementById("traj-video");
+    const video = media();
     state.seeking = false;
     grabVideoFrame();
     if (!state.visible || !video || !state.ep) return;
@@ -158,7 +203,15 @@
 
   function advanceFrame() {
     if (!state.visible || !state.playing || !state.ep) return;
-    const video = document.getElementById("traj-video");
+    const video = media();
+    if (sharedVideo) {
+      adoptVideoClock();
+      state.playing = !video.paused && !video.ended;
+      renderChrome();
+      clearTimeout(state.playTimer);
+      if (state.playing) state.playTimer = setTimeout(advanceFrame, 80);
+      return;
+    }
     const maxFrame = count() - 1;
     const clip = video && Number.isFinite(video.duration) && video.duration > 0.2 ? video.duration : 0;
     const flown = state.cursor * state.ep.dt;
@@ -500,7 +553,7 @@
   }
 
   function pictureSource() {
-    const video = document.getElementById("traj-video");
+    const video = media();
     if (video && video.readyState >= 2 && video.videoWidth) return video;
     return state.grab || null;
   }
@@ -515,7 +568,7 @@
   }
 
   function drawVideoCover() {
-    const video = document.getElementById("traj-video");
+    const video = media();
     if (video && video.readyState >= 2 && video.videoWidth) grabVideoFrame();
     const image = state.grab && state.grab.width ? state.grab : null;
     ctx.fillStyle = "#12171c";
@@ -739,7 +792,7 @@
 
   function paintVideoFrame() {
     const plate = state.plate;
-    const video = document.getElementById("traj-video");
+    const video = media();
     if (!plate || !video || !state.ep || state.loadedClip !== state.clip) return;
     const image = state.grab;
     if (!image || state.grabTime == null) return;
@@ -790,7 +843,7 @@
   }
 
   function drawLiveGround(basis) {
-    const video = document.getElementById("traj-video");
+    const video = media();
     if (!video || !state.ep || state.loadedClip !== state.clip) return;
     const image = state.grab;
     if (!image || state.grabTime == null) return;
@@ -1807,6 +1860,7 @@
     if (!n) return;
     state.cursor = Math.max(0, Math.min(n - 1, index));
     state.index = Math.round(state.cursor);
+    if (sharedVideo) sharedVideo.currentTime = desiredTime();
     renderChrome();
     draw();
     if (!state.playing) syncVideo();
@@ -1817,18 +1871,19 @@
     visible = Boolean(visible);
     if (state.visible === visible) return;
     state.visible = visible;
-    const video = document.getElementById("traj-video");
+    const video = media();
     clearTimeout(state.playTimer);
     cancelAnimationFrame(state.raf);
     state.raf = 0;
     if (!visible) {
-      if (video) video.pause();
+      if (video && !sharedVideo) video.pause();
       state.hiddenAt = performance.now();
       return;
     }
     if (state.intro && state.hiddenAt) state.intro.t0 += performance.now() - state.hiddenAt;
     state.hiddenAt = null;
     if (!state.ep) return;
+    if (sharedVideo) { adoptVideoClock(); state.playing = !sharedVideo.paused && !sharedVideo.ended; renderChrome(); }
     resize();
     syncVideo();
     if (state.playing) state.playTimer = setTimeout(advanceFrame, 80);
@@ -1860,8 +1915,8 @@
     if (state.bound) return;
     state.bound = true;
     const c = canvas();
-    const video = document.getElementById("traj-video");
-    if (video) {
+    const video = media();
+    if (video && !sharedVideo) {
       video.addEventListener("loadedmetadata", () => syncVideo());
       video.addEventListener("loadeddata", () => { draw(); ensurePump(); });
       video.addEventListener("seeked", finishSeek);
@@ -1937,8 +1992,9 @@
     const stopPlayback = () => {
       state.playing = false;
       clearTimeout(state.playTimer);
-      const video = document.getElementById("traj-video");
+      const video = media();
       if (video) video.pause();
+      if (sharedVideo) notifyPlayback(false);
     };
     document.getElementById("traj-time").addEventListener("input", (event) => {
       stopPlayback();
@@ -1951,7 +2007,18 @@
       setIndex(Math.round(u * (count() - 1)));
     });
     document.getElementById("traj-play").addEventListener("click", () => {
-      const video = document.getElementById("traj-video");
+      const video = media();
+      if (sharedVideo) {
+        const playing = video.paused || video.ended;
+        if (video.ended) video.currentTime = 0;
+        state.playing = playing;
+        if (playing) video.play().catch(() => {});
+        else video.pause();
+        notifyPlayback(playing);
+        renderChrome();
+        ensurePump();
+        return;
+      }
       if (!state.playing && state.cursor >= count() - 1) {
         state.cursor = 0;
         state.index = 0;
@@ -1988,5 +2055,5 @@
     return clamp(value, 12, 900);
   }
 
-  window.TrajectoryView = { boot, show, resize, setVisible };
+  window.TrajectoryView = { boot, show, resize, setVisible, attachVideo };
 })();

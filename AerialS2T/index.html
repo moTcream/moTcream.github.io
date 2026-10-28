@@ -626,18 +626,110 @@
       .scene-block .traj-controls { flex-wrap: wrap; }
     }
   </style>
+  <style>
+    /* One recorded flight, carried from the cover into the spatial replay. */
+    .hero { padding:78px 0 186px; }
+    .mission-eyebrow { position:absolute;top:24px;left:36px;right:36px;z-index:12;display:flex;justify-content:space-between;align-items:center;color:#d8e9f0;font:10px/1.4 system-ui,sans-serif;letter-spacing:.18em;pointer-events:none; }
+    .mission-eyebrow span { font-family:inherit; }
+    .mission-eyebrow .recording-tag::before { content:"";display:inline-block;width:5px;height:5px;margin:0 9px 2px 0;border-radius:50%;background:#73e4d8;box-shadow:0 0 9px #73e4d866; }
+    .mission-hud { position:absolute;bottom:68px;left:50%;transform:translateX(-50%);z-index:12;width:min(1120px,calc(100% - 144px));display:grid;grid-template-columns:1.1fr 180px 1.6fr auto;align-items:center;gap:22px;padding:17px 22px 21px;border:1px solid #b8e8f435;border-radius:12px;background:linear-gradient(120deg,#0b2237e8,#0c293adc);box-shadow:0 12px 40px #00132333;color:#e5f3f7;text-align:left; }
+    .mission-hud *, .flight-console *, .mission-handoff *, .scene-nav * { font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; }
+    .hud-eyeline { margin:0 0 6px;color:#91afc1;font-size:9px;letter-spacing:.15em;font-weight:500; }
+    .hud-scene { font-size:15px;font-weight:600;letter-spacing:.015em;white-space:nowrap; }
+    .hud-episode { display:block;margin-top:5px;color:#8eaebe;font-size:10px;letter-spacing:.08em; }
+    .hud-map { width:100%;height:59px;overflow:visible; }
+    .hud-route { height:64px;position:relative;border-left:1px solid #abcce21f;padding-left:16px; }
+    .hud-route::before { content:"FLIGHT PATH";position:absolute;top:-4px;left:16px;color:#809eaf;font:8px/1 system-ui;letter-spacing:.12em; }
+    .hud-data { display:grid;grid-template-columns:repeat(3,1fr);gap:14px; }
+    .hud-data small { display:block;color:#88a8ba;font-size:9px;letter-spacing:.1em;margin-bottom:5px; }
+    .hud-data strong { font-size:15px;font-weight:500;font-variant-numeric:tabular-nums;white-space:nowrap; }
+    .hud-phase { grid-column:1/-1;display:flex;align-items:center;gap:8px;font-size:10px;letter-spacing:.12em;line-height:1;color:var(--phase-color,#73e4d8); }
+    .hud-phase::before,.console-phase::before { content:"";width:5px;height:5px;display:inline-block;border-radius:50%;background:currentColor;box-shadow:0 0 8px currentColor; }
+    .hud-explore { display:flex;align-items:center;gap:14px;color:#bffbf2;text-decoration:none;font-size:11px;line-height:1.7;white-space:nowrap; }
+    .hud-explore span { display:grid;place-items:center;width:30px;height:30px;border:1px solid #75e5d55c;border-radius:50%;font-size:18px;transition:transform .2s,background .2s; }
+    .hud-explore:hover span { transform:translateY(3px);background:#75e5d51c; }
+    .hud-progress { position:absolute;bottom:0;left:12px;right:12px;height:2px;background:#88aebe24;overflow:hidden; }
+    .hud-progress i { display:block;width:100%;height:100%;transform:scaleX(0);transform-origin:left;background:linear-gradient(90deg,#5798ff,#6ee8d1);box-shadow:0 0 8px #63dfd4; }
+    .hero .carousel-pagination { bottom:21px; }
+    .scene-block { padding:42px 0 54px;background:linear-gradient(180deg,#edf5fa,#f8fbfd); }
+    .scene-block > .container { max-width:1240px; }
+    .scene-block .section-title { margin-bottom:10px; }
+    .scene-intro { text-align:center;margin:0 0 28px;color:#627b8e;font-size:1rem; }
+    .mission-handoff { display:flex;align-items:center;justify-content:center;gap:10px;margin:0 auto 18px;color:#528493;font-size:9px;letter-spacing:.17em; }
+    .mission-handoff::before { content:"";display:block;width:28px;height:1px;background:#6dabb4; }
+    .mission-handoff::after { content:"";display:block;width:28px;height:1px;background:#6dabb4; }
+    .flight-console { padding:0 20px 20px;background:#10263a;border:1px solid #244457;border-radius:18px;box-shadow:0 24px 64px #142e4524;overflow:hidden;color:#d7e9ef;text-align:left; }
+    .console-toolbar { display:flex;justify-content:space-between;align-items:center;gap:14px;min-height:65px;border-bottom:1px solid #8eb6ce20;margin-bottom:18px; }
+    .console-identity { display:flex;align-items:center;gap:12px; }
+    .console-number { display:grid;place-items:center;width:29px;height:29px;border:1px solid #78b4cb44;color:#91c5d6;font-size:10px;border-radius:7px; }
+    .scene-block .scene-kicker { margin:0;color:#e5f5f9;font:600 13px/1.4 system-ui; }
+    .console-eyeline { display:block;margin-top:4px;color:#7e9eb3;font-size:8px;letter-spacing:.14em; }
+    .console-phase { display:flex;align-items:center;gap:7px;color:var(--phase-color,#6ee8d1);font-size:10px;font-weight:500;letter-spacing:.14em; }
+    .scene-block .traj-stage { margin-bottom:0; }
+    .mission-views { display:grid;grid-template-columns:minmax(0,1.75fr) minmax(280px,1fr);gap:14px; }
+    .mission-pane { min-width:0;display:flex;flex-direction:column; }
+    .pane-heading { display:flex;align-items:center;justify-content:space-between;gap:10px;color:#819fb4;font-size:9px;letter-spacing:.14em;padding:0 1px 12px; }
+    .pane-heading em { color:#57798e;font-style:normal;font-size:8px;letter-spacing:.08em; }
+    .scene-block .traj-viewport { border-radius:10px;box-shadow:none;border:1px solid #7899b126; }
+    .scene-block .traj-legend { left:10px;top:10px;gap:5px;max-width:88%; }
+    .scene-block .traj-legend span { font-size:9px;padding:4px 7px 4px 5px;background:#0d233ada; }
+    .scene-block .traj-legend i { width:6px;height:6px; }
+    .spatial-viewport { position:relative;flex:1;min-height:260px;border:1px solid #6085a030;border-radius:10px;overflow:hidden;background:radial-gradient(ellipse at 50% 50%,#173b50,#0b2032 78%); }
+    #mission-spatial { display:block;width:100%;height:100%;min-height:260px;position:absolute;inset:0;touch-action:none;cursor:grab; }
+    #mission-spatial.dragging { cursor:grabbing; }
+    .spatial-legend { position:absolute;left:14px;top:13px;display:flex;gap:14px;color:#7ea1b7;font-size:8px;letter-spacing:.06em;pointer-events:none; }
+    .spatial-legend i { display:inline-block;width:5px;height:5px;border-radius:50%;margin-right:5px;background:#6ee8d1; }
+    .spatial-legend span:nth-child(2) i { background:#fa6b98; }.spatial-legend span:nth-child(3) i { background:transparent;border:1px solid #6ee8d1;border-radius:0; }
+    .spatial-hint { position:absolute;bottom:11px;left:0;right:0;text-align:center;color:#7899af;font-size:8px;letter-spacing:.1em;pointer-events:none; }
+    .spatial-axis { fill:#7196a8;font-size:9px;letter-spacing:.1em; }
+    .route-aircraft { filter:drop-shadow(0 0 5px #6ee8d18c); }
+    .scene-block #traj-frame-caption { margin:12px 0 0;color:#7f9fb4;text-align:left;font-size:10px;letter-spacing:.02em; }
+    .scene-block .traj-controls { margin-top:16px;gap:10px; }
+    .scene-block .traj-controls button { padding:8px 14px;border:1px solid #577b934a;background:#18384d;color:#b9d5e3;font-size:11px; }
+    .scene-block #traj-play { color:#092635;background:#79dfd1;border-color:#79dfd1;min-width:66px;font-weight:600; }
+    .scene-block #traj-clock { color:#b8d6e3;font-size:12px;min-width:110px; }
+    .scene-block #traj-time { accent-color:#79dfd1; }
+    .scene-block .traj-phasebar { height:3px;opacity:.85;margin-top:12px; }
+    .scene-block .traj-readout { margin-top:16px;gap:12px 24px;color:#bcd6e1;font-size:12px; }
+    .scene-block .traj-readout em { color:#7597ab;font-size:9px;letter-spacing:.08em;text-transform:uppercase;margin-bottom:5px; }
+    .scene-nav { margin-top:22px; }
+    .scene-nav .scene-arrow { width:32px;height:32px;border-radius:9px; }
+    .scene-nav .scene-arrow svg { width:17px;height:17px; }
+    .scene-nav .scene-toggle { width:27px;height:27px; }
+    .scene-dot { height:3px;width:22px; }.scene-dot.is-active { width:36px; }
+    @media(min-width:900px) and (max-height:820px) {
+      .hero { padding:50px 0 158px; }.hero .brand { margin-bottom:10px; }.hero .publication-title { margin-bottom:20px; }.hero .author-line { margin-bottom:12px; }.hero .author-line.primary { margin-bottom:5px; }.hero .author-note { margin-top:12px; }.hero .links { margin-top:14px; }.hero .mission-hud { bottom:55px;padding-top:14px;padding-bottom:17px; }
+    }
+    @media(min-width:1600px) { .mission-hud { bottom:74px; } }
+    @media(max-width:1000px) { .mission-hud { width:calc(100% - 100px);grid-template-columns:1fr 150px 1.4fr;gap:16px; }.hud-explore { display:none; }.mission-views { grid-template-columns:minmax(0,1.5fr) minmax(240px,1fr); } }
+    @media(max-width:760px) {
+      .hero { padding:65px 0 177px; }.mission-eyebrow { top:18px;left:20px;right:20px;font-size:8px;letter-spacing:.1em; }.mission-eyebrow > span:last-child { display:none; }
+      .mission-hud { width:calc(100% - 36px);bottom:60px;padding:14px 15px 18px;grid-template-columns:1fr 1.3fr;gap:12px; }.hud-route { display:none; }.hud-data { gap:10px; }.hud-scene { font-size:12px; }.hud-data strong { font-size:12px; }.hud-eyeline,.hud-data small { font-size:8px; }.hud-phase { font-size:8px; }
+      .mission-views { grid-template-columns:1fr;gap:18px; }.spatial-viewport { min-height:280px; }.flight-console { padding:0 12px 16px;border-radius:13px; }.console-toolbar { min-height:60px; }.console-phase { font-size:8px;letter-spacing:.08em; }.console-eyeline { font-size:7px; }.scene-block .scene-kicker { font-size:11px; }
+      .scene-block .traj-controls { flex-wrap:wrap; }.scene-block .traj-slider-wrap { flex-basis:100%; }.scene-block .traj-readout { gap:12px 18px; }.scene-block { padding-top:30px; }.scene-intro { font-size:.9rem;line-height:1.7; }.scene-block #traj-clock { margin-left:auto;min-width:unset; }
+    }
+    @media(prefers-reduced-motion:reduce) { .hud-explore span { transition:none; } }
+  </style>
 </head>
 <body>
   <section class="hero">
     <div class="hero-video" aria-hidden="true">
-      <video class="tl is-active" playsinline muted loop preload="auto" aria-hidden="true" data-src="cover_tl_v7.mp4?v=9" src="cover_tl_v7.mp4?v=9"></video>
-      <video class="tr" playsinline muted loop preload="none" aria-hidden="true" data-src="cover_tr_v7.mp4?v=9"></video>
-      <video class="bl" playsinline muted loop preload="none" aria-hidden="true" data-src="cover_bl_v7.mp4?v=9"></video>
-      <video class="br" playsinline muted loop preload="none" aria-hidden="true" data-src="cover_br_v7.mp4?v=9"></video>
-      <video playsinline muted loop preload="none" aria-hidden="true" data-src="cover_05_town07_v7.mp4?v=1"></video>
-      <video playsinline muted loop preload="none" aria-hidden="true" data-src="cover_06_town10_v7.mp4?v=1"></video>
+      <video class="tl is-active" playsinline muted loop preload="auto" aria-hidden="true" data-src="fly_01_town01.mp4?v=1" src="fly_01_town01.mp4?v=1"></video>
+      <video class="tr" playsinline muted loop preload="none" aria-hidden="true" data-src="fly_02_town03.mp4?v=1"></video>
+      <video class="bl" playsinline muted loop preload="none" aria-hidden="true" data-src="fly_03_town04.mp4?v=1"></video>
+      <video class="br" playsinline muted loop preload="none" aria-hidden="true" data-src="fly_04_town05.mp4?v=1"></video>
+      <video playsinline muted loop preload="none" aria-hidden="true" data-src="fly_05_town07.mp4?v=1"></video>
+      <video playsinline muted loop preload="none" aria-hidden="true" data-src="fly_06_town10.mp4?v=1"></video>
     </div>
     <div class="overlay"></div>
+    <div class="mission-eyebrow" aria-hidden="true"><span class="recording-tag">AERIALLIFT · RECORDED FLIGHT</span><span>SEARCH → ACQUIRE → TRACK</span></div>
+    <div class="mission-hud" aria-label="Current flight telemetry">
+      <div><p class="hud-eyeline">MISSION <span id="mission-count">01 / 06</span></p><div class="hud-scene" id="mission-name">Town01 · Van</div><span class="hud-episode" id="mission-episode">EPISODE 817</span></div>
+      <div class="hud-route"><svg id="mission-mini" class="hud-map" viewBox="0 0 240 100" aria-label="Current flight path" role="img"></svg></div>
+      <div class="hud-data"><div class="hud-phase" id="mission-phase">RECORDED REPLAY</div><div><small>TIME</small><strong id="mission-time">00:00.0</strong></div><div><small>ALTITUDE</small><strong id="mission-altitude">— m</strong></div><div><small>TARGET RANGE</small><strong id="mission-range">— m</strong></div></div>
+      <a class="hud-explore" href="#scene-3d">Follow this flight<br>in 3D<span aria-hidden="true">↘</span></a>
+      <div class="hud-progress" aria-hidden="true"><i id="mission-progress"></i></div>
+    </div>
     <button class="carousel-arrow carousel-prev" type="button" aria-label="Previous background video">
       <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m14.5 5-7 7 7 7"/></svg>
     </button>
@@ -698,13 +790,15 @@
   <section class="page-section scene-block" id="scene-3d">
     <div class="container">
       <h2 class="section-title">Trajectory</h2>
-      <p class="scene-kicker" id="scene-label">Town01 · Van</p>
-      <p class="scene-caption" style="margin:0 0 16px">Drag to rotate · Scroll to zoom · Move the timeline to inspect a recorded frame</p>
+      <p class="scene-intro">The same flight, from two perspectives. One shared timeline.</p>
+      <div class="mission-handoff">SYNCHRONIZED WITH THE COVER</div>
+      <div class="flight-console">
+      <div class="console-toolbar"><div class="console-identity"><span class="console-number" id="console-count">01</span><div><p class="scene-kicker" id="scene-label">Town01 · Van</p><span class="console-eyeline" id="console-episode">EPISODE 817 · RECORDED FLIGHT</span></div></div><span class="console-phase" id="console-phase">SYNCHRONIZED REPLAY</span></div>
       <div class="traj-stage" id="traj-stage">
-        <video id="traj-video" playsinline muted preload="none"></video>
-        <div class="traj-viewport">
-          <canvas id="traj-canvas"></canvas>
-          <div class="traj-legend" id="traj-legend"></div>
+        <video id="traj-video" playsinline muted preload="none" aria-hidden="true"></video>
+        <div class="mission-views">
+          <div class="mission-pane"><div class="pane-heading"><span>01 / FLIGHT VIEW</span><em>RECORDED FLIGHT</em></div><div class="traj-viewport"><canvas id="traj-canvas"></canvas><div class="traj-legend" id="traj-legend"></div></div></div>
+          <div class="mission-pane"><div class="pane-heading"><span>02 / SPATIAL TRAJECTORY</span><em>DRAG TO ORBIT</em></div><div class="spatial-viewport"><svg id="mission-spatial" viewBox="0 0 400 360" role="img" aria-label="Interactive 3D flight trajectory. Drag to orbit."></svg><div class="spatial-legend"><span><i></i>AIRCRAFT</span><span><i></i>TARGET</span><span><i></i>CAMERA FOV</span></div><div class="spatial-hint">DRAG TO ORBIT · RESET VIEW TO RESTORE</div></div></div>
         </div>
         <p id="traj-frame-caption" class="scene-caption"></p>
         <div class="traj-controls">
@@ -715,6 +809,7 @@
         </div>
         <div class="traj-phasebar" id="traj-phasebar"></div>
         <div class="traj-readout" id="traj-readout"></div>
+      </div>
       </div>
       <div class="scene-nav" aria-label="Trajectory scene controls">
         <button class="scene-arrow scene-prev" type="button" aria-label="Previous trajectory">
@@ -785,7 +880,8 @@
 
   <!-- Website template adapted from MomaGraph: https://hybridrobotics.github.io/MomaGraph/ -->
 
-  <script src="figures/trajectory.js?v=20"></script>
+  <script src="figures/trajectory.js?v=21"></script>
+  <script src="figures/mission.js?v=1"></script>
   <script>
     const SCENES = [
       { ep: 817, town: "Town01", label: "Town01 · Van", clip: "fly_01_town01.mp4?v=1", seconds: 43 },
@@ -795,192 +891,7 @@
       { ep: 9568, town: "Town07", label: "Town07 · Motorcycle", clip: "fly_05_town07.mp4?v=1", seconds: 34 },
       { ep: 9419, town: "Town10HD", label: "Town10HD · Teenager", clip: "fly_06_town10.mp4?v=1", seconds: 40 }
     ];
-    const motionOK = !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    const clips = Array.from(document.querySelectorAll(".hero-video video"));
-    const dots = Array.from(document.querySelectorAll(".hero .carousel-dot"));
-    const sceneDots = Array.from(document.querySelectorAll(".scene-dot"));
-    const toggles = Array.from(document.querySelectorAll(".carousel-toggle, .scene-toggle"));
-    let currentSlide = 0;
-    let autoplay = motionOK;
-    let carouselTimer = null;
-    let warmTimer = null;
-    let slideRequest = 0;
-    let heroVisible = false;
-    let trajectoryVisible = false;
-    let trajectoryReady = false;
-    let trajectoryLoading = null;
-    let trajectoryScene = -1;
-
-    // Keep only the current background; warm the next clip shortly before switching.
-    // Dormant videos have no src, so opening the page does not fetch all six MP4s.
-    function prepareClip(index, preload = "auto") {
-      const clip = clips[index];
-      clip.preload = preload;
-      if (!clip.getAttribute("src")) {
-        clip.src = clip.dataset.src;
-        clip.load();
-      }
-      return clip;
-    }
-    function releaseUnusedClips(keepNext = false) {
-      const next = (currentSlide + 1) % clips.length;
-      clips.forEach((clip, index) => {
-        if (index === currentSlide || (keepNext && index === next)) return;
-        clip.pause();
-        if (clip.getAttribute("src")) {
-          clip.removeAttribute("src");
-          clip.preload = "none";
-          clip.load();
-        }
-      });
-    }
-    function warmNextClip() {
-      clearTimeout(warmTimer);
-      if (!heroVisible || document.hidden || !autoplay || navigator.connection?.saveData) return;
-      warmTimer = setTimeout(() => {
-        if (!heroVisible || document.hidden || !autoplay) return;
-        prepareClip((currentSlide + 1) % clips.length);
-      }, Math.max(2000, (SCENES[currentSlide].seconds - 5) * 1000));
-    }
-    function restartCarouselTimer() {
-      clearTimeout(carouselTimer);
-      if (autoplay && !document.hidden && (heroVisible || trajectoryVisible)) {
-        const scene = SCENES[currentSlide] || SCENES[0];
-        carouselTimer = setTimeout(() => showSlide(currentSlide + 1), scene.seconds * 1000);
-      }
-    }
-    function updatePlaybackControl() {
-      toggles.forEach((toggle) => {
-        toggle.textContent = autoplay ? "Ⅱ" : "▶";
-        toggle.setAttribute("aria-label", autoplay ? "Pause automatic switching" : "Resume automatic switching");
-        toggle.setAttribute("aria-pressed", String(!autoplay));
-      });
-    }
-    function showScene(index) {
-      const scene = SCENES[index];
-      document.getElementById("scene-label").textContent = scene.label;
-      if (!trajectoryReady || !trajectoryVisible || document.hidden || trajectoryScene === index) return;
-      trajectoryScene = index;
-      TrajectoryView.show(scene.ep, scene.clip, { episode_index: scene.ep, town: scene.town });
-      const play = document.getElementById("traj-play");
-      if (motionOK && play.textContent !== "Pause") play.click();
-    }
-    function ensureTrajectory() {
-      if (trajectoryLoading) return trajectoryLoading;
-      trajectoryLoading = fetch("figures/scenes.json?v=14")
-        .then((response) => {
-          if (!response.ok) throw new Error("Trajectory data could not be loaded");
-          return response.json();
-        })
-        .then((pack) => {
-          if (!window.TrajectoryView) throw new Error("Trajectory viewer could not be loaded");
-          TrajectoryView.boot(pack);
-          trajectoryReady = true;
-          TrajectoryView.setVisible(trajectoryVisible && !document.hidden);
-          showScene(currentSlide);
-        })
-        .catch((error) => {
-          document.getElementById("traj-stage").hidden = true;
-          document.querySelector(".scene-nav").hidden = true;
-          const label = document.getElementById("scene-label");
-          label.textContent = "The trajectory viewer could not be loaded. Please refresh to try again.";
-          label.setAttribute("role", "status");
-          console.error(error);
-        });
-      return trajectoryLoading;
-    }
-    function syncMediaVisibility() {
-      clearTimeout(warmTimer);
-      clips.forEach((clip, i) => {
-        if (document.hidden || !heroVisible || i !== currentSlide) clip.pause();
-      });
-      if (heroVisible && !document.hidden) {
-        prepareClip(currentSlide).play().catch(() => {});
-        warmNextClip();
-      }
-      if (trajectoryReady) TrajectoryView.setVisible(trajectoryVisible && !document.hidden);
-      if (trajectoryVisible && !document.hidden) {
-        ensureTrajectory();
-        showScene(currentSlide);
-      }
-      restartCarouselTimer();
-    }
-    async function showSlide(index) {
-      const next = (index + clips.length) % clips.length;
-      if (next === currentSlide) { restartCarouselTimer(); return; }
-      const request = ++slideRequest;
-      clearTimeout(carouselTimer);
-      clearTimeout(warmTimer);
-      const previous = clips[currentSlide];
-      const incoming = clips[next];
-      // Below the hero, switching trajectories must not start a hidden background.
-      if (heroVisible && !document.hidden) {
-        prepareClip(next);
-        incoming.currentTime = 0;
-        try { await incoming.play(); } catch (_) { /* Preserve navigation if autoplay is blocked. */ }
-      }
-      if (request !== slideRequest) return;
-      previous.classList.remove("is-active");
-      incoming.classList.add("is-active");
-      currentSlide = next;
-      dots.forEach((dot, i) => {
-        dot.classList.toggle("is-active", i === next);
-        dot.setAttribute("aria-pressed", String(i === next));
-      });
-      sceneDots.forEach((dot, i) => {
-        dot.classList.toggle("is-active", i === next);
-        dot.setAttribute("aria-pressed", String(i === next));
-      });
-      showScene(next);
-      if (!heroVisible || document.hidden) incoming.pause();
-      setTimeout(() => {
-        if (request !== slideRequest) return;
-        releaseUnusedClips(heroVisible && autoplay && !document.hidden);
-        warmNextClip();
-      }, 1050);
-      restartCarouselTimer();
-    }
-    document.querySelector(".carousel-prev").addEventListener("click", () => showSlide(currentSlide - 1));
-    document.querySelector(".carousel-next").addEventListener("click", () => showSlide(currentSlide + 1));
-    document.querySelector(".scene-prev").addEventListener("click", () => showSlide(currentSlide - 1));
-    document.querySelector(".scene-next").addEventListener("click", () => showSlide(currentSlide + 1));
-    dots.forEach((dot, i) => dot.addEventListener("click", () => showSlide(i)));
-    sceneDots.forEach((dot, i) => dot.addEventListener("click", () => showSlide(i)));
-    function setAutomaticSwitching(enabled) {
-      autoplay = enabled;
-      updatePlaybackControl();
-      if (!autoplay) {
-        ++slideRequest;
-        clearTimeout(warmTimer);
-        releaseUnusedClips();
-      }
-      // This control stops rotation only; the visible selected video keeps playing.
-      if (heroVisible && !document.hidden) prepareClip(currentSlide).play().catch(() => {});
-      warmNextClip();
-      restartCarouselTimer();
-    }
-    toggles.forEach((toggle) => toggle.addEventListener("click", () => setAutomaticSwitching(!autoplay)));
-    document.getElementById("traj-stage").addEventListener("pointerdown", (event) => {
-      if (event.target.closest("canvas, button, input, .traj-phasebar")) setAutomaticSwitching(false);
-    });
-    document.getElementById("traj-time").addEventListener("input", () => setAutomaticSwitching(false));
-    document.addEventListener("visibilitychange", syncMediaVisibility);
-    updatePlaybackControl();
-    if ("IntersectionObserver" in window) {
-      const mediaObserver = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => {
-          const visible = entry.isIntersecting && entry.intersectionRatio >= 0.01;
-          if (entry.target.matches(".hero")) heroVisible = visible;
-          else trajectoryVisible = visible;
-        });
-        syncMediaVisibility();
-      }, { threshold: 0.01 });
-      mediaObserver.observe(document.querySelector(".hero"));
-      mediaObserver.observe(document.querySelector(".traj-viewport"));
-    } else {
-      heroVisible = trajectoryVisible = true;
-      syncMediaVisibility();
-    }
+    AerialMission.start(SCENES);
 
     let viewerData = null;
     let viewerCategory = null;
