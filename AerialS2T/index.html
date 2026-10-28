@@ -561,6 +561,70 @@
       .carousel-arrow svg { width:20px;height:20px; }
     }
     @media(prefers-reduced-motion:reduce) { .hero-video video { transition:none; } }
+    .scene-block [hidden] { display: none !important; }
+    .scene-block { padding-top: 28px; }
+    .scene-kicker {
+      margin: -8px 0 16px;
+      color: #526c83;
+      font-size: 1.15rem;
+    }
+    .scene-block .traj-stage { position: relative; margin: 0 auto 8px; text-align: left; }
+    .scene-block #traj-video { position: absolute; width: 320px; height: 180px; left: -4000px; top: 0; }
+    .scene-block .traj-viewport {
+      position: relative;
+      border-radius: 16px;
+      overflow: hidden;
+      background: #0c1824;
+      box-shadow: 0 14px 34px rgba(16, 32, 44, 0.16);
+    }
+    .scene-block .traj-viewport canvas {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      height: auto;
+      display: block;
+      cursor: grab;
+      touch-action: none;
+    }
+    .scene-block .traj-legend {
+      position: absolute; left: 14px; top: 14px;
+      display: flex; flex-wrap: wrap; gap: 8px; max-width: 78%;
+    }
+    .scene-block .traj-legend span {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: rgba(8, 16, 24, 0.62); color: #f4f7f8;
+      border-radius: 999px; padding: 4px 10px 4px 6px; font-size: 0.86rem;
+    }
+    .scene-block .traj-legend i { width: 10px; height: 10px; border-radius: 50%; display: block; }
+    .scene-caption { margin: 10px 0 0; text-align: center; color: #526c83; }
+    .scene-block .traj-controls { display: flex; align-items: center; gap: 12px; margin-top: 14px; }
+    .scene-block .traj-controls button {
+      border: 1px solid #cdddeb; background: #fff; color: #243041;
+      border-radius: 999px; padding: 8px 16px; font-size: 0.98rem; cursor: pointer;
+    }
+    .scene-block #traj-play { background: #2f70b4; border-color: #2f70b4; color: #fff; min-width: 84px; }
+    .scene-block #traj-clock { color: #243041; min-width: 118px; font-variant-numeric: tabular-nums; }
+    .scene-block .traj-slider-wrap { flex: 1; }
+    .scene-block #traj-time { width: 100%; accent-color: #2f70b4; margin: 0; }
+    .scene-block .traj-phasebar { display: flex; height: 8px; border-radius: 999px; overflow: hidden; margin-top: 8px; cursor: pointer; }
+    .scene-block .traj-phasebar i { display: block; height: 100%; }
+    .scene-block .traj-readout { display: flex; flex-wrap: wrap; gap: 8px 18px; margin-top: 12px; color: #243041; font-size: 1rem; }
+    .scene-block .traj-readout em { display: block; font-style: normal; color: #8a8a8a; font-size: 0.78rem; }
+    .scene-nav { display: flex; align-items: center; justify-content: center; gap: 14px; margin-top: 16px; }
+    .scene-nav .scene-arrow {
+      width: 42px; height: 42px; border-radius: 12px; border: 1px solid #cdddeb;
+      background: #fff; color: #305a82; cursor: pointer;
+    }
+    .scene-nav .scene-arrow svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+    .scene-dots { display: flex; align-items: center; gap: 8px; }
+    .scene-dot { width: 25px; height: 5px; border: 0; border-radius: 6px; padding: 0; background: rgba(47,112,180,.28); cursor: pointer; }
+    .scene-dot.is-active { width: 42px; background: #2f70b4; }
+    .scene-toggle {
+      width: 32px; height: 32px; border-radius: 50%; border: 1px solid #cdddeb;
+      background: #fff; color: #305a82; cursor: pointer;
+    }
+    @media (max-width: 800px) {
+      .scene-block .traj-controls { flex-wrap: wrap; }
+    }
   </style>
 </head>
 <body>
@@ -633,11 +697,53 @@
         <p class="author-note"><sup>*</sup> Equal Contribution, <sup>†</sup> Corresponding Author</p>
 
         <nav class="links" aria-label="Project navigation">
+          <a href="#scene-3d"><span class="pill">Trajectory</span></a>
           <a href="#overview"><span class="pill">Overview</span></a>
           <a href="#dataset"><span class="pill">Dataset</span></a>
           <a href="#method"><span class="pill">Method</span></a>
           <a href="https://github.com/moTcream/AerialS2T" target="_blank" rel="noopener noreferrer"><span class="pill">GitHub</span></a>
         </nav>
+      </div>
+    </div>
+  </section>
+
+  <section class="page-section scene-block" id="scene-3d">
+    <div class="container">
+      <h2 class="section-title">Trajectory</h2>
+      <p class="scene-kicker" id="scene-label">Town01 · Van</p>
+      <p class="scene-caption" style="margin:0 0 16px">Drag to rotate · Scroll to zoom · Move the timeline to inspect a recorded frame</p>
+      <div class="traj-stage" id="traj-stage">
+        <video id="traj-video" playsinline muted></video>
+        <div class="traj-viewport">
+          <canvas id="traj-canvas"></canvas>
+          <div class="traj-legend" id="traj-legend"></div>
+        </div>
+        <p id="traj-frame-caption" class="scene-caption"></p>
+        <div class="traj-controls">
+          <button id="traj-play" type="button">Play</button>
+          <button id="traj-reset" type="button">Reset view</button>
+          <span id="traj-clock">0.0 s</span>
+          <div class="traj-slider-wrap"><input id="traj-time" type="range" min="0" max="100" value="0" aria-label="Trajectory timeline"></div>
+        </div>
+        <div class="traj-phasebar" id="traj-phasebar"></div>
+        <div class="traj-readout" id="traj-readout"></div>
+      </div>
+      <div class="scene-nav" aria-label="Trajectory scene controls">
+        <button class="scene-arrow scene-prev" type="button" aria-label="Previous trajectory">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m14.5 5-7 7 7 7"/></svg>
+        </button>
+        <div class="scene-dots">
+          <button type="button" class="scene-dot is-active" aria-label="Show trajectory 1" aria-pressed="true"></button>
+          <button type="button" class="scene-dot" aria-label="Show trajectory 2" aria-pressed="false"></button>
+          <button type="button" class="scene-dot" aria-label="Show trajectory 3" aria-pressed="false"></button>
+          <button type="button" class="scene-dot" aria-label="Show trajectory 4" aria-pressed="false"></button>
+          <button type="button" class="scene-dot" aria-label="Show trajectory 5" aria-pressed="false"></button>
+          <button type="button" class="scene-dot" aria-label="Show trajectory 6" aria-pressed="false"></button>
+        </div>
+        <button class="scene-toggle" type="button" aria-label="Pause automatic trajectory switching" aria-pressed="false">Ⅱ</button>
+        <button class="scene-arrow scene-next" type="button" aria-label="Next trajectory">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9.5 5 7 7-7 7"/></svg>
+        </button>
       </div>
     </div>
   </section>
@@ -691,22 +797,48 @@
 
   <!-- Website template adapted from MomaGraph: https://hybridrobotics.github.io/MomaGraph/ -->
 
+  <script src="figures/trajectory.js?v=19"></script>
   <script>
+    const SCENES = [
+      { ep: 817, town: "Town01", label: "Town01 · Van", clip: "fly_01_town01.mp4?v=1", seconds: 43 },
+      { ep: 515, town: "Town03", label: "Town03 · Bicycle", clip: "fly_02_town03.mp4?v=1", seconds: 38 },
+      { ep: 169, town: "Town04", label: "Town04 · Adult", clip: "fly_03_town04.mp4?v=1", seconds: 44 },
+      { ep: 9440, town: "Town05", label: "Town05 · Car", clip: "fly_04_town05.mp4?v=1", seconds: 40 },
+      { ep: 9568, town: "Town07", label: "Town07 · Motorcycle", clip: "fly_05_town07.mp4?v=1", seconds: 34 },
+      { ep: 9419, town: "Town10HD", label: "Town10HD · Teenager", clip: "fly_06_town10.mp4?v=1", seconds: 40 }
+    ];
+    const motionOK = !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    function showScene(index) {
+      const scene = SCENES[index];
+      const label = document.getElementById("scene-label");
+      if (label) label.textContent = scene.label;
+      if (!window.TrajectoryView) return;
+      TrajectoryView.show(scene.ep, scene.clip, { episode_index: scene.ep, town: scene.town });
+      const play = document.getElementById("traj-play");
+      if (play && motionOK && play.textContent !== "Pause") play.click();
+    }
+
     const clips = Array.from(document.querySelectorAll(".hero-video video"));
-    const dots = Array.from(document.querySelectorAll(".carousel-dot"));
-    const toggle = document.querySelector(".carousel-toggle");
+    const dots = Array.from(document.querySelectorAll(".hero .carousel-dot"));
+    const sceneDots = Array.from(document.querySelectorAll(".scene-dot"));
+    const toggles = Array.from(document.querySelectorAll(".carousel-toggle, .scene-toggle"));
     let currentSlide = 0;
     let autoplay = !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     let carouselTimer = null;
     let slideRequest = 0;
     function restartCarouselTimer() {
       clearTimeout(carouselTimer);
-      if (autoplay && !document.hidden) carouselTimer = setTimeout(() => showSlide(currentSlide + 1), 3000);
+      if (autoplay && !document.hidden) {
+        const scene = SCENES[currentSlide] || SCENES[0];
+        carouselTimer = setTimeout(() => showSlide(currentSlide + 1), (scene.seconds || 15) * 1000);
+      }
     }
     function updatePlaybackControl() {
-      toggle.textContent = autoplay ? "Ⅱ" : "▶";
-      toggle.setAttribute("aria-label", autoplay ? "Pause automatic video switching" : "Resume automatic video switching");
-      toggle.setAttribute("aria-pressed", String(!autoplay));
+      toggles.forEach((toggle) => {
+        toggle.textContent = autoplay ? "Ⅱ" : "▶";
+        toggle.setAttribute("aria-label", autoplay ? "Pause automatic switching" : "Resume automatic switching");
+        toggle.setAttribute("aria-pressed", String(!autoplay));
+      });
     }
     async function showSlide(index) {
       const next = (index + clips.length) % clips.length;
@@ -725,14 +857,22 @@
         dot.classList.toggle("is-active", i === next);
         dot.setAttribute("aria-pressed", String(i === next));
       });
+      sceneDots.forEach((dot, i) => {
+        dot.classList.toggle("is-active", i === next);
+        dot.setAttribute("aria-pressed", String(i === next));
+      });
+      showScene(next);
       setTimeout(() => { if (!previous.classList.contains("is-active")) previous.pause(); }, 1050);
       restartCarouselTimer();
     }
     document.querySelector(".carousel-prev").addEventListener("click", () => showSlide(currentSlide - 1));
     document.querySelector(".carousel-next").addEventListener("click", () => showSlide(currentSlide + 1));
+    document.querySelector(".scene-prev").addEventListener("click", () => showSlide(currentSlide - 1));
+    document.querySelector(".scene-next").addEventListener("click", () => showSlide(currentSlide + 1));
     dots.forEach((dot, i) => dot.addEventListener("click", () => showSlide(i)));
-    toggle.addEventListener("click", () => {
-      autoplay = !autoplay;
+    sceneDots.forEach((dot, i) => dot.addEventListener("click", () => showSlide(i)));
+    function setAutomaticSwitching(enabled) {
+      autoplay = enabled;
       updatePlaybackControl();
       if (!autoplay) {
         // Stop rotation; the selected video continues looping normally.
@@ -741,7 +881,13 @@
       }
       clips[currentSlide].play().catch(() => {});
       restartCarouselTimer();
+    }
+    toggles.forEach((toggle) => toggle.addEventListener("click", () => setAutomaticSwitching(!autoplay)));
+    // Keep the selected scene while the visitor explores its trajectory.
+    document.getElementById("traj-stage").addEventListener("pointerdown", (event) => {
+      if (event.target.closest("canvas, button, input, .traj-phasebar")) setAutomaticSwitching(false);
     });
+    document.getElementById("traj-time").addEventListener("input", () => setAutomaticSwitching(false));
     document.addEventListener("visibilitychange", () => {
       if (document.hidden) { clearTimeout(carouselTimer); clips.forEach(clip => clip.pause()); }
       else { clips[currentSlide].play().catch(() => {}); restartCarouselTimer(); }
@@ -749,6 +895,24 @@
     updatePlaybackControl();
     clips[0].play().catch(() => {});
     restartCarouselTimer();
+    fetch("figures/scenes.json?v=14")
+      .then((response) => {
+        if (!response.ok) throw new Error("Trajectory data could not be loaded");
+        return response.json();
+      })
+      .then((pack) => {
+        if (!window.TrajectoryView) throw new Error("Trajectory viewer could not be loaded");
+        TrajectoryView.boot(pack);
+        showScene(currentSlide);
+      })
+      .catch((error) => {
+        document.getElementById("traj-stage").hidden = true;
+        document.querySelector(".scene-nav").hidden = true;
+        const label = document.getElementById("scene-label");
+        label.textContent = "The trajectory viewer could not be loaded. Please refresh to try again.";
+        label.setAttribute("role", "status");
+        console.error(error);
+      });
 
     let viewerData = null;
     let viewerCategory = null;

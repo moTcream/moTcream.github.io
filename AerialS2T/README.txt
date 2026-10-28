@@ -18,3 +18,8 @@ figures/anu-logo.svg 澳洲国立大学官网 Logo：https://d1blp3aor2iuhp.clou
 
 figures/whu-badge.png 武汉大学官网标准双色校徽，来自：https://www.whu.edu.cn/xxgk/wdbs.htm
 官方素材包：https://www.whu.edu.cn/new2024/wdbsxz/xiaohui.zip
+
+figures/trajectory.js  三维轨迹与录制视频同步回放组件
+figures/scenes.json    六个演示场景的轨迹、姿态和阶段数据
+fly_01_town01.mp4 至 fly_06_town10.mp4  六个场景的录制视频
+首页背景与 Trajectory 演示按场景完整时长同步轮换；手动操作轨迹会停止自动换场景。
