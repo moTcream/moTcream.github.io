@@ -3,8 +3,10 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" type="image/png" href="figures/logo.png?v=transparent">
-  <link rel="apple-touch-icon" href="figures/logo.png?v=transparent">
+  <link rel="icon" type="image/png" sizes="48x48" href="figures/web/icon-48.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="figures/web/icon-180.png">
+  <meta name="theme-color" content="#10263a">
+  <link rel="preload" as="image" href="figures/web/poster-01-1280.webp" imagesrcset="figures/web/poster-01-640.webp 640w, figures/web/poster-01-1280.webp 1280w" imagesizes="100vw" fetchpriority="high">
   <title>AerialS2T</title>
   <style>
     :root {
@@ -710,19 +712,58 @@
     }
     @media(prefers-reduced-motion:reduce) { .hud-explore span { transition:none; } }
   </style>
+  <style>
+    /* The static cover paints before video decoding; content never waits on a loader. */
+    .mission-cover { position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block; }
+    .hero-video { background:#10263a; }
+    .hero-video video,.hero-video video.tl,.hero-video video.is-active { background:transparent;opacity:0; }
+    .hero-video video.is-active.is-ready { opacity:1; }
+    .mission-media-status { display:flex;align-items:center;gap:12px;font:inherit;letter-spacing:.08em; }
+    .mission-media-status [hidden] { display:none!important; }
+    .mission-media-status button { pointer-events:auto;color:#d6fcf4;background:#0c263c99;border:1px solid #8ecacb75;border-radius:6px;padding:7px 12px;cursor:pointer;font:10px/1.2 system-ui;letter-spacing:.04em; }
+    .mission-media-status button:focus-visible { outline:2px solid #a4f5e8;outline-offset:3px; }
+    .scene-block .traj-controls button:disabled,.scene-block #traj-time:disabled { opacity:.45;cursor:wait; }
+    .scene-block .replay-poster { position:absolute;inset:0;width:100%;height:100%;object-fit:cover;pointer-events:none;opacity:1;transition:opacity .18s ease; }
+    .scene-block .traj-viewport.has-frame .replay-poster { opacity:0; }
+    .figure-media { display:block;max-width:980px;margin:0 auto;background:#eaf1f6;border-radius:6px;overflow:hidden;box-shadow:0 4px 18px #00000014; }
+    .figure-wrap .figure-media img { width:100%;height:100%;object-fit:contain;box-shadow:none;opacity:0;transition:opacity .18s ease; }
+    .figure-wrap .figure-media.is-loaded img { opacity:1; }
+    .figure-media.figure-error img { opacity:1; }
+    @media(max-width:760px) { .mission-eyebrow .mission-media-status { display:flex; }.mission-media-status { font-size:8px; }.mission-media-status button { font-size:9px;padding:6px 9px; }#mission-playback-note { display:none!important; } }
+    @media(prefers-reduced-motion:reduce) { .scene-block .replay-poster,.figure-wrap .figure-media img { transition:none; } }
+  </style>
+  <style>
+    /* Reserve the complete intro even while a slow response is still streaming. */
+    .hero { --intro-reserve:557px;--padding-reserve:264px;min-height:max(100svh,calc(var(--intro-reserve) + var(--padding-reserve) + 1px)); }
+    .hero-body { min-height:var(--intro-reserve); }
+    .mission-media-status { position:relative;width:172px;height:14px;flex:0 0 172px; }
+    #mission-load-status,#mission-playback-note { position:absolute;inset:0;text-align:right;line-height:14px;white-space:nowrap; }
+    .mission-media-status button { position:absolute;right:0;top:50%;transform:translateY(-50%); }
+    .carousel-pagination { width:271px;height:26px; }
+    .carousel-dots { width:232px;min-width:232px;flex:0 0 232px;height:5px; }
+    .carousel-dot,.carousel-dot.is-active { flex:0 0 32px;position:relative;width:32px;background:transparent;transition:none; }
+    .carousel-dot::before { content:"";position:absolute;inset:0;border-radius:6px;background:#ffffff6b;transform:scaleX(.63);transition:transform .22s ease,background .22s ease; }
+    .carousel-dot.is-active::before { background:#fff;transform:scaleX(1); }
+    @media(min-width:900px) and (max-height:820px) { .hero { --intro-reserve:527px;--padding-reserve:208px; } }
+    @media(min-width:761px) and (max-width:1100px) { .hero { --intro-reserve:680px; } }
+    @media(max-width:760px) { .hero { --intro-reserve:910px;--padding-reserve:242px; }.mission-media-status { width:110px;flex-basis:110px; } }
+    @media(prefers-reduced-motion:reduce) { .carousel-dot::before { transition:none; } }
+</style>
+  <noscript><style>.figure-media{display:none}</style></noscript>
 </head>
 <body>
   <section class="hero">
     <div class="hero-video" aria-hidden="true">
-      <video class="tl is-active" playsinline muted loop preload="auto" aria-hidden="true" data-src="fly_01_town01.mp4?v=1" src="fly_01_town01.mp4?v=1"></video>
-      <video class="tr" playsinline muted loop preload="none" aria-hidden="true" data-src="fly_02_town03.mp4?v=1"></video>
-      <video class="bl" playsinline muted loop preload="none" aria-hidden="true" data-src="fly_03_town04.mp4?v=1"></video>
-      <video class="br" playsinline muted loop preload="none" aria-hidden="true" data-src="fly_04_town05.mp4?v=1"></video>
-      <video playsinline muted loop preload="none" aria-hidden="true" data-src="fly_05_town07.mp4?v=1"></video>
-      <video playsinline muted loop preload="none" aria-hidden="true" data-src="fly_06_town10.mp4?v=1"></video>
+      <img id="mission-cover" class="mission-cover" src="figures/web/poster-01-1280.webp" srcset="figures/web/poster-01-640.webp 640w, figures/web/poster-01-1280.webp 1280w" sizes="100vw" width="1280" height="720" fetchpriority="high" decoding="async" alt="">
+      <video class="tl is-active" playsinline muted loop preload="none" aria-hidden="true" data-src="fly_01_town01.mp4?v=1" data-mobile-src="media/mobile/fly_01_town01.mp4?v=1" data-poster="figures/web/poster-01"></video>
+      <video class="tr" playsinline muted loop preload="none" aria-hidden="true" data-src="fly_02_town03.mp4?v=1" data-mobile-src="media/mobile/fly_02_town03.mp4?v=1" data-poster="figures/web/poster-02"></video>
+      <video class="bl" playsinline muted loop preload="none" aria-hidden="true" data-src="fly_03_town04.mp4?v=1" data-mobile-src="media/mobile/fly_03_town04.mp4?v=1" data-poster="figures/web/poster-03"></video>
+      <video class="br" playsinline muted loop preload="none" aria-hidden="true" data-src="fly_04_town05.mp4?v=1" data-mobile-src="media/mobile/fly_04_town05.mp4?v=1" data-poster="figures/web/poster-04"></video>
+      <video playsinline muted loop preload="none" aria-hidden="true" data-src="fly_05_town07.mp4?v=1" data-mobile-src="media/mobile/fly_05_town07.mp4?v=1" data-poster="figures/web/poster-05"></video>
+      <video playsinline muted loop preload="none" aria-hidden="true" data-src="fly_06_town10.mp4?v=1" data-mobile-src="media/mobile/fly_06_town10.mp4?v=1" data-poster="figures/web/poster-06"></video>
     </div>
     <div class="overlay"></div>
-    <div class="mission-eyebrow" aria-hidden="true"><span class="recording-tag">AERIALLIFT · RECORDED FLIGHT</span><span>SEARCH → ACQUIRE → TRACK</span></div>
+    <div class="mission-eyebrow"><span class="recording-tag">AERIALLIFT · RECORDED FLIGHT</span><div class="mission-media-status"><span id="mission-load-status" role="status">Preparing replay…</span><button id="mission-start" type="button" hidden>Play flight</button><span id="mission-playback-note" hidden>SEARCH → ACQUIRE → TRACK</span></div></div>
     <div class="mission-hud" aria-label="Current flight telemetry">
       <div><p class="hud-eyeline">MISSION <span id="mission-count">01 / 06</span></p><div class="hud-scene" id="mission-name">Town01 · Van</div><span class="hud-episode" id="mission-episode">EPISODE 817</span></div>
       <div class="hud-route"><svg id="mission-mini" class="hud-map" viewBox="0 0 240 100" aria-label="Current flight path" role="img"></svg></div>
@@ -744,7 +785,7 @@
     <div class="hero-body">
       <div class="container" id="top">
         <div class="brand" aria-label="AerialS2T">
-          <img class="brand-icon" src="figures/logo.png?v=transparent" alt="" width="80" height="80">
+          <img class="brand-icon" src="figures/web/logo-176.webp" srcset="figures/web/logo-176.webp 176w, figures/web/logo-264.webp 264w" sizes="(max-width:800px) 64px, 88px" alt="" width="88" height="88" decoding="async">
           <span class="brand-name" aria-hidden="true"><span class="brand-aerial">Aerial</span><span class="brand-s">S</span><span class="brand-two">2</span><span class="brand-t">T</span></span>
         </div>
         <h1 class="publication-title">Learning Vision-Language-Action Policies<br>for Aerial Search-to-Track</h1>
@@ -762,7 +803,7 @@
         </p>
         <div class="affiliations" aria-label="Affiliations">
           <div class="affiliation">
-            <img class="affiliation-logo nwpu" src="figures/npu-badge.png" alt="Northwestern Polytechnical University logo" width="74" height="74">
+            <img class="affiliation-logo nwpu" src="figures/web/npu-badge-130.webp" srcset="figures/web/npu-badge-130.webp 130w, figures/web/npu-badge-260.webp 260w" sizes="65px" decoding="async" alt="Northwestern Polytechnical University logo" width="74" height="74">
             <p><sup>1</sup>Northwestern Polytechnical University</p>
           </div>
           <div class="affiliation">
@@ -770,7 +811,7 @@
             <p><sup>2</sup>Australian National University</p>
           </div>
           <div class="affiliation">
-            <img class="affiliation-logo whu" src="figures/whu-badge.png" alt="Wuhan University logo" width="74" height="74">
+            <img class="affiliation-logo whu" src="figures/web/whu-badge-130.webp" srcset="figures/web/whu-badge-130.webp 130w, figures/web/whu-badge-260.webp 260w" sizes="65px" decoding="async" alt="Wuhan University logo" width="74" height="74">
             <p><sup>3</sup>Wuhan University</p>
           </div>
         </div>
@@ -797,15 +838,16 @@
       <div class="traj-stage" id="traj-stage">
         <video id="traj-video" playsinline muted preload="none" aria-hidden="true"></video>
         <div class="mission-views">
-          <div class="mission-pane"><div class="pane-heading"><span>01 / FLIGHT VIEW</span><em>RECORDED FLIGHT</em></div><div class="traj-viewport"><canvas id="traj-canvas"></canvas><div class="traj-legend" id="traj-legend"></div></div></div>
+          <div class="mission-pane"><div class="pane-heading"><span>01 / FLIGHT VIEW</span><em>RECORDED FLIGHT</em></div><div class="traj-viewport"><canvas id="traj-canvas"></canvas><img id="traj-poster" class="replay-poster" src="figures/web/poster-01-1280.webp" srcset="figures/web/poster-01-640.webp 640w, figures/web/poster-01-1280.webp 1280w" sizes="100vw" width="1280" height="720" loading="lazy" decoding="async" alt=""><div class="traj-legend" id="traj-legend"></div></div></div>
           <div class="mission-pane"><div class="pane-heading"><span>02 / SPATIAL TRAJECTORY</span><em>DRAG TO ORBIT</em></div><div class="spatial-viewport"><svg id="mission-spatial" viewBox="0 0 400 360" role="img" aria-label="Interactive 3D flight trajectory. Drag to orbit."></svg><div class="spatial-legend"><span><i></i>AIRCRAFT</span><span><i></i>TARGET</span><span><i></i>CAMERA FOV</span></div><div class="spatial-hint">DRAG TO ORBIT · RESET VIEW TO RESTORE</div></div></div>
         </div>
-        <p id="traj-frame-caption" class="scene-caption"></p>
+        <p id="traj-frame-caption" class="scene-caption">Loading replay controls…</p>
         <div class="traj-controls">
-          <button id="traj-play" type="button">Play</button>
-          <button id="traj-reset" type="button">Reset view</button>
+          <button id="traj-play" type="button" disabled>Play</button>
+          <button id="traj-reset" type="button" disabled>Reset view</button>
+          <button id="traj-retry" type="button" hidden>Retry replay</button>
           <span id="traj-clock">0.0 s</span>
-          <div class="traj-slider-wrap"><input id="traj-time" type="range" min="0" max="100" value="0" aria-label="Trajectory timeline"></div>
+          <div class="traj-slider-wrap"><input id="traj-time" type="range" disabled min="0" max="100" value="0" aria-label="Trajectory timeline"></div>
         </div>
         <div class="traj-phasebar" id="traj-phasebar"></div>
         <div class="traj-readout" id="traj-readout"></div>
@@ -835,7 +877,7 @@
     <div class="container">
       <h2 class="section-title">Overview</h2>
       <div class="figure-wrap">
-        <img loading="lazy" decoding="async" src="figures/teaser.png" width="3200" height="1586" alt="AerialS2T overview">
+        <picture class="figure-media" style="aspect-ratio:3200/1586"><source type="image/webp" data-srcset="figures/web/teaser-960.webp 960w, figures/web/teaser-1600.webp 1600w, figures/web/teaser-2400.webp 2400w, figures/web/teaser-3200.webp 3200w" sizes="(max-width:1028px) calc(100vw - 48px), 980px"><img loading="lazy" decoding="async" src="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%223200%22 height=%221586%22/%3E" data-src="figures/teaser.png" width="3200" height="1586" alt="AerialS2T overview"></picture><noscript><img src="figures/teaser.png" width="3200" height="1586" alt="AerialS2T overview"></noscript>
         <p class="figure-caption">Figure 1. AerialS2T task overview: takeoff, search, acquire, and track under language instructions.</p>
       </div>
     </div>
@@ -846,7 +888,7 @@
       <h2 class="section-title">Dataset</h2>
       <h3 class="section-subtitle">AerialLIFT-10K</h3>
       <div class="figure-wrap">
-        <img loading="lazy" decoding="async" src="figures/dataset.png" width="3200" height="1880" alt="AerialLIFT-10K dataset overview">
+        <picture class="figure-media" style="aspect-ratio:3200/1880"><source type="image/webp" data-srcset="figures/web/dataset-960.webp 960w, figures/web/dataset-1600.webp 1600w, figures/web/dataset-2400.webp 2400w, figures/web/dataset-3200.webp 3200w" sizes="(max-width:1028px) calc(100vw - 48px), 980px"><img loading="lazy" decoding="async" src="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%223200%22 height=%221880%22/%3E" data-src="figures/dataset.png" width="3200" height="1880" alt="AerialLIFT-10K dataset overview"></picture><noscript><img src="figures/dataset.png" width="3200" height="1880" alt="AerialLIFT-10K dataset overview"></noscript>
         <p class="figure-caption">Figure 2. AerialLIFT-10K dataset overview across maps, targets, weather, and acquisition statistics.</p>
       </div>
 
@@ -872,7 +914,7 @@
       <h2 class="section-title">Method</h2>
       <h3 class="section-subtitle">MoViC</h3>
       <div class="figure-wrap">
-        <img loading="lazy" decoding="async" src="figures/model.png?v=20261027" width="3200" height="1514" alt="MoViC architecture">
+        <picture class="figure-media" style="aspect-ratio:3200/1514"><source type="image/webp" data-srcset="figures/web/model-960.webp 960w, figures/web/model-1600.webp 1600w, figures/web/model-2400.webp 2400w, figures/web/model-3200.webp 3200w" sizes="(max-width:1028px) calc(100vw - 48px), 980px"><img loading="lazy" decoding="async" src="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%223200%22 height=%221514%22/%3E" data-src="figures/model.png?v=20261027" width="3200" height="1514" alt="MoViC architecture"></picture><noscript><img src="figures/model.png?v=20261027" width="3200" height="1514" alt="MoViC architecture"></noscript>
         <p class="figure-caption">Figure 3. Method overview: MoViC architecture with recurrent target forecasting and geometric action refinement.</p>
       </div>
     </div>
@@ -880,106 +922,7 @@
 
   <!-- Website template adapted from MomaGraph: https://hybridrobotics.github.io/MomaGraph/ -->
 
-  <script src="figures/trajectory.js?v=21"></script>
-  <script src="figures/mission.js?v=1"></script>
-  <script>
-    const SCENES = [
-      { ep: 817, town: "Town01", label: "Town01 · Van", clip: "fly_01_town01.mp4?v=1", seconds: 43 },
-      { ep: 515, town: "Town03", label: "Town03 · Bicycle", clip: "fly_02_town03.mp4?v=1", seconds: 38 },
-      { ep: 169, town: "Town04", label: "Town04 · Adult", clip: "fly_03_town04.mp4?v=1", seconds: 44 },
-      { ep: 9440, town: "Town05", label: "Town05 · Car", clip: "fly_04_town05.mp4?v=1", seconds: 40 },
-      { ep: 9568, town: "Town07", label: "Town07 · Motorcycle", clip: "fly_05_town07.mp4?v=1", seconds: 34 },
-      { ep: 9419, town: "Town10HD", label: "Town10HD · Teenager", clip: "fly_06_town10.mp4?v=1", seconds: 40 }
-    ];
-    AerialMission.start(SCENES);
-
-    let viewerData = null;
-    let viewerCategory = null;
-    let viewerItem = null;
-
-    function renderViewerTabs() {
-      const bar = document.getElementById("viewer-tabs");
-      bar.innerHTML = "";
-      viewerData.order.forEach((key) => {
-        const btn = document.createElement("button");
-        btn.type = "button";
-        btn.textContent = viewerData.categories[key].label;
-        btn.className = key === viewerCategory ? "active" : "";
-        btn.addEventListener("click", () => showViewerCategory(key, true));
-        bar.appendChild(btn);
-      });
-    }
-
-    function showViewerCategory(key, openFirst) {
-      viewerCategory = key;
-      renderViewerTabs();
-      const row = document.getElementById("viewer-thumbs");
-      row.innerHTML = "";
-      const items = viewerData.categories[key].items.slice(0, 7);
-      items.forEach((item, index) => {
-        const btn = document.createElement("button");
-        btn.type = "button";
-        btn.className = item.id === viewerItem ? "selected" : "";
-        const img = document.createElement("img");
-        img.loading = "lazy";
-        img.decoding = "async";
-        img.src = item.thumb;
-        img.alt = item.record.task_instruction;
-        btn.appendChild(img);
-        btn.addEventListener("click", () => showViewerDetail(item, true));
-        row.appendChild(btn);
-        if (openFirst && index === 0) showViewerDetail(item, false);
-      });
-    }
-
-    function showViewerDetail(item, scroll) {
-      viewerItem = item.id;
-      document.querySelectorAll("#viewer-thumbs button").forEach((btn, i) => {
-        const current = viewerData.categories[viewerCategory].items[i];
-        btn.classList.toggle("selected", current && current.id === item.id);
-      });
-      const photos = document.getElementById("viewer-photos");
-      photos.innerHTML = "";
-      item.images.forEach((frame) => {
-        const fig = document.createElement("figure");
-        const img = document.createElement("img");
-        img.loading = "lazy";
-        img.decoding = "async";
-        img.src = frame.src;
-        img.alt = frame.label;
-        const cap = document.createElement("figcaption");
-        cap.textContent = frame.label;
-        fig.appendChild(img);
-        fig.appendChild(cap);
-        photos.appendChild(fig);
-      });
-      document.getElementById("viewer-record").textContent = JSON.stringify(item.record, null, 2);
-      const card = document.getElementById("viewer-detail");
-      card.classList.add("open");
-      if (scroll) card.scrollIntoView({ behavior: "smooth", block: "nearest" });
-    }
-
-    function loadDatasetViewer() {
-      fetch("figures/viewer/data.json")
-        .then((res) => { if (!res.ok) throw new Error("Dataset could not be loaded"); return res.json(); })
-        .then((data) => {
-          viewerData = data;
-          showViewerCategory(data.order[0], true);
-        })
-        .catch(() => {
-          const hint = document.querySelector(".viewer-hint");
-          if (hint) hint.textContent = "Dataset viewer is still loading.";
-        });
-    }
-    if ("IntersectionObserver" in window) {
-      const datasetObserver = new IntersectionObserver((entries, observer) => {
-        if (!entries.some((entry) => entry.isIntersecting)) return;
-        observer.disconnect();
-        loadDatasetViewer();
-      }, { rootMargin: "300px" });
-      datasetObserver.observe(document.getElementById("dataset"));
-    } else loadDatasetViewer();
-
-  </script>
+  <script defer src="figures/mission-v2.js?v=1"></script>
+  <script defer src="figures/site.js?v=1"></script>
 </body>
 </html>
