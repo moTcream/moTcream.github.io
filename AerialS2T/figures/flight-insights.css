@@ -1,0 +1,53 @@
+/* A compact timeline and two plots share the recorded flight clock. */
+#scene-3d .traj-controls { gap:12px;margin-top:18px; }
+#scene-3d .traj-slider-wrap[hidden] { display:none; }
+#scene-3d #traj-clock { margin-left:auto;text-align:right; }
+#scene-3d .traj-phasebar.event-timeline { display:block;height:auto;overflow:visible;margin:12px 0 0;opacity:1;border-radius:0;cursor:default; }
+.timeline-scrubber { position:relative;height:30px;isolation:isolate; }
+.timeline-segments { position:absolute;inset:11px 0 auto;height:8px;border-radius:5px;overflow:hidden;background:#b2c9da; }
+.timeline-segments > span { position:absolute;height:100%;background:color-mix(in srgb,var(--event-color) 60%,#4e7185 40%); }
+#scene-3d .timeline-scrubber #traj-time { position:absolute;inset:0;width:100%;height:30px;opacity:0;cursor:ew-resize;z-index:3; }
+.timeline-cursor { position:absolute;top:4px;height:22px;width:2px;background:#244e68;transform:translateX(-50%);pointer-events:none;z-index:2;box-shadow:0 0 0 2px #e7f1f9c2; }
+.timeline-cursor::before { content:"";position:absolute;width:7px;height:7px;left:-2.5px;top:-2px;border-radius:50%;background:#244e68; }
+.timeline-scrubber:focus-within .timeline-segments { outline:2px solid #287b9c;outline-offset:5px; }
+.timeline-tooltip { position:absolute;bottom:32px;transform:translateX(-50%);background:#24495f;color:#fff;padding:7px 10px;border-radius:7px;font-size:12px;font-weight:550;white-space:nowrap;box-shadow:0 3px 12px #21485b26;pointer-events:none;z-index:4; }
+.timeline-tooltip::after { content:"";position:absolute;left:calc(50% - 4px);top:100%;border:4px solid transparent;border-top-color:#24495f; }
+.timeline-events { display:flex;gap:9px; }
+#scene-3d .timeline-event { display:flex;flex:1;align-items:center;justify-content:space-between;gap:10px;min-width:0;border:1px solid transparent;border-radius:8px;background:#e8f1f785;color:#466279;padding:8px 12px;font-size:12px;cursor:pointer;transition:background .18s,border-color .18s; }
+.timeline-event strong { display:flex;align-items:center;gap:7px;font-weight:600; }
+.timeline-event strong::before { content:"";width:6px;height:6px;border-radius:50%;background:color-mix(in srgb,var(--event-color) 50%,#244e68 50%);flex:0 0 6px; }
+.timeline-event > span { font-variant-numeric:tabular-nums;color:#547086;font-size:11px;white-space:nowrap; }
+#scene-3d .timeline-event.is-current { color:#25495f;background:#f6fbff;border-color:#89acbf;box-shadow:0 2px 6px #234d6708; }
+#scene-3d .timeline-event:hover { background:#f6fbff;border-color:#89acbf; }
+.timeline-event:focus-visible { outline:2px solid #287b9c;outline-offset:3px; }
+.telemetry-grid { display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin-top:18px; }
+.telemetry-card { display:flex;align-items:center;gap:18px;padding:13px 16px 11px;border:1px solid #b8ccdb;border-radius:11px;background:linear-gradient(115deg,#f6fbfdd9,#e8f1f7d1);min-width:0; }
+.metric-reading { flex:0 0 92px;min-width:0; }
+.metric-reading > span { display:block;color:#29485e;font-size:23px;font-weight:600;line-height:1.3;font-variant-numeric:tabular-nums;letter-spacing:-.03em;white-space:nowrap; }
+.metric-reading em { display:block;margin-bottom:5px;color:#48667c;font-size:12px;font-weight:600;letter-spacing:.015em;font-style:normal; }
+.metric-plot { position:relative;height:72px;flex:1;min-width:0;padding-right:45px; }
+.metric-plot svg { display:block;width:100%;height:100%;overflow:visible; }
+.metric-grid { fill:none;stroke:#9ab7cb;stroke-width:1;stroke-dasharray:2 5;opacity:.4;vector-effect:non-scaling-stroke; }
+.metric-area { fill:var(--metric-color);opacity:.05; }
+.metric-future { fill:none;stroke:var(--metric-color);stroke-width:1.5;opacity:.22;vector-effect:non-scaling-stroke; }
+.metric-history { fill:none;stroke:var(--metric-color);stroke-width:2;stroke-linecap:round;stroke-linejoin:round;vector-effect:non-scaling-stroke; }
+.metric-crosshair { fill:none;stroke:var(--metric-color);stroke-width:1;opacity:.35;stroke-dasharray:2 3;vector-effect:non-scaling-stroke; }
+.metric-halo { fill:var(--metric-color);opacity:.12; }
+.metric-dot { fill:var(--metric-color);stroke:#f4fbff;stroke-width:1.5;vector-effect:non-scaling-stroke; }
+.metric-limit { position:absolute;right:0;font-size:10px;color:#58788e;font-variant-numeric:tabular-nums;line-height:1; }
+.metric-max { top:7px; }.metric-min { bottom:4px; }
+#scene-3d .traj-readout { margin-top:15px;padding-top:14px;gap:20px 38px;font-size:14px; }
+#scene-3d .traj-readout em { font-size:11px; }
+@media(max-width:1000px) and (min-width:761px) {
+ .telemetry-card { padding:12px;gap:12px; }.metric-reading { flex-basis:75px; }.metric-reading > span { font-size:21px; }
+}
+@media(max-width:760px) {
+ .telemetry-grid { grid-template-columns:1fr;gap:10px;margin-top:15px; }
+ .telemetry-card { padding:11px 12px;gap:10px; }.metric-reading { flex-basis:83px; }.metric-reading > span { font-size:21px; }
+ .metric-plot { height:60px;padding-right:40px; }
+ #scene-3d .timeline-event { flex-direction:column;align-items:flex-start;padding:8px 9px;gap:4px;font-size:12px; }
+ .timeline-events { gap:6px; }.timeline-event strong { gap:5px; }
+ #scene-3d .traj-readout { gap:16px 22px;font-size:14px; }
+ #scene-3d #traj-clock { font-size:13px; }
+}
+@media(prefers-reduced-motion:reduce) { #scene-3d .timeline-event { transition:none; } }
