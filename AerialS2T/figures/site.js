@@ -34,9 +34,9 @@
     const SCENES = [
       { ep: 817, town: "Town01", label: "Town01 · Van", clip: "fly_01_town01.mp4?v=1", seconds: 43 },
       { ep: 515, town: "Town03", label: "Town03 · Bicycle", clip: "fly_02_town03.mp4?v=1", seconds: 38 },
-      { ep: 169, town: "Town04", label: "Town04 · Adult", clip: "fly_03_town04.mp4?v=1", seconds: 44 },
+      { ep: 5867, town: "Town04", label: "Town04 · Adult", clip: "fly_03_town04.mp4?v=2", seconds: 41 },
       { ep: 9440, town: "Town05", label: "Town05 · Car", clip: "fly_04_town05.mp4?v=1", seconds: 40 },
-      { ep: 9568, town: "Town07", label: "Town07 · Motorcycle", clip: "fly_05_town07.mp4?v=1", seconds: 34 },
+      { ep: 9556, town: "Town07", label: "Town07 · Motorcycle", clip: "fly_05_town07.mp4?v=2", seconds: 42 },
       { ep: 9419, town: "Town10HD", label: "Town10HD · Teenager", clip: "fly_06_town10.mp4?v=1", seconds: 40 }
     ];
     AerialMission.start(SCENES);

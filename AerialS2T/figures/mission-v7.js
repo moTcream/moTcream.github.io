@@ -92,7 +92,7 @@
       if (viewerLoading) return viewerLoading;
       viewerLoading = new Promise((resolve, reject) => {
         const script = document.createElement("script");
-        script.src = "figures/trajectory-v5.js?v=1";
+        script.src = "figures/trajectory-v5.js?v=6";
         script.onload = () => window.TrajectoryView ? resolve() : reject(new Error("Replay renderer unavailable"));
         script.onerror = () => { script.remove(); reject(new Error("Replay renderer could not be loaded")); };
         document.head.appendChild(script);
@@ -196,17 +196,27 @@
         (spatial ? '<path class="route-fov-face" fill="var(--flight-color,#74e4d6)" fill-opacity=".1"/>' : '') +
         (spatial ? '<path class="route-frustum" d="" stroke="var(--flight-color,#71e1cd)" stroke-opacity=".7" stroke-width="1" fill="none"/><path class="route-sightline" d="" stroke="#fa6b98" stroke-opacity=".4" stroke-dasharray="3 4" stroke-width=".8" fill="none"/><path class="route-height" d="" stroke="#74e4d6" stroke-opacity=".32" stroke-dasharray="3 4" fill="none"/>' : '') +
         '<circle cx="' + ap[0].x + '" cy="' + ap[0].y + '" r="2" fill="#8aabba"/>' +
-        '<g class="route-target"><circle class="target-capture" r="7" fill="none" stroke="var(--flight-color,#fa6b98)" stroke-width="1.8" opacity="0"/><circle class="target-breath" r="' + (spatial ? 7 : 4) + '" fill="#fa6b981c" stroke="#fa6b9877"/><circle r="2.3" fill="#fa6b98"/></g>' +
-        '<g class="route-aircraft">' + (spatial ? '<circle r="12" fill="#63ead01c" stroke="#72e6d13d"/><path d="M-5 -5 5 5M-5 5 5 -5" stroke="#b8fff3" stroke-width="1.6"/><g fill="#12394a" stroke="#b8fff3" stroke-width="1.1"><circle cx="-5" cy="-5" r="3"/><circle cx="5" cy="-5" r="3"/><circle cx="-5" cy="5" r="3"/><circle cx="5" cy="5" r="3"/></g>' : '<circle r="6" fill="#6ee8d122" stroke="#6ee8d15c"/><circle r="2.8" fill="#c9fff3"/>') + '</g>';
+        '<g class="route-target"><circle class="target-capture" r="7" fill="none" stroke="#ff1f33" stroke-width="1.8" opacity="0"/><circle class="target-breath" r="' + (spatial ? 7 : 4) + '" fill="#ff1f331c" stroke="#ff1f3377"/><circle r="2.3" fill="#ff1f33"/></g>' +
+        '<g class="route-craft"><ellipse class="craft-shadow" cx="0" cy="6" rx="12" ry="3.6" fill="#102838" opacity=".18"/>' +
+        '<g class="route-aircraft">' + (spatial ? '<path d="M-9 -9 9 9M-9 9 9 -9" stroke="#1a120e" stroke-width="2.8" stroke-linecap="round"/>' +
+        '<g fill="#f4f1ea" stroke="#1c140f" stroke-width="2.3"><circle cx="-7" cy="-7" r="5.1"/><circle cx="7" cy="-7" r="5.1"/><circle cx="-7" cy="7" r="5.1"/><circle cx="7" cy="7" r="5.1"/></g>' +
+        '<g fill="#e10600"><circle cx="-7" cy="-7" r="1.35"/><circle cx="7" cy="-7" r="1.35"/><circle cx="-7" cy="7" r="1.35"/><circle cx="7" cy="7" r="1.35"/></g>' +
+        '<path d="M1.2 0 11 0" stroke="#1a120e" stroke-width="1.7" stroke-linecap="round"/><path d="M8.2 -2.3 11.6 0 8.2 2.3" fill="#1a120e"/>' : '<circle r="6" fill="#6ee8d122" stroke="#6ee8d15c"/><circle r="2.8" fill="#c9fff3"/>') + '</g></g>';
       const distances = [0];
       for (let i = 1; i < ap.length; i++) distances[i] = distances[i - 1] + Math.hypot(ap[i].x - ap[i - 1].x, ap[i].y - ap[i - 1].y);
-      return { svg, project, distances, points:ap, trails:[...svg.querySelectorAll('.route-trail')], face:svg.querySelector('.route-fov-face'), breath:svg.querySelector('.target-breath'), capture:svg.querySelector('.target-capture'), progress:svg.querySelector('.route-progress'), aircraft:svg.querySelector('.route-aircraft'), target:svg.querySelector('.route-target'), height:svg.querySelector('.route-height'), frustum:svg.querySelector('.route-frustum'), sightline:svg.querySelector('.route-sightline') };
+      return { svg, project, distances, points:ap, trails:[...svg.querySelectorAll('.route-trail')], face:svg.querySelector('.route-fov-face'), breath:svg.querySelector('.target-breath'), capture:svg.querySelector('.target-capture'), progress:svg.querySelector('.route-progress'), craft:svg.querySelector('.route-craft'), aircraft:svg.querySelector('.route-aircraft'), target:svg.querySelector('.route-target'), height:svg.querySelector('.route-height'), frustum:svg.querySelector('.route-frustum'), sightline:svg.querySelector('.route-sightline') };
     }
     function updateRoute(route, pose) {
       if (!route) return;
       const p = route.project(pose), target = route.project({x:pose.tx,y:pose.ty,z:pose.tz});
-      route.aircraft.setAttribute("transform", `translate(${p.x.toFixed(2)} ${p.y.toFixed(2)})`);
+      const yaw = (pose.yaw || 0) * Math.PI / 180;
+      const ahead = route.project({ x: pose.x + Math.cos(yaw), y: pose.y + Math.sin(yaw), z: pose.z });
+      const turn = Math.atan2(ahead.y - p.y, ahead.x - p.x) * 180 / Math.PI;
+      if (route.craft) route.craft.setAttribute("transform", `translate(${p.x.toFixed(2)} ${p.y.toFixed(2)})`);
+      route.aircraft.setAttribute("transform", route.craft ? `rotate(${turn.toFixed(1)})` : `translate(${p.x.toFixed(2)} ${p.y.toFixed(2)}) rotate(${turn.toFixed(1)})`);
       route.target.setAttribute("transform", `translate(${target.x.toFixed(2)} ${target.y.toFixed(2)})`);
+      const shown = "AKLR".includes(episode().phase[Math.round(pose.frame)] || "");
+      route.target.style.opacity = shown ? "1" : "0";
       const effect = flightEffects(episode(),pose.frame,motionOK);
       route.svg.style.setProperty('--flight-color',effect.color);
       const i = Math.floor(pose.frame), j = Math.min(route.distances.length - 1, i + 1), u = pose.frame - i;
@@ -255,8 +265,8 @@
       const poster = active().dataset.poster;
       if (poster) {
         const cover = el("mission-cover");
-        cover.srcset = poster + "-640.webp 640w, " + poster + "-1280.webp 1280w";
-        cover.src = poster + "-1280.webp";
+        cover.srcset = poster + "-640.webp?v=2 640w, " + poster + "-1280.webp?v=2 1280w";
+        cover.src = poster + "-1280.webp?v=2";
         el("traj-poster").srcset = cover.srcset;
         el("traj-poster").src = poster + "-1280.webp";
       }
@@ -449,7 +459,7 @@
     if (cover.complete && cover.naturalWidth) beginMedia();
     // A failed poster request must not prevent playback or manual controls.
     setTimeout(beginMedia,1500);
-    fetch("figures/scenes.json?v=14")
+    fetch("figures/scenes.json?v=15")
       .then((response) => { if (!response.ok) throw new Error("Trajectory data could not be loaded");return response.json(); })
       .then((data) => { pack=data;renderScene();showTrajectory();ensureHUD(); })
       .catch((error) => {

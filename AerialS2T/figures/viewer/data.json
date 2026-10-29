@@ -9,7 +9,7 @@
   ],
   "categories": {
     "town01": {
-      "label": "Town01 · Van",
+      "label": "Town01 \u00b7 Van",
       "items": [
         {
           "id": "town01-1",
@@ -406,7 +406,7 @@
       ]
     },
     "town03": {
-      "label": "Town03 · Bicycle",
+      "label": "Town03 \u00b7 Bicycle",
       "items": [
         {
           "id": "town03-1",
@@ -803,53 +803,53 @@
       ]
     },
     "town04": {
-      "label": "Town04 · Adult",
+      "label": "Town04 \u00b7 Adult",
       "items": [
         {
           "id": "town04-1",
-          "thumb": "figures/viewer/town04/01/thumb.jpg?v=2",
+          "thumb": "figures/viewer/town04/01/thumb.jpg?v=3",
           "images": [
             {
-              "src": "figures/viewer/town04/01/takeoff.jpg?v=2",
+              "src": "figures/viewer/town04/01/takeoff.jpg?v=3",
               "label": "Takeoff"
             },
             {
-              "src": "figures/viewer/town04/01/search.jpg?v=2",
+              "src": "figures/viewer/town04/01/search.jpg?v=3",
               "label": "Search"
             },
             {
-              "src": "figures/viewer/town04/01/acquire.jpg?v=2",
+              "src": "figures/viewer/town04/01/acquire.jpg?v=3",
               "label": "Acquire"
             },
             {
-              "src": "figures/viewer/town04/01/track.jpg?v=2",
+              "src": "figures/viewer/town04/01/track.jpg?v=3",
               "label": "Track"
             }
           ],
           "record": {
-            "episode_index": 169,
-            "task_instruction": "Find and track the female adult pedestrian to your rear-left, near the building at the initial sighting.",
+            "episode_index": 5867,
+            "task_instruction": "Find and track the male adult pedestrian to your front-left, beside the building at the initial sighting.",
             "town": "Town04",
-            "weather": "ClearNoon",
+            "weather": "CloudyNoon",
             "target": {
               "category": "adult",
               "color": ""
             },
-            "initial_direction": "rear-left",
+            "initial_direction": "front-left",
             "landmark": "building",
-            "duration_s": 43.0,
+            "duration_s": 41.0,
             "phases_s": {
               "SEARCH": [
                 0.0,
-                16.6
+                11.8
               ],
               "ACQUIRE": [
-                16.8,
-                18.2
+                12.0,
+                15.8
               ],
               "TRACK": [
-                18.4,
-                43.2
+                16.0,
+                40.8
               ]
             }
           }
@@ -1200,7 +1200,7 @@
       ]
     },
     "town05": {
-      "label": "Town05 · Car",
+      "label": "Town05 \u00b7 Car",
       "items": [
         {
           "id": "town05-1",
@@ -1597,53 +1597,53 @@
       ]
     },
     "town07": {
-      "label": "Town07 · Motorcycle",
+      "label": "Town07 \u00b7 Motorcycle",
       "items": [
         {
           "id": "town07-1",
-          "thumb": "figures/viewer/town07/01/thumb.jpg?v=2",
+          "thumb": "figures/viewer/town07/01/thumb.jpg?v=3",
           "images": [
             {
-              "src": "figures/viewer/town07/01/takeoff.jpg?v=2",
+              "src": "figures/viewer/town07/01/takeoff.jpg?v=3",
               "label": "Takeoff"
             },
             {
-              "src": "figures/viewer/town07/01/search.jpg?v=2",
+              "src": "figures/viewer/town07/01/search.jpg?v=3",
               "label": "Search"
             },
             {
-              "src": "figures/viewer/town07/01/acquire.jpg?v=2",
+              "src": "figures/viewer/town07/01/acquire.jpg?v=3",
               "label": "Acquire"
             },
             {
-              "src": "figures/viewer/town07/01/track.jpg?v=2",
+              "src": "figures/viewer/town07/01/track.jpg?v=3",
               "label": "Track"
             }
           ],
           "record": {
-            "episode_index": 9568,
-            "task_instruction": "Find and track the black motorcycle to your left.",
+            "episode_index": 9556,
+            "task_instruction": "Find and track the gray motorcycle to your rear-right.",
             "town": "Town07",
-            "weather": "ClearNoon",
+            "weather": "ClearSunset",
             "target": {
               "category": "motorcycle",
-              "color": "black"
+              "color": "gray"
             },
-            "initial_direction": "left",
-            "landmark": "building",
-            "duration_s": 32.8,
+            "initial_direction": "rear-right",
+            "landmark": "",
+            "duration_s": 41.8,
             "phases_s": {
               "SEARCH": [
                 0.0,
-                6.4
+                15.0
               ],
               "ACQUIRE": [
-                6.6,
-                8.0
+                15.2,
+                16.6
               ],
               "TRACK": [
-                8.2,
-                33.0
+                16.8,
+                41.6
               ]
             }
           }
@@ -1994,7 +1994,7 @@
       ]
     },
     "town10": {
-      "label": "Town10HD · Teenager",
+      "label": "Town10HD \u00b7 Teenager",
       "items": [
         {
           "id": "town10-1",
