@@ -37,7 +37,7 @@
     let heroVisible = false, trajectoryVisible = false, request = 0, pending = null;
     let pack = null, viewerBooted = false, viewerScene = -1, warmTimer = 0;
     let hudRAF = 0, replayRAF = 0, lastFrame = 0, lastReadout = 0, spatialRoute = null;
-    let azimuth = -0.65, tilt = 0.68, orbitDrag = null;
+    const azimuth = -0.65, tilt = 0.68;
     const active = () => clips[current];
     const visible = () => !document.hidden && (heroVisible || trajectoryVisible);
     const episode = () => pack?.episodes[String(scenes[current].ep)];
@@ -77,7 +77,7 @@
       if (viewerLoading) return viewerLoading;
       viewerLoading = new Promise((resolve, reject) => {
         const script = document.createElement("script");
-        script.src = "figures/trajectory.js?v=21";
+        script.src = "figures/trajectory.js?v=22";
         script.onload = () => window.TrajectoryView ? resolve() : reject(new Error("Replay renderer unavailable"));
         script.onerror = () => { script.remove(); reject(new Error("Replay renderer could not be loaded")); };
         document.head.appendChild(script);
@@ -131,7 +131,7 @@
       warmNext();
     }
 
-    // A fixed projection is built once per episode/orbit, not on every frame.
+    // Build the fixed projection once per episode, rather than on every frame.
     function buildRoute(svg, spatial) {
       const ep = episode();
       if (!ep) return null;
@@ -206,7 +206,6 @@
         dot.classList.toggle("is-active", selected); dot.setAttribute("aria-pressed",String(selected));
       });
       if (pack) {
-        azimuth = -0.65; tilt = 0.68;
         spatialRoute = trajectoryVisible ? buildRoute(el("mission-spatial"), true) : null;
       }
       const poster = active().dataset.poster;
@@ -343,7 +342,7 @@
     heroDots.forEach((dot, i) => dot.addEventListener("click", () => showSlide(i)));
     sceneDots.forEach((dot, i) => dot.addEventListener("click", () => showSlide(i)));
     toggles.forEach((toggle) => toggle.addEventListener("click", () => setAutomatic(!automatic)));
-    el("traj-stage").addEventListener("pointerdown", (event) => { if (event.target.closest("canvas,svg,button,input,.traj-phasebar")) setAutomatic(false); });
+    el("traj-stage").addEventListener("pointerdown", (event) => { if (event.target.closest("button,input,.traj-phasebar")) setAutomatic(false); });
     el("traj-time").addEventListener("input", () => { setAutomatic(false); updateVisuals(true); });
     document.addEventListener("missionplaybackchange", (event) => {
       playbackRunning = event.detail.playing;
@@ -363,23 +362,6 @@
       if (video.error) video.load();
       playVideo(video); mediaStatus(); warmNext();
     });
-    const spatial = el("mission-spatial");
-    spatial.addEventListener("pointerdown", (event) => {
-      if (event.button !== 0 || !pack) return;
-      setAutomatic(false);
-      spatial.setPointerCapture(event.pointerId);
-      orbitDrag = { id:event.pointerId,x:event.clientX,y:event.clientY,az:azimuth,tilt };
-      spatial.classList.add("dragging");
-    });
-    spatial.addEventListener("pointermove", (event) => {
-      if (!orbitDrag || event.pointerId !== orbitDrag.id) return;
-      azimuth = orbitDrag.az + (event.clientX-orbitDrag.x) * .009;
-      tilt = clamp(orbitDrag.tilt+(event.clientY-orbitDrag.y)*.006,.18,1.3);
-      spatialRoute = buildRoute(spatial,true); updateVisuals(true);
-    });
-    const endOrbit = () => { orbitDrag = null; spatial.classList.remove("dragging"); };
-    spatial.addEventListener("pointerup",endOrbit); spatial.addEventListener("pointercancel",endOrbit);
-    el("traj-reset").addEventListener("click", () => { azimuth=-.65;tilt=.68;spatialRoute=buildRoute(spatial,true);updateVisuals(true); });
     document.addEventListener("visibilitychange",syncVisibility);
     if ("IntersectionObserver" in window) {
       const observer = new IntersectionObserver((entries) => {

@@ -584,8 +584,8 @@
       aspect-ratio: 16 / 9;
       height: auto;
       display: block;
-      cursor: grab;
-      touch-action: none;
+      cursor: default;
+      touch-action: auto;
     }
     .scene-block .traj-legend {
       position: absolute; left: 14px; top: 14px;
@@ -657,12 +657,10 @@
     .scene-block .traj-legend span { font-size:9px;padding:4px 7px 4px 5px;background:#0d233ada; }
     .scene-block .traj-legend i { width:6px;height:6px; }
     .spatial-viewport { position:relative;flex:1;min-height:260px;border:1px solid #6085a030;border-radius:10px;overflow:hidden;background:radial-gradient(ellipse at 50% 50%,#173b50,#0b2032 78%); }
-    #mission-spatial { display:block;width:100%;height:100%;min-height:260px;position:absolute;inset:0;touch-action:none;cursor:grab; }
-    #mission-spatial.dragging { cursor:grabbing; }
+    #mission-spatial { display:block;width:100%;height:100%;min-height:260px;position:absolute;inset:0;touch-action:auto;cursor:default; }
     .spatial-legend { position:absolute;left:14px;top:13px;display:flex;gap:14px;color:#7ea1b7;font-size:8px;letter-spacing:.06em;pointer-events:none; }
     .spatial-legend i { display:inline-block;width:5px;height:5px;border-radius:50%;margin-right:5px;background:#6ee8d1; }
     .spatial-legend span:nth-child(2) i { background:#fa6b98; }.spatial-legend span:nth-child(3) i { background:transparent;border:1px solid #6ee8d1;border-radius:0; }
-    .spatial-hint { position:absolute;bottom:11px;left:0;right:0;text-align:center;color:#7899af;font-size:8px;letter-spacing:.1em;pointer-events:none; }
     .spatial-axis { fill:#7196a8;font-size:9px;letter-spacing:.1em; }
     .route-aircraft { filter:drop-shadow(0 0 5px #6ee8d18c); }
     .scene-block #traj-frame-caption { margin:12px 0 0;color:#7f9fb4;text-align:left;font-size:10px;letter-spacing:.02em; }
@@ -795,16 +793,16 @@
 
   <section class="page-section scene-block" id="scene-3d">
     <div class="container">
-      <h2 class="section-title">Trajectory</h2>
-      <p class="scene-intro">The same flight, from two perspectives. One shared timeline.</p>
-      <div class="mission-handoff">SYNCHRONIZED WITH THE COVER</div>
+      <h2 class="section-title">Trajectory Visualization</h2>
+      <p class="scene-intro">Flight trajectories synchronized with the full-screen videos above.</p>
+      <div class="mission-handoff">SYNCHRONIZED WITH THE VIDEO ABOVE</div>
       <div class="flight-console">
       <div class="console-toolbar"><div class="console-identity"><span class="console-number" id="console-count">01</span><div><p class="scene-kicker" id="scene-label">Town01 · Van</p><span class="console-eyeline" id="console-episode">EPISODE 817 · RECORDED FLIGHT</span></div></div><span class="console-phase" id="console-phase">SYNCHRONIZED REPLAY</span></div>
       <div class="traj-stage" id="traj-stage">
         <video id="traj-video" playsinline muted preload="none" aria-hidden="true"></video>
         <div class="mission-views">
           <div class="mission-pane"><div class="pane-heading"><span>01 / FLIGHT VIEW</span><em>RECORDED FLIGHT</em></div><div class="traj-viewport"><canvas id="traj-canvas"></canvas><img id="traj-poster" class="replay-poster" src="figures/web/poster-01-1280.webp" srcset="figures/web/poster-01-640.webp 640w, figures/web/poster-01-1280.webp 1280w" sizes="100vw" width="1280" height="720" loading="lazy" decoding="async" alt=""><div class="traj-legend" id="traj-legend"></div></div></div>
-          <div class="mission-pane"><div class="pane-heading"><span>02 / SPATIAL TRAJECTORY</span><em>DRAG TO ORBIT</em></div><div class="spatial-viewport"><svg id="mission-spatial" viewBox="0 0 400 360" role="img" aria-label="Interactive 3D flight trajectory. Drag to orbit."></svg><div class="spatial-legend"><span><i></i>AIRCRAFT</span><span><i></i>TARGET</span><span><i></i>CAMERA FOV</span></div><div class="spatial-hint">DRAG TO ORBIT · RESET VIEW TO RESTORE</div></div></div>
+          <div class="mission-pane"><div class="pane-heading"><span>02 / SPATIAL TRAJECTORY</span></div><div class="spatial-viewport"><svg id="mission-spatial" viewBox="0 0 400 360" role="img" aria-label="3D flight trajectory synchronized with the video above."></svg><div class="spatial-legend"><span><i></i>AIRCRAFT</span><span><i></i>TARGET</span><span><i></i>CAMERA FOV</span></div></div></div>
         </div>
         <p id="traj-frame-caption" class="scene-caption">Loading replay controls…</p>
         <div class="traj-controls">
@@ -887,7 +885,7 @@
 
   <!-- Website template adapted from MomaGraph: https://hybridrobotics.github.io/MomaGraph/ -->
 
-  <script defer src="figures/mission-v3.js?v=1"></script>
+  <script defer src="figures/mission-v3.js?v=2"></script>
   <script defer src="figures/site.js?v=1"></script>
 </body>
 </html>
