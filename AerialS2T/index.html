@@ -630,29 +630,9 @@
   </style>
   <style>
     /* One recorded flight, carried from the cover into the spatial replay. */
-    .hero { padding:78px 0 186px; }
-    .mission-eyebrow { position:absolute;top:24px;left:36px;right:36px;z-index:12;display:flex;justify-content:space-between;align-items:center;color:#d8e9f0;font:10px/1.4 system-ui,sans-serif;letter-spacing:.18em;pointer-events:none; }
-    .mission-eyebrow span { font-family:inherit; }
-    .mission-eyebrow .recording-tag::before { content:"";display:inline-block;width:5px;height:5px;margin:0 9px 2px 0;border-radius:50%;background:#73e4d8;box-shadow:0 0 9px #73e4d866; }
-    .mission-hud { position:absolute;bottom:68px;left:50%;transform:translateX(-50%);z-index:12;width:min(1120px,calc(100% - 144px));display:grid;grid-template-columns:1.1fr 180px 1.6fr auto;align-items:center;gap:22px;padding:17px 22px 21px;border:1px solid #b8e8f435;border-radius:12px;background:linear-gradient(120deg,#0b2237e8,#0c293adc);box-shadow:0 12px 40px #00132333;color:#e5f3f7;text-align:left; }
-    .mission-hud *, .flight-console *, .mission-handoff *, .scene-nav * { font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; }
-    .hud-eyeline { margin:0 0 6px;color:#91afc1;font-size:9px;letter-spacing:.15em;font-weight:500; }
-    .hud-scene { font-size:15px;font-weight:600;letter-spacing:.015em;white-space:nowrap; }
-    .hud-episode { display:block;margin-top:5px;color:#8eaebe;font-size:10px;letter-spacing:.08em; }
-    .hud-map { width:100%;height:59px;overflow:visible; }
-    .hud-route { height:64px;position:relative;border-left:1px solid #abcce21f;padding-left:16px; }
-    .hud-route::before { content:"FLIGHT PATH";position:absolute;top:-4px;left:16px;color:#809eaf;font:8px/1 system-ui;letter-spacing:.12em; }
-    .hud-data { display:grid;grid-template-columns:repeat(3,1fr);gap:14px; }
-    .hud-data small { display:block;color:#88a8ba;font-size:9px;letter-spacing:.1em;margin-bottom:5px; }
-    .hud-data strong { font-size:15px;font-weight:500;font-variant-numeric:tabular-nums;white-space:nowrap; }
-    .hud-phase { grid-column:1/-1;display:flex;align-items:center;gap:8px;font-size:10px;letter-spacing:.12em;line-height:1;color:var(--phase-color,#73e4d8); }
-    .hud-phase::before,.console-phase::before { content:"";width:5px;height:5px;display:inline-block;border-radius:50%;background:currentColor;box-shadow:0 0 8px currentColor; }
-    .hud-explore { display:flex;align-items:center;gap:14px;color:#bffbf2;text-decoration:none;font-size:11px;line-height:1.7;white-space:nowrap; }
-    .hud-explore span { display:grid;place-items:center;width:30px;height:30px;border:1px solid #75e5d55c;border-radius:50%;font-size:18px;transition:transform .2s,background .2s; }
-    .hud-explore:hover span { transform:translateY(3px);background:#75e5d51c; }
-    .hud-progress { position:absolute;bottom:0;left:12px;right:12px;height:2px;background:#88aebe24;overflow:hidden; }
-    .hud-progress i { display:block;width:100%;height:100%;transform:scaleX(0);transform-origin:left;background:linear-gradient(90deg,#5798ff,#6ee8d1);box-shadow:0 0 8px #63dfd4; }
-    .hero .carousel-pagination { bottom:21px; }
+    .hero { padding:40px 0 62px; }
+    .flight-console *, .mission-handoff *, .scene-nav * { font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; }
+    .console-phase::before { content:"";width:5px;height:5px;display:inline-block;border-radius:50%;background:currentColor;box-shadow:0 0 8px currentColor; }
     .scene-block { padding:42px 0 54px;background:linear-gradient(180deg,#edf5fa,#f8fbfd); }
     .scene-block > .container { max-width:1240px; }
     .scene-block .section-title { margin-bottom:10px; }
@@ -699,18 +679,11 @@
     .scene-nav .scene-arrow svg { width:17px;height:17px; }
     .scene-nav .scene-toggle { width:27px;height:27px; }
     .scene-dot { height:3px;width:22px; }.scene-dot.is-active { width:36px; }
-    @media(min-width:900px) and (max-height:820px) {
-      .hero { padding:50px 0 158px; }.hero .brand { margin-bottom:10px; }.hero .publication-title { margin-bottom:20px; }.hero .author-line { margin-bottom:12px; }.hero .author-line.primary { margin-bottom:5px; }.hero .author-note { margin-top:12px; }.hero .links { margin-top:14px; }.hero .mission-hud { bottom:55px;padding-top:14px;padding-bottom:17px; }
-    }
-    @media(min-width:1600px) { .mission-hud { bottom:74px; } }
-    @media(max-width:1000px) { .mission-hud { width:calc(100% - 100px);grid-template-columns:1fr 150px 1.4fr;gap:16px; }.hud-explore { display:none; }.mission-views { grid-template-columns:minmax(0,1.5fr) minmax(240px,1fr); } }
+    @media(max-width:1000px) { .mission-views { grid-template-columns:minmax(0,1.5fr) minmax(240px,1fr); } }
     @media(max-width:760px) {
-      .hero { padding:65px 0 177px; }.mission-eyebrow { top:18px;left:20px;right:20px;font-size:8px;letter-spacing:.1em; }.mission-eyebrow > span:last-child { display:none; }
-      .mission-hud { width:calc(100% - 36px);bottom:60px;padding:14px 15px 18px;grid-template-columns:1fr 1.3fr;gap:12px; }.hud-route { display:none; }.hud-data { gap:10px; }.hud-scene { font-size:12px; }.hud-data strong { font-size:12px; }.hud-eyeline,.hud-data small { font-size:8px; }.hud-phase { font-size:8px; }
       .mission-views { grid-template-columns:1fr;gap:18px; }.spatial-viewport { min-height:280px; }.flight-console { padding:0 12px 16px;border-radius:13px; }.console-toolbar { min-height:60px; }.console-phase { font-size:8px;letter-spacing:.08em; }.console-eyeline { font-size:7px; }.scene-block .scene-kicker { font-size:11px; }
       .scene-block .traj-controls { flex-wrap:wrap; }.scene-block .traj-slider-wrap { flex-basis:100%; }.scene-block .traj-readout { gap:12px 18px; }.scene-block { padding-top:30px; }.scene-intro { font-size:.9rem;line-height:1.7; }.scene-block #traj-clock { margin-left:auto;min-width:unset; }
     }
-    @media(prefers-reduced-motion:reduce) { .hud-explore span { transition:none; } }
   </style>
   <style>
     /* The static cover paints before video decoding; content never waits on a loader. */
@@ -729,24 +702,23 @@
     .figure-wrap .figure-media img { width:100%;height:100%;object-fit:contain;box-shadow:none;opacity:0;transition:opacity .18s ease; }
     .figure-wrap .figure-media.is-loaded img { opacity:1; }
     .figure-media.figure-error img { opacity:1; }
-    @media(max-width:760px) { .mission-eyebrow .mission-media-status { display:flex; }.mission-media-status { font-size:8px; }.mission-media-status button { font-size:9px;padding:6px 9px; }#mission-playback-note { display:none!important; } }
+    @media(max-width:760px) { .mission-media-status button { font-size:11px;padding:8px 12px; } }
     @media(prefers-reduced-motion:reduce) { .scene-block .replay-poster,.figure-wrap .figure-media img { transition:none; } }
   </style>
   <style>
     /* Reserve the complete intro even while a slow response is still streaming. */
-    .hero { --intro-reserve:557px;--padding-reserve:264px;min-height:max(100svh,calc(var(--intro-reserve) + var(--padding-reserve) + 1px)); }
+    .hero { --intro-reserve:557px;--padding-reserve:102px;min-height:max(100svh,calc(var(--intro-reserve) + var(--padding-reserve) + 1px)); }
     .hero-body { min-height:var(--intro-reserve); }
-    .mission-media-status { position:relative;width:172px;height:14px;flex:0 0 172px; }
-    #mission-load-status,#mission-playback-note { position:absolute;inset:0;text-align:right;line-height:14px;white-space:nowrap; }
-    .mission-media-status button { position:absolute;right:0;top:50%;transform:translateY(-50%); }
+    .mission-media-status { position:absolute;right:24px;bottom:61px;z-index:30; }
+    #mission-load-status { position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap; }
+    #mission-playback-note { display:none; }
     .carousel-pagination { width:271px;height:26px; }
     .carousel-dots { width:232px;min-width:232px;flex:0 0 232px;height:5px; }
     .carousel-dot,.carousel-dot.is-active { flex:0 0 32px;position:relative;width:32px;background:transparent;transition:none; }
     .carousel-dot::before { content:"";position:absolute;inset:0;border-radius:6px;background:#ffffff6b;transform:scaleX(.63);transition:transform .22s ease,background .22s ease; }
     .carousel-dot.is-active::before { background:#fff;transform:scaleX(1); }
-    @media(min-width:900px) and (max-height:820px) { .hero { --intro-reserve:527px;--padding-reserve:208px; } }
     @media(min-width:761px) and (max-width:1100px) { .hero { --intro-reserve:680px; } }
-    @media(max-width:760px) { .hero { --intro-reserve:910px;--padding-reserve:242px; }.mission-media-status { width:110px;flex-basis:110px; } }
+    @media(max-width:760px) { .hero { --intro-reserve:910px; } }
     @media(prefers-reduced-motion:reduce) { .carousel-dot::before { transition:none; } }
 </style>
   <noscript><style>.figure-media{display:none}</style></noscript>
@@ -763,14 +735,7 @@
       <video playsinline muted loop preload="none" aria-hidden="true" data-src="fly_06_town10.mp4?v=1" data-mobile-src="media/mobile/fly_06_town10.mp4?v=1" data-poster="figures/web/poster-06"></video>
     </div>
     <div class="overlay"></div>
-    <div class="mission-eyebrow"><span class="recording-tag">AERIALLIFT · RECORDED FLIGHT</span><div class="mission-media-status"><span id="mission-load-status" role="status">Preparing replay…</span><button id="mission-start" type="button" hidden>Play flight</button><span id="mission-playback-note" hidden>SEARCH → ACQUIRE → TRACK</span></div></div>
-    <div class="mission-hud" aria-label="Current flight telemetry">
-      <div><p class="hud-eyeline">MISSION <span id="mission-count">01 / 06</span></p><div class="hud-scene" id="mission-name">Town01 · Van</div><span class="hud-episode" id="mission-episode">EPISODE 817</span></div>
-      <div class="hud-route"><svg id="mission-mini" class="hud-map" viewBox="0 0 240 100" aria-label="Current flight path" role="img"></svg></div>
-      <div class="hud-data"><div class="hud-phase" id="mission-phase">RECORDED REPLAY</div><div><small>TIME</small><strong id="mission-time">00:00.0</strong></div><div><small>ALTITUDE</small><strong id="mission-altitude">— m</strong></div><div><small>TARGET RANGE</small><strong id="mission-range">— m</strong></div></div>
-      <a class="hud-explore" href="#scene-3d">Follow this flight<br>in 3D<span aria-hidden="true">↘</span></a>
-      <div class="hud-progress" aria-hidden="true"><i id="mission-progress"></i></div>
-    </div>
+    <div class="mission-media-status"><span id="mission-load-status" role="status">Preparing replay…</span><button id="mission-start" type="button" hidden>Play flight</button><span id="mission-playback-note" hidden></span></div>
     <button class="carousel-arrow carousel-prev" type="button" aria-label="Previous background video">
       <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m14.5 5-7 7 7 7"/></svg>
     </button>
@@ -922,7 +887,7 @@
 
   <!-- Website template adapted from MomaGraph: https://hybridrobotics.github.io/MomaGraph/ -->
 
-  <script defer src="figures/mission-v2.js?v=1"></script>
+  <script defer src="figures/mission-v3.js?v=1"></script>
   <script defer src="figures/site.js?v=1"></script>
 </body>
 </html>
