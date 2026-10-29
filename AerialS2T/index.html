@@ -425,9 +425,7 @@
       border-radius: 10px;
       transition: transform 160ms ease, background 160ms ease, box-shadow 160ms ease;
     }
-    .links a:last-child .pill { background: #2f70b4; color: #fff; border-color: #2f70b4; }
     .links a:hover .pill { background: #e8f1fb; transform: translateY(-2px); box-shadow: 0 5px 14px rgba(52,94,138,0.1); }
-    .links a:last-child:hover .pill { background: #245f9d; }
     .hero-video {
       order: 1;
       position: relative;
@@ -782,8 +780,95 @@
     .flight-connector svg { display:block;width:18px;height:18px;fill:none;stroke:#3c9caa;stroke-width:1.4;stroke-linecap:round;stroke-linejoin:round;margin-top:-4px; }
     .scene-block .flight-continuation .section-title { margin:0 0 12px;font-size:clamp(2.25rem,3.6vw,2.9rem);line-height:1.15;letter-spacing:-.025em;color:#254c6b; }
     .flight-continuation .section-title span { color:#2c8b99; }
-    .flight-continuation .scene-intro { margin:0;font-size:1rem;line-height:1.65;color:#587487; }
-    @media(max-width:760px) { .flight-connector { height:43px;margin-bottom:7px; }.flight-continuation { padding-bottom:24px; }.flight-continuation .scene-intro { max-width:330px;margin:auto;font-size:.9rem; } }
+    .flight-continuation .scene-intro { margin:0;font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;font-size:1.125rem;font-weight:500;line-height:1.65;color:#344f65;text-shadow:none; }
+    @media(max-width:760px) { .flight-connector { height:43px;margin-bottom:7px; }.flight-continuation { padding-bottom:24px; }.flight-continuation .scene-intro { max-width:36rem;margin:auto;font-size:1rem; } }
+  </style>
+
+  <style>
+    #scene-3d .flight-console { color-scheme:light;color:#35566e;background:#cfdfec;border-color:#c0d1df;box-shadow:0 20px 52px #234f6a16;--stage-ink:color-mix(in srgb,var(--flight-color,#79dfd1) 35%,#102f41 65%); }
+    #scene-3d .console-toolbar { border-bottom-color:#9fb9cc55; }
+    #scene-3d .console-number { color:#52758e;border-color:#abc3d4;background:#eef5fab3; }
+    #scene-3d .scene-kicker { color:#31546d; }
+    #scene-3d .flight-stages { color:#71879a; }
+    #scene-3d .flight-step.is-current { color:var(--stage-ink);border-color:color-mix(in srgb,var(--stage-ink) 25%,#b9cdda);background:color-mix(in srgb,var(--flight-color) 9%,#f5f9fc); }
+    #scene-3d .console-phase { color:var(--stage-ink); }
+    #scene-3d .pane-heading { color:#658098; }
+    #scene-3d .traj-viewport { border-color:#b7ccdc; }
+    #scene-3d .spatial-viewport { background:radial-gradient(ellipse at 50% 45%,#eaf3f9,#dce9f3 85%);border-color:#b8cddd; }
+    #scene-3d .spatial-legend { color:#668196; }
+    #scene-3d .spatial-legend span:first-child i { background:color-mix(in srgb,var(--flight-color) 55%,#082939 45%); }
+    #scene-3d .spatial-legend span:nth-child(2) i { background:#d24d7f; }
+    #scene-3d .spatial-legend span:nth-child(3) i { border-color:#518e91; }
+    #mission-spatial { --spatial-ink:color-mix(in srgb,var(--flight-color,#60cbb6) 55%,#082939 45%); }
+    #mission-spatial > path:first-of-type { stroke:#8eaabd;stroke-opacity:.38; }
+    #mission-spatial > path:nth-of-type(2) { stroke:#c96388;stroke-opacity:.45; }
+    #mission-spatial > path:nth-of-type(3) { stroke:#6f94a9;stroke-opacity:.27; }
+    #mission-spatial .route-progress { stroke:var(--spatial-ink);stroke-opacity:.42; }
+    #mission-spatial .route-trail { stroke:var(--spatial-ink); }
+    #mission-spatial .route-frustum { stroke:var(--spatial-ink);stroke-opacity:.9;stroke-width:1.2; }
+    #mission-spatial .route-fov-face { fill:var(--spatial-ink);fill-opacity:.08; }
+    #mission-spatial .route-sightline { stroke:#ca4e7d;stroke-opacity:.65; }
+    #mission-spatial .route-height { stroke:#548e99;stroke-opacity:.55; }
+    #mission-spatial .route-aircraft { filter:drop-shadow(0 1px 2px #295f7429); }
+    #mission-spatial .route-aircraft > circle { fill:#e3f4f3;stroke:#74aaa9; }
+    #mission-spatial .route-aircraft > path { stroke:#245e78; }
+    #mission-spatial .route-aircraft > g { fill:#f2f9fc;stroke:#245e78; }
+    #mission-spatial .route-target circle:last-child { fill:#d6437b; }
+    #mission-spatial .target-breath { fill:#e4598b15;stroke:#c74c7a; }
+    #mission-spatial .target-capture { stroke:var(--spatial-ink); }
+    #scene-3d .traj-controls button { color:#4d718c;background:#edf4fa;border-color:#b1c8d9; }
+    #scene-3d #traj-play { color:#fff;background:#267e8e;border-color:#267e8e; }
+    #scene-3d #traj-clock { color:#53758c; }
+    #scene-3d #traj-time { accent-color:#2b8495; }
+    #scene-3d .traj-readout { color:#35566e;border-top-color:#abc1d157; }
+    #scene-3d .traj-readout em { color:#6b869c; }
+    #scene-3d #traj-frame-caption { color:#668196; }
+  </style>
+
+  <style>
+    .hero .project-nav { display:flex;flex-direction:column;align-items:center;gap:11px; }
+    .trajectory-nav-row { display:flex;justify-content:center;width:100%; }
+    .project-nav-row { display:flex;justify-content:center;flex-wrap:wrap;gap:12px; }
+    .hero .links .trajectory-link .pill { gap:11px;padding:12px 27px;color:#fff;font-size:1.224rem;font-weight:600;border:1px solid #9ee2e166;background:linear-gradient(115deg,#2b769c,#258b91);box-shadow:0 4px 16px #081e3740;text-shadow:0 1px 2px #0a354a40; }
+    .hero .links .trajectory-link:hover .pill { background:linear-gradient(115deg,#236c92,#1d8087);box-shadow:0 6px 19px #081e3750; }
+    .trajectory-pill svg { width:21px;height:21px;flex:0 0 21px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;opacity:.92; }
+    .project-nav-row .pill { font-size:1.1rem;padding:9px 25px; }
+    .project-nav-row .paper-placeholder { line-height:normal;opacity:1;cursor:default; }
+    .hero { --intro-reserve:600px; }
+    @media(min-width:761px) and (max-width:1100px) { .hero { --intro-reserve:720px; } }
+    @media(max-width:760px) { .hero { --intro-reserve:910px; }.hero .links .trajectory-link .pill { font-size:1.1rem;padding:11px 22px;gap:9px; }.project-nav-row { gap:10px; }.project-nav-row .pill { font-size:1.02rem;padding:9px 15px; } }
+    @media(max-width:440px) { .project-nav-row { display:grid;grid-template-columns:repeat(2,minmax(0,1fr));width:100%;max-width:334px; }.project-nav-row .pill { width:100%;justify-content:center; } }
+  </style>
+
+  <style>
+    /* Keep replay labels readable against the pale blue console. */
+    #scene-3d .flight-console, #scene-3d .scene-nav { text-shadow:none; }
+    #scene-3d .console-number { font-size:12px;font-weight:600;color:#3b5a71; }
+    #scene-3d .scene-kicker { font-size:16px;color:#243f55; }
+    #scene-3d .flight-stages { font-size:13px;font-weight:600;letter-spacing:0;color:#466277; }
+    #scene-3d .flight-step { padding:6px 11px; }
+    #scene-3d .step-link { color:#5c798e;opacity:1; }
+    #scene-3d .pane-heading { font-size:14px;font-weight:600;letter-spacing:.01em;color:#354f65; }
+    #scene-3d .spatial-legend { font-size:11px;font-weight:600;letter-spacing:.015em;color:#3c5a70;gap:12px;flex-wrap:wrap;right:12px; }
+    #scene-3d .spatial-legend i { width:7px;height:7px;margin-right:6px; }
+    #scene-3d .traj-controls button { font-size:14px;font-weight:600;padding:9px 16px;color:#35556d; }
+    #scene-3d #traj-play { color:#fff; }
+    #scene-3d #traj-clock { font-size:14px;font-weight:600;color:#35556d;min-width:120px; }
+    #scene-3d .traj-readout { font-size:16px;font-weight:600;color:#29485e; }
+    #scene-3d .traj-readout em { font-size:12px;font-weight:600;letter-spacing:.035em;color:#48667c; }
+    #scene-3d #traj-frame-caption { font-size:13px;font-weight:500;color:#48667c; }
+    #scene-3d .scene-selector-title { font-size:14px;font-weight:600;color:#35566f; }
+    #scene-3d .auto-switch-label { font-size:13px;font-weight:500;color:#45667d; }
+    #scene-3d .scene-index { font-size:12px;font-weight:600; }
+    #scene-3d .scene-card-copy { flex-wrap:wrap; }
+    #scene-3d .scene-card-copy strong { font-size:13px;color:#29485f; }
+    #scene-3d .scene-card-copy > span { font-size:12px;color:#46667e; }
+    @media(max-width:760px) {
+      #scene-3d .scene-kicker { font-size:15px; }
+      #scene-3d .flight-step { font-size:13px; }
+      #scene-3d .spatial-legend { gap:10px;left:12px; }
+      #scene-3d #traj-clock { min-width:unset; }
+    }
   </style>
 </head>
 <body>
@@ -845,12 +930,14 @@
         </div>
         <p class="author-note"><sup>*</sup> Equal Contribution, <sup>†</sup> Corresponding Author</p>
 
-        <nav class="links" aria-label="Project navigation">
-          <a href="#scene-3d"><span class="pill">Trajectory</span></a>
-          <a href="#overview"><span class="pill">Overview</span></a>
-          <a href="#dataset"><span class="pill">Dataset</span></a>
-          <a href="#method"><span class="pill">Method</span></a>
-          <a href="https://github.com/moTcream/AerialS2T" target="_blank" rel="noopener noreferrer"><span class="pill">GitHub</span></a>
+        <nav class="links project-nav" aria-label="Project navigation">
+          <div class="trajectory-nav-row"><a class="trajectory-link" href="#scene-3d"><span class="pill trajectory-pill"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 17c6 0 2-11 8-11s4 11 10 4M17 10h4v4"/></svg>Trajectory Visualization</span></a></div>
+          <div class="project-nav-row">
+            <button class="pill paper-placeholder" type="button" disabled title="Paper link coming soon">Paper</button>
+            <a href="https://github.com/moTcream/AerialS2T" target="_blank" rel="noopener noreferrer"><span class="pill">Code</span></a>
+            <a href="#dataset"><span class="pill">AerialLIFT-10K</span></a>
+            <a href="#method"><span class="pill">MoViC</span></a>
+          </div>
         </nav>
       </div>
     </div>
@@ -860,8 +947,8 @@
     <div class="container">
       <div class="flight-continuation">
         <div class="flight-connector" aria-hidden="true"><span></span><svg viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg></div>
-        <h2 class="section-title" id="flight-title">Follow the <span>Flight</span></h2>
-        <p class="scene-intro">The flight above, visualized below — one video, one synchronized trajectory.</p>
+        <h2 class="section-title" id="flight-title">Trajectory <span>Visualization</span></h2>
+        <p class="scene-intro">The 3D trajectory below is synchronized with the flight video above.</p>
       </div>
       <div class="flight-console">
       <div class="console-toolbar"><div class="console-identity"><span class="console-number" id="console-count">01</span><div><p class="scene-kicker" id="scene-label">Town01 · Van</p></div></div><div class="flight-stages" aria-label="Flight stages"><span class="flight-step" data-phase="S">Search</span><span class="step-link" aria-hidden="true">→</span><span class="flight-step" data-phase="A">Acquire</span><span class="step-link" aria-hidden="true">→</span><span class="flight-step" data-phase="K">Track</span></div><span class="console-phase" id="console-phase" role="status" hidden></span></div>
@@ -897,9 +984,8 @@
     </div>
   </section>
 
-  <section class="page-section alt" id="overview">
+  <section class="page-section alt" id="overview" aria-label="Task overview">
     <div class="container">
-      <h2 class="section-title">Overview</h2>
       <div class="figure-wrap">
         <picture class="figure-media" style="aspect-ratio:3200/1586"><source type="image/webp" data-srcset="figures/web/teaser-960.webp 960w, figures/web/teaser-1600.webp 1600w, figures/web/teaser-2400.webp 2400w, figures/web/teaser-3200.webp 3200w" sizes="(max-width:1028px) calc(100vw - 48px), 980px"><img loading="lazy" decoding="async" src="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%223200%22 height=%221586%22/%3E" data-src="figures/teaser.png" width="3200" height="1586" alt="AerialS2T overview"></picture><noscript><img src="figures/teaser.png" width="3200" height="1586" alt="AerialS2T overview"></noscript>
         <p class="figure-caption">Figure 1. AerialS2T task overview: takeoff, search, acquire, and track under language instructions.</p>
@@ -909,8 +995,7 @@
 
   <section class="page-section" id="dataset">
     <div class="container">
-      <h2 class="section-title">Dataset</h2>
-      <h3 class="section-subtitle">AerialLIFT-10K</h3>
+      <h2 class="section-title">AerialLIFT-10K</h2>
       <div class="figure-wrap">
         <picture class="figure-media" style="aspect-ratio:3200/1880"><source type="image/webp" data-srcset="figures/web/dataset-960.webp 960w, figures/web/dataset-1600.webp 1600w, figures/web/dataset-2400.webp 2400w, figures/web/dataset-3200.webp 3200w" sizes="(max-width:1028px) calc(100vw - 48px), 980px"><img loading="lazy" decoding="async" src="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%223200%22 height=%221880%22/%3E" data-src="figures/dataset.png" width="3200" height="1880" alt="AerialLIFT-10K dataset overview"></picture><noscript><img src="figures/dataset.png" width="3200" height="1880" alt="AerialLIFT-10K dataset overview"></noscript>
         <p class="figure-caption">Figure 2. AerialLIFT-10K dataset overview across maps, targets, weather, and acquisition statistics.</p>
@@ -935,8 +1020,7 @@
 
   <section class="page-section alt" id="method">
     <div class="container">
-      <h2 class="section-title">Method</h2>
-      <h3 class="section-subtitle">MoViC</h3>
+      <h2 class="section-title">MoViC</h2>
       <div class="figure-wrap">
         <picture class="figure-media" style="aspect-ratio:3200/1514"><source type="image/webp" data-srcset="figures/web/model-960.webp 960w, figures/web/model-1600.webp 1600w, figures/web/model-2400.webp 2400w, figures/web/model-3200.webp 3200w" sizes="(max-width:1028px) calc(100vw - 48px), 980px"><img loading="lazy" decoding="async" src="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%223200%22 height=%221514%22/%3E" data-src="figures/model.png?v=20261027" width="3200" height="1514" alt="MoViC architecture"></picture><noscript><img src="figures/model.png?v=20261027" width="3200" height="1514" alt="MoViC architecture"></noscript>
         <p class="figure-caption">Figure 3. Method overview: MoViC architecture with recurrent target forecasting and geometric action refinement.</p>
