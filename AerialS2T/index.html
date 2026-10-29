@@ -733,6 +733,58 @@
     @media(max-width:760px) { .console-toolbar { flex-wrap:wrap;padding:12px 0; }.flight-stages { order:3;width:100%;margin:0;justify-content:center;gap:8px; }.console-phase { margin-left:auto; }.flight-step { padding:5px 9px; } }
     @media(prefers-reduced-motion:reduce) { .flight-step,.flight-console .traj-viewport,.spatial-viewport { transition:none; } }
   </style>
+
+  <style>
+    .console-toolbar { min-height:64px;margin-bottom:17px; }
+    .scene-block .scene-kicker { font-size:15px;letter-spacing:.01em; }
+    .flight-stages { margin-right:0; }
+    .console-phase[hidden] { display:none!important; }
+    .pane-heading { font-size:11px;letter-spacing:.04em;padding-bottom:11px; }
+    .scene-block .traj-controls { margin-top:17px; }
+    .scene-block .traj-readout { padding-top:14px;border-top:1px solid #8eb6ce17;gap:14px 32px; }
+    .scene-nav { display:block;margin-top:22px;text-align:left; }
+    .scene-selector-bar { display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;gap:16px; }
+    .scene-selector-title { color:#486b88;font-size:12px;font-weight:600;letter-spacing:.02em; }
+    .scene-actions { display:flex;align-items:center;gap:10px; }
+    .auto-switch-label { margin-left:5px;color:#6c8496;font-size:11px; }
+    .scene-nav .scene-arrow { width:29px;height:29px;border-radius:8px;display:grid;place-items:center; }
+    .scene-nav .scene-toggle { width:27px;height:27px; }
+    .scene-dots { display:grid;grid-template-columns:repeat(6,minmax(0,1fr));align-items:stretch;gap:12px; }
+    .scene-nav .scene-card,.scene-nav .scene-card.is-active { display:block;width:100%;height:auto;min-width:0;padding:5px;border:1px solid #cfdee8;border-radius:11px;background:#f9fcfe;color:#29475f;text-align:left;cursor:pointer;box-shadow:0 3px 10px #183c5505;transition:border-color .2s,background .2s,box-shadow .2s; }
+    .scene-nav .scene-card:hover { border-color:#89acc5;box-shadow:0 5px 16px #183c5510; }
+    .scene-nav .scene-card.is-active { border-color:#418cba;background:#fff;box-shadow:0 0 0 1px #418cba,0 5px 18px #24608413; }
+    .scene-card:focus-visible { outline:2px solid #247fae;outline-offset:4px; }
+    .scene-thumb { display:block;position:relative;overflow:hidden;border-radius:6px;aspect-ratio:16/9;background:#173047; }
+    .scene-thumb::after { content:"";position:absolute;inset:0;background:linear-gradient(180deg,#00102028,transparent 60%);pointer-events:none; }
+    .scene-thumb img { display:block;width:100%;height:100%;object-fit:cover;opacity:.83;transition:opacity .2s; }
+    .scene-card:hover img,.scene-card.is-active img { opacity:1; }
+    .scene-index { position:absolute;top:7px;left:8px;color:#fff;font-size:10px;line-height:1;z-index:1;text-shadow:0 1px 4px #001523b3; }
+    .scene-selected { position:absolute;top:6px;right:6px;display:grid;place-items:center;width:17px;height:17px;border-radius:50%;color:#0d3a44;background:#a5f1e4;font-size:11px;opacity:0;z-index:1; }
+    .scene-card.is-active .scene-selected { opacity:1; }
+    .scene-card-copy { display:flex;align-items:center;justify-content:space-between;gap:6px;padding:10px 5px 6px; }
+    .scene-card-copy strong { font-size:11px;font-weight:650;white-space:nowrap; }
+    .scene-card-copy > span { color:#698297;font-size:10px;white-space:nowrap; }
+    @media(max-width:1050px) and (min-width:761px) { .scene-card-copy { align-items:flex-start;flex-direction:column;gap:4px; }.scene-dots { gap:9px; } }
+    @media(max-width:760px) {
+      .console-toolbar { padding:13px 0;gap:13px; }.scene-block .scene-kicker { font-size:14px; }.flight-stages { margin:0; }.flight-step { font-size:10px; }.console-phase { margin-left:0; }
+      .scene-block .traj-readout { gap:14px 23px; }.scene-selector-bar { margin-bottom:10px; }.scene-actions { gap:8px; }
+      .scene-dots { display:flex;overflow-x:auto;gap:10px;padding:2px 2px 10px;scroll-snap-type:x proximity;scrollbar-width:thin;scrollbar-color:#9cb9cc transparent;overscroll-behavior-inline:contain; }
+      .scene-nav .scene-card,.scene-nav .scene-card.is-active { width:155px;flex:0 0 155px;scroll-snap-align:center; }.scene-card-copy { align-items:flex-start;flex-direction:column;gap:4px;padding:8px 5px 6px; }.scene-card-copy strong { font-size:12px; }.scene-card-copy > span { font-size:11px; }
+    }
+    @media(prefers-reduced-motion:reduce) { .scene-nav .scene-card,.scene-thumb img { transition:none; } }
+  </style>
+
+  <style>
+    .scene-block { padding-top:0; }
+    .flight-continuation { position:relative;text-align:center;padding:0 0 28px; }
+    .flight-connector { display:flex;flex-direction:column;align-items:center;height:57px;margin:0 auto 8px; }
+    .flight-connector span { display:block;flex:1;width:1px;background:linear-gradient(180deg,#6b9fb655,#3c9caa); }
+    .flight-connector svg { display:block;width:18px;height:18px;fill:none;stroke:#3c9caa;stroke-width:1.4;stroke-linecap:round;stroke-linejoin:round;margin-top:-4px; }
+    .scene-block .flight-continuation .section-title { margin:0 0 12px;font-size:clamp(2.25rem,3.6vw,2.9rem);line-height:1.15;letter-spacing:-.025em;color:#254c6b; }
+    .flight-continuation .section-title span { color:#2c8b99; }
+    .flight-continuation .scene-intro { margin:0;font-size:1rem;line-height:1.65;color:#587487; }
+    @media(max-width:760px) { .flight-connector { height:43px;margin-bottom:7px; }.flight-continuation { padding-bottom:24px; }.flight-continuation .scene-intro { max-width:330px;margin:auto;font-size:.9rem; } }
+  </style>
 </head>
 <body>
   <section class="hero">
@@ -806,16 +858,18 @@
 
   <section class="page-section scene-block" id="scene-3d">
     <div class="container">
-      <h2 class="section-title">Trajectory Visualization</h2>
-      <p class="scene-intro">Flight trajectories synchronized with the full-screen videos above.</p>
-      <div class="mission-handoff">SYNCHRONIZED WITH THE VIDEO ABOVE</div>
+      <div class="flight-continuation">
+        <div class="flight-connector" aria-hidden="true"><span></span><svg viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg></div>
+        <h2 class="section-title" id="flight-title">Follow the <span>Flight</span></h2>
+        <p class="scene-intro">The flight above, visualized below — one video, one synchronized trajectory.</p>
+      </div>
       <div class="flight-console">
-      <div class="console-toolbar"><div class="console-identity"><span class="console-number" id="console-count">01</span><div><p class="scene-kicker" id="scene-label">Town01 · Van</p><span class="console-eyeline" id="console-episode">EPISODE 817 · RECORDED FLIGHT</span></div></div><div class="flight-stages" aria-label="Flight stages"><span class="flight-step" data-phase="S">Search</span><span class="step-link" aria-hidden="true">→</span><span class="flight-step" data-phase="A">Acquire</span><span class="step-link" aria-hidden="true">→</span><span class="flight-step" data-phase="K">Track</span></div><span class="console-phase" id="console-phase">SYNCHRONIZED REPLAY</span></div>
+      <div class="console-toolbar"><div class="console-identity"><span class="console-number" id="console-count">01</span><div><p class="scene-kicker" id="scene-label">Town01 · Van</p></div></div><div class="flight-stages" aria-label="Flight stages"><span class="flight-step" data-phase="S">Search</span><span class="step-link" aria-hidden="true">→</span><span class="flight-step" data-phase="A">Acquire</span><span class="step-link" aria-hidden="true">→</span><span class="flight-step" data-phase="K">Track</span></div><span class="console-phase" id="console-phase" role="status" hidden></span></div>
       <div class="traj-stage" id="traj-stage">
         <video id="traj-video" playsinline muted preload="none" aria-hidden="true"></video>
         <div class="mission-views">
-          <div class="mission-pane"><div class="pane-heading"><span>01 / FLIGHT VIEW</span><em>RECORDED FLIGHT</em></div><div class="traj-viewport"><canvas id="traj-canvas"></canvas><img id="traj-poster" class="replay-poster" src="figures/web/poster-01-1280.webp" srcset="figures/web/poster-01-640.webp 640w, figures/web/poster-01-1280.webp 1280w" sizes="100vw" width="1280" height="720" loading="lazy" decoding="async" alt=""><div class="traj-legend" id="traj-legend"></div></div></div>
-          <div class="mission-pane"><div class="pane-heading"><span>02 / SPATIAL TRAJECTORY</span></div><div class="spatial-viewport"><svg id="mission-spatial" viewBox="0 0 400 360" role="img" aria-label="3D flight trajectory synchronized with the video above."></svg><div class="spatial-legend"><span><i></i>AIRCRAFT</span><span><i></i>TARGET</span><span><i></i>CAMERA FOV</span></div></div></div>
+          <div class="mission-pane"><div class="pane-heading"><span>Flight view</span></div><div class="traj-viewport"><canvas id="traj-canvas"></canvas><img id="traj-poster" class="replay-poster" src="figures/web/poster-01-1280.webp" srcset="figures/web/poster-01-640.webp 640w, figures/web/poster-01-1280.webp 1280w" sizes="100vw" width="1280" height="720" loading="lazy" decoding="async" alt=""></div></div>
+          <div class="mission-pane"><div class="pane-heading"><span>Spatial trajectory</span></div><div class="spatial-viewport"><svg id="mission-spatial" viewBox="0 0 400 360" role="img" aria-label="3D flight trajectory synchronized with the video above."></svg><div class="spatial-legend"><span><i></i>AIRCRAFT</span><span><i></i>TARGET</span><span><i></i>CAMERA FOV</span></div></div></div>
         </div>
         <p id="traj-frame-caption" class="scene-caption">Loading replay controls…</p>
         <div class="traj-controls">
@@ -830,21 +884,15 @@
       </div>
       </div>
       <div class="scene-nav" aria-label="Trajectory scene controls">
-        <button class="scene-arrow scene-prev" type="button" aria-label="Previous trajectory">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m14.5 5-7 7 7 7"/></svg>
-        </button>
-        <div class="scene-dots">
-          <button type="button" class="scene-dot is-active" aria-label="Show trajectory 1" aria-pressed="true"></button>
-          <button type="button" class="scene-dot" aria-label="Show trajectory 2" aria-pressed="false"></button>
-          <button type="button" class="scene-dot" aria-label="Show trajectory 3" aria-pressed="false"></button>
-          <button type="button" class="scene-dot" aria-label="Show trajectory 4" aria-pressed="false"></button>
-          <button type="button" class="scene-dot" aria-label="Show trajectory 5" aria-pressed="false"></button>
-          <button type="button" class="scene-dot" aria-label="Show trajectory 6" aria-pressed="false"></button>
+        <div class="scene-selector-bar"><span class="scene-selector-title">Choose a scene</span><div class="scene-actions"><button class="scene-arrow scene-prev" type="button" aria-label="Previous trajectory"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m14.5 5-7 7 7 7"/></svg></button><span class="auto-switch-label">Auto switch</span><button class="scene-toggle" type="button" aria-label="Pause automatic switching" aria-pressed="false">Ⅱ</button><button class="scene-arrow scene-next" type="button" aria-label="Next trajectory"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9.5 5 7 7-7 7"/></svg></button></div></div>
+        <div class="scene-dots" aria-label="Flight scenes">
+          <button type="button" class="scene-dot scene-card is-active" aria-label="View Town01, Van" aria-pressed="true"><span class="scene-thumb"><img src="figures/web/scene-01.webp" width="384" height="216" loading="lazy" decoding="async" alt=""><span class="scene-index" aria-hidden="true">01</span><span class="scene-selected" aria-hidden="true">✓</span></span><span class="scene-card-copy"><strong>Town01</strong><span>Van</span></span></button>
+          <button type="button" class="scene-dot scene-card" aria-label="View Town03, Bicycle" aria-pressed="false"><span class="scene-thumb"><img src="figures/web/scene-02.webp" width="384" height="216" loading="lazy" decoding="async" alt=""><span class="scene-index" aria-hidden="true">02</span><span class="scene-selected" aria-hidden="true">✓</span></span><span class="scene-card-copy"><strong>Town03</strong><span>Bicycle</span></span></button>
+          <button type="button" class="scene-dot scene-card" aria-label="View Town04, Adult" aria-pressed="false"><span class="scene-thumb"><img src="figures/web/scene-03.webp" width="384" height="216" loading="lazy" decoding="async" alt=""><span class="scene-index" aria-hidden="true">03</span><span class="scene-selected" aria-hidden="true">✓</span></span><span class="scene-card-copy"><strong>Town04</strong><span>Adult</span></span></button>
+          <button type="button" class="scene-dot scene-card" aria-label="View Town05, Car" aria-pressed="false"><span class="scene-thumb"><img src="figures/web/scene-04.webp" width="384" height="216" loading="lazy" decoding="async" alt=""><span class="scene-index" aria-hidden="true">04</span><span class="scene-selected" aria-hidden="true">✓</span></span><span class="scene-card-copy"><strong>Town05</strong><span>Car</span></span></button>
+          <button type="button" class="scene-dot scene-card" aria-label="View Town07, Motorcycle" aria-pressed="false"><span class="scene-thumb"><img src="figures/web/scene-05.webp" width="384" height="216" loading="lazy" decoding="async" alt=""><span class="scene-index" aria-hidden="true">05</span><span class="scene-selected" aria-hidden="true">✓</span></span><span class="scene-card-copy"><strong>Town07</strong><span>Motorcycle</span></span></button>
+          <button type="button" class="scene-dot scene-card" aria-label="View Town10HD, Teenager" aria-pressed="false"><span class="scene-thumb"><img src="figures/web/scene-06.webp" width="384" height="216" loading="lazy" decoding="async" alt=""><span class="scene-index" aria-hidden="true">06</span><span class="scene-selected" aria-hidden="true">✓</span></span><span class="scene-card-copy"><strong>Town10HD</strong><span>Teenager</span></span></button>
         </div>
-        <button class="scene-toggle" type="button" aria-label="Pause automatic trajectory switching" aria-pressed="false">Ⅱ</button>
-        <button class="scene-arrow scene-next" type="button" aria-label="Next trajectory">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9.5 5 7 7-7 7"/></svg>
-        </button>
       </div>
     </div>
   </section>
@@ -898,7 +946,7 @@
 
   <!-- Website template adapted from MomaGraph: https://hybridrobotics.github.io/MomaGraph/ -->
 
-  <script defer src="figures/mission-v4.js?v=1"></script>
+  <script defer src="figures/mission-v5.js?v=1"></script>
   <script defer src="figures/site.js?v=1"></script>
 </body>
 </html>
