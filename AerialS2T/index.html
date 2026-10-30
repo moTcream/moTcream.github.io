@@ -870,7 +870,7 @@
     }
   </style>
   <link rel="stylesheet" href="figures/flight-insights.css?v=1">
-  <link rel="stylesheet" href="figures/paper-content.css?v=3">
+  <link rel="stylesheet" href="figures/paper-content.css?v=4">
 </head>
 <body>
   <section class="hero">
@@ -1041,20 +1041,26 @@
   <section class="page-section" id="results" aria-labelledby="results-title">
     <div class="container">
       <h2 class="section-title" id="results-title">Experiments</h2>
-      <p class="paper-copy">We evaluate MoViC on search-to-track and tracking-only tasks. On unseen maps, MoViC improves end-to-end success from <strong>10.2% to 16.6%</strong> over its π<sub>0.5</sub> base policy, and tracking continuity from 26.02% to 31.66%.</p>
+      <p class="paper-copy">We evaluate trajectory prediction in open loop and policy performance on search-to-track and tracking-only tasks in closed loop. On unseen maps, MoViC improves end-to-end success from <strong>10.2% to 16.6%</strong> over its π<sub>0.5</sub> base policy, and tracking continuity from 26.02% to 31.66%.</p>
       <div class="result-tabs" role="tablist" aria-label="Evaluation map split">
         <button id="tab-unseen" type="button" role="tab" aria-selected="true" aria-controls="panel-unseen" tabindex="0" data-split="unseen">Unseen maps</button>
         <button id="tab-seen" type="button" role="tab" aria-selected="false" aria-controls="panel-seen" tabindex="-1" data-split="seen">Seen maps</button>
       </div>
       <div id="panel-unseen" role="tabpanel" aria-labelledby="tab-unseen">
         <p class="split-note">500 evaluation episodes from Town05 and Town07, both excluded from training and validation.</p>
-<div class="results-scroll" tabindex="0" role="region" aria-label="Unseen map results"><table><caption class="sr-only">Closed-loop unseen map results from manuscript Table 1. All values are percentages.</caption><thead><tr><th scope="col">Policy</th><th scope="col"><abbr title="End-to-end success rate">E2E-SR</abbr> ↑</th><th scope="col"><abbr title="Acquisition rate">AR</abbr> ↑</th><th scope="col"><abbr title="Collision rate">CR</abbr> ↓</th><th scope="col"><abbr title="Tracking ratio">TR</abbr> ↑</th><th scope="col"><abbr title="Tracking continuity ratio">TCR</abbr> ↑</th></tr></thead><tbody><tr><th scope="row">SmolVLA</th><td>1.40</td><td>42.20</td><td>18.20</td><td>25.82</td><td>22.36</td></tr><tr><th scope="row">π<sub>0</sub></th><td>2.00</td><td>45.60</td><td>19.20</td><td>19.26</td><td>17.43</td></tr><tr><th scope="row">π<sub>0.5</sub></th><td>10.20</td><td>31.60</td><td>10.80</td><td>28.40</td><td>26.02</td></tr><tr class="ours"><th scope="row">MoViC</th><td>16.60</td><td>41.40</td><td>8.80</td><td>33.19</td><td>31.66</td></tr></tbody></table></div>
+<div class="results-scroll" tabindex="0" role="region" aria-label="Unseen map results"><table><caption class="sr-only">Open-loop and closed-loop unseen map results from manuscript Table 1. Open-loop errors in meters; other metrics in percent.</caption><thead>
+<tr class="result-groups"><th scope="col" rowspan="2">Policy</th><th scope="colgroup" colspan="3">Open-loop (m)</th><th scope="colgroup" colspan="3">AerialS2T (%)</th><th scope="colgroup" colspan="2">Tracking-only (%)</th></tr>
+<tr><th scope="col"><abbr title="Average displacement error">ADE</abbr> ↓</th><th scope="col"><abbr title="First waypoint displacement error">First-DE</abbr> ↓</th><th scope="col"><abbr title="Final waypoint displacement error">Final-DE</abbr> ↓</th><th scope="col"><abbr title="End-to-end success rate">E2E-SR</abbr> ↑</th><th scope="col"><abbr title="Acquisition rate">AR</abbr> ↑</th><th scope="col"><abbr title="Collision rate">CR</abbr> ↓</th><th scope="col"><abbr title="Tracking ratio">TR</abbr> ↑</th><th scope="col"><abbr title="Tracking continuity ratio">TCR</abbr> ↑</th></tr>
+</thead><tbody><tr><th scope="row">SmolVLA</th><td>2.738</td><td>0.660</td><td>4.829</td><td>1.40</td><td>42.20</td><td>18.20</td><td>25.82</td><td>22.36</td></tr><tr><th scope="row">π<sub>0</sub></th><td>2.832</td><td>0.657</td><td>5.054</td><td>2.00</td><td>45.60</td><td>19.20</td><td>19.26</td><td>17.43</td></tr><tr><th scope="row">π<sub>0.5</sub></th><td>2.020</td><td>0.458</td><td>3.699</td><td>10.20</td><td>31.60</td><td>10.80</td><td>28.40</td><td>26.02</td></tr><tr class="ours"><th scope="row">MoViC</th><td>1.602</td><td>0.492</td><td>2.577</td><td>16.60</td><td>41.40</td><td>8.80</td><td>33.19</td><td>31.66</td></tr></tbody></table></div>
       </div>
       <div id="panel-seen" role="tabpanel" aria-labelledby="tab-seen" hidden>
         <p class="split-note">Independent test episodes from the four training maps: Town01, Town03, Town04, and Town10HD.</p>
-<div class="results-scroll" tabindex="0" role="region" aria-label="Seen map results"><table><caption class="sr-only">Closed-loop seen map results from manuscript Table 1. All values are percentages.</caption><thead><tr><th scope="col">Policy</th><th scope="col"><abbr title="End-to-end success rate">E2E-SR</abbr> ↑</th><th scope="col"><abbr title="Acquisition rate">AR</abbr> ↑</th><th scope="col"><abbr title="Collision rate">CR</abbr> ↓</th><th scope="col"><abbr title="Tracking ratio">TR</abbr> ↑</th><th scope="col"><abbr title="Tracking continuity ratio">TCR</abbr> ↑</th></tr></thead><tbody><tr><th scope="row">SmolVLA</th><td>1.08</td><td>49.28</td><td>13.54</td><td>27.98</td><td>24.55</td></tr><tr><th scope="row">π<sub>0</sub></th><td>0.90</td><td>44.77</td><td>20.76</td><td>20.67</td><td>18.86</td></tr><tr><th scope="row">π<sub>0.5</sub></th><td>5.42</td><td>36.82</td><td>3.79</td><td>32.10</td><td>27.76</td></tr><tr class="ours"><th scope="row">MoViC</th><td>11.01</td><td>44.58</td><td>2.53</td><td>37.20</td><td>33.12</td></tr></tbody></table></div>
+<div class="results-scroll" tabindex="0" role="region" aria-label="Seen map results"><table><caption class="sr-only">Open-loop and closed-loop seen map results from manuscript Table 1. Open-loop errors in meters; other metrics in percent.</caption><thead>
+<tr class="result-groups"><th scope="col" rowspan="2">Policy</th><th scope="colgroup" colspan="3">Open-loop (m)</th><th scope="colgroup" colspan="3">AerialS2T (%)</th><th scope="colgroup" colspan="2">Tracking-only (%)</th></tr>
+<tr><th scope="col"><abbr title="Average displacement error">ADE</abbr> ↓</th><th scope="col"><abbr title="First waypoint displacement error">First-DE</abbr> ↓</th><th scope="col"><abbr title="Final waypoint displacement error">Final-DE</abbr> ↓</th><th scope="col"><abbr title="End-to-end success rate">E2E-SR</abbr> ↑</th><th scope="col"><abbr title="Acquisition rate">AR</abbr> ↑</th><th scope="col"><abbr title="Collision rate">CR</abbr> ↓</th><th scope="col"><abbr title="Tracking ratio">TR</abbr> ↑</th><th scope="col"><abbr title="Tracking continuity ratio">TCR</abbr> ↑</th></tr>
+</thead><tbody><tr><th scope="row">SmolVLA</th><td>2.339</td><td>0.570</td><td>4.106</td><td>1.08</td><td>49.28</td><td>13.54</td><td>27.98</td><td>24.55</td></tr><tr><th scope="row">π<sub>0</sub></th><td>2.364</td><td>0.559</td><td>4.203</td><td>0.90</td><td>44.77</td><td>20.76</td><td>20.67</td><td>18.86</td></tr><tr><th scope="row">π<sub>0.5</sub></th><td>1.552</td><td>0.362</td><td>2.827</td><td>5.42</td><td>36.82</td><td>3.79</td><td>32.10</td><td>27.76</td></tr><tr class="ours"><th scope="row">MoViC</th><td>0.984</td><td>0.428</td><td>1.631</td><td>11.01</td><td>44.58</td><td>2.53</td><td>37.20</td><td>33.12</td></tr></tbody></table></div>
       </div>
-      <p class="results-source">Closed-loop evaluation on AerialLIFT-10K. All values are percentages.</p>
+      <p class="results-source">Open-loop errors are reported in meters; AerialS2T and tracking-only metrics are percentages.</p>
     </div>
   </section>
 
