@@ -8,6 +8,8 @@
   <meta name="theme-color" content="#10263a">
   <link rel="preload" as="image" href="figures/web/poster-01-1280.webp" imagesrcset="figures/web/poster-01-640.webp 640w, figures/web/poster-01-1280.webp 1280w" imagesizes="100vw" fetchpriority="high">
   <title>AerialS2T</title>
+  <meta name="description" content="AerialS2T connects language-guided search and sustained tracking. Explore AerialLIFT-10K and MoViC, a motion-view coupling framework for joint flight and camera control.">
+  <meta property="og:title" content="AerialS2T: Motion–View Coupling in Vision-Language-Action Models for Aerial Search-to-Track">
   <style>
     :root {
       --heading-color: #1f5a91;
@@ -868,6 +870,7 @@
     }
   </style>
   <link rel="stylesheet" href="figures/flight-insights.css?v=1">
+  <link rel="stylesheet" href="figures/paper-content.css?v=3">
 </head>
 <body>
   <section class="hero">
@@ -899,7 +902,7 @@
           <img class="brand-icon" src="figures/web/logo-176.webp" srcset="figures/web/logo-176.webp 176w, figures/web/logo-264.webp 264w" sizes="(max-width:800px) 64px, 88px" alt="" width="88" height="88" decoding="async">
           <span class="brand-name" aria-hidden="true"><span class="brand-aerial">Aerial</span><span class="brand-s">S</span><span class="brand-two">2</span><span class="brand-t">T</span></span>
         </div>
-        <h1 class="publication-title">Learning Vision-Language-Action Policies<br>for Aerial Search-to-Track</h1>
+        <h1 class="publication-title"><span class="sr-only">AerialS2T: </span><span class="paper-title-main">Motion–View Coupling in Vision-Language-Action Models</span><br>for Aerial Search-to-Track</h1>
 
         <p class="author-line primary">
           <span>Jiaxu Tian<sup>1,*</sup></span>
@@ -984,6 +987,7 @@
 
   <section class="page-section alt" id="overview" aria-label="Task overview">
     <div class="container">
+      <p class="paper-copy">In AerialS2T, a UAV receives a language instruction describing a moving target that is initially outside the camera’s field of view. It must locate the target and keep following it by controlling its flight path and camera pitch.</p>
       <div class="figure-wrap">
         <picture class="figure-media" style="aspect-ratio:3200/1586"><source type="image/webp" data-srcset="figures/web/teaser-960.webp 960w, figures/web/teaser-1600.webp 1600w, figures/web/teaser-2400.webp 2400w, figures/web/teaser-3200.webp 3200w" sizes="(max-width:1028px) calc(100vw - 48px), 980px"><img loading="lazy" decoding="async" src="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%223200%22 height=%221586%22/%3E" data-src="figures/teaser.png" width="3200" height="1586" alt="AerialS2T overview"></picture><noscript><img src="figures/teaser.png" width="3200" height="1586" alt="AerialS2T overview"></noscript>
         <p class="figure-caption">Figure 1. AerialS2T task overview: takeoff, search, acquire, and track under language instructions.</p>
@@ -994,6 +998,7 @@
   <section class="page-section" id="dataset">
     <div class="container">
       <h2 class="section-title">AerialLIFT-10K</h2>
+      <p class="paper-copy">AerialLIFT-10K contains <strong>10,127 expert demonstrations</strong>, with 106.3 hours of flight and 1.90 million action-labeled steps. Collected in a CARLA-based simulation environment, it covers 6 maps, 12 weather settings, and 93 target models. Each demonstration provides synchronized observations, UAV poses, and joint flight and camera action labels.</p>
       <div class="figure-wrap">
         <picture class="figure-media" style="aspect-ratio:3200/1880"><source type="image/webp" data-srcset="figures/web/dataset-960.webp 960w, figures/web/dataset-1600.webp 1600w, figures/web/dataset-2400.webp 2400w, figures/web/dataset-3200.webp 3200w" sizes="(max-width:1028px) calc(100vw - 48px), 980px"><img loading="lazy" decoding="async" src="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%223200%22 height=%221880%22/%3E" data-src="figures/dataset.png" width="3200" height="1880" alt="AerialLIFT-10K dataset overview"></picture><noscript><img src="figures/dataset.png" width="3200" height="1880" alt="AerialLIFT-10K dataset overview"></noscript>
         <p class="figure-caption">Figure 2. AerialLIFT-10K dataset overview across maps, targets, weather, and acquisition statistics.</p>
@@ -1019,10 +1024,37 @@
   <section class="page-section alt" id="method">
     <div class="container">
       <h2 class="section-title">MoViC</h2>
+      <p class="paper-copy">MoViC (Motion–View Coupling) extends a base VLA policy with recurrent target forecasting and projective action decoding. It uses RGB observations, a language instruction, and the UAV state to jointly predict flight and camera actions.</p>
       <div class="figure-wrap">
         <picture class="figure-media" style="aspect-ratio:3200/1514"><source type="image/webp" data-srcset="figures/web/model-960.webp 960w, figures/web/model-1600.webp 1600w, figures/web/model-2400.webp 2400w, figures/web/model-3200.webp 3200w" sizes="(max-width:1028px) calc(100vw - 48px), 980px"><img loading="lazy" decoding="async" src="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%223200%22 height=%221514%22/%3E" data-src="figures/model.png?v=20261027" width="3200" height="1514" alt="MoViC architecture"></picture><noscript><img src="figures/model.png?v=20261027" width="3200" height="1514" alt="MoViC architecture"></noscript>
-        <p class="figure-caption">Figure 3. Method overview: MoViC architecture with recurrent target forecasting and geometric action refinement.</p>
+        <p class="figure-caption">Figure 3. MoViC combines recurrent target forecasting and projective action decoding for joint flight and camera control.</p>
       </div>
+
+      <div class="method-notes">
+        <p><strong>Recurrent Target Forecasting</strong> retains target information across observations and predicts distributions over target positions at future waypoint times.</p>
+        <p><strong>Projective Action Decoding</strong> projects those predictions into the camera views determined by the base policy’s initial actions. The resulting geometry guides residual updates to the flight and camera actions.</p>
+        <p>The policy predicts eight waypoints over a 1.6 s horizon and replans every 0.2 s.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="page-section" id="results" aria-labelledby="results-title">
+    <div class="container">
+      <h2 class="section-title" id="results-title">Experiments</h2>
+      <p class="paper-copy">We evaluate MoViC on search-to-track and tracking-only tasks. On unseen maps, MoViC improves end-to-end success from <strong>10.2% to 16.6%</strong> over its π<sub>0.5</sub> base policy, and tracking continuity from 26.02% to 31.66%.</p>
+      <div class="result-tabs" role="tablist" aria-label="Evaluation map split">
+        <button id="tab-unseen" type="button" role="tab" aria-selected="true" aria-controls="panel-unseen" tabindex="0" data-split="unseen">Unseen maps</button>
+        <button id="tab-seen" type="button" role="tab" aria-selected="false" aria-controls="panel-seen" tabindex="-1" data-split="seen">Seen maps</button>
+      </div>
+      <div id="panel-unseen" role="tabpanel" aria-labelledby="tab-unseen">
+        <p class="split-note">500 evaluation episodes from Town05 and Town07, both excluded from training and validation.</p>
+<div class="results-scroll" tabindex="0" role="region" aria-label="Unseen map results"><table><caption class="sr-only">Closed-loop unseen map results from manuscript Table 1. All values are percentages.</caption><thead><tr><th scope="col">Policy</th><th scope="col"><abbr title="End-to-end success rate">E2E-SR</abbr> ↑</th><th scope="col"><abbr title="Acquisition rate">AR</abbr> ↑</th><th scope="col"><abbr title="Collision rate">CR</abbr> ↓</th><th scope="col"><abbr title="Tracking ratio">TR</abbr> ↑</th><th scope="col"><abbr title="Tracking continuity ratio">TCR</abbr> ↑</th></tr></thead><tbody><tr><th scope="row">SmolVLA</th><td>1.40</td><td>42.20</td><td>18.20</td><td>25.82</td><td>22.36</td></tr><tr><th scope="row">π<sub>0</sub></th><td>2.00</td><td>45.60</td><td>19.20</td><td>19.26</td><td>17.43</td></tr><tr><th scope="row">π<sub>0.5</sub></th><td>10.20</td><td>31.60</td><td>10.80</td><td>28.40</td><td>26.02</td></tr><tr class="ours"><th scope="row">MoViC</th><td>16.60</td><td>41.40</td><td>8.80</td><td>33.19</td><td>31.66</td></tr></tbody></table></div>
+      </div>
+      <div id="panel-seen" role="tabpanel" aria-labelledby="tab-seen" hidden>
+        <p class="split-note">Independent test episodes from the four training maps: Town01, Town03, Town04, and Town10HD.</p>
+<div class="results-scroll" tabindex="0" role="region" aria-label="Seen map results"><table><caption class="sr-only">Closed-loop seen map results from manuscript Table 1. All values are percentages.</caption><thead><tr><th scope="col">Policy</th><th scope="col"><abbr title="End-to-end success rate">E2E-SR</abbr> ↑</th><th scope="col"><abbr title="Acquisition rate">AR</abbr> ↑</th><th scope="col"><abbr title="Collision rate">CR</abbr> ↓</th><th scope="col"><abbr title="Tracking ratio">TR</abbr> ↑</th><th scope="col"><abbr title="Tracking continuity ratio">TCR</abbr> ↑</th></tr></thead><tbody><tr><th scope="row">SmolVLA</th><td>1.08</td><td>49.28</td><td>13.54</td><td>27.98</td><td>24.55</td></tr><tr><th scope="row">π<sub>0</sub></th><td>0.90</td><td>44.77</td><td>20.76</td><td>20.67</td><td>18.86</td></tr><tr><th scope="row">π<sub>0.5</sub></th><td>5.42</td><td>36.82</td><td>3.79</td><td>32.10</td><td>27.76</td></tr><tr class="ours"><th scope="row">MoViC</th><td>11.01</td><td>44.58</td><td>2.53</td><td>37.20</td><td>33.12</td></tr></tbody></table></div>
+      </div>
+      <p class="results-source">Closed-loop evaluation on AerialLIFT-10K. All values are percentages.</p>
     </div>
   </section>
 
@@ -1030,5 +1062,6 @@
 
   <script defer src="figures/mission-v7.js?v=8"></script>
   <script defer src="figures/site.js?v=2"></script>
+  <script defer src="figures/paper-content.js?v=1"></script>
 </body>
 </html>

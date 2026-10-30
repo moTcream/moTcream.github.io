@@ -1,0 +1,34 @@
+.hero .publication-title { max-width:1120px;text-wrap:initial; }
+@media(min-width:1101px) { .paper-title-main { white-space:nowrap; } }
+.sr-only { position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0; }
+.paper-copy { max-width:980px;margin:0 auto 26px;color:#344b60;font-size:18px;line-height:1.8;text-align:left; }
+.paper-copy strong { font-weight:600;color:#2e526d; }
+#overview .paper-copy { margin-bottom:28px; }
+#overview .figure-wrap { margin-top:0; }
+#dataset .paper-copy { max-width:980px; }
+.method-notes { margin:27px auto 0;max-width:980px; }
+.method-notes p { margin:0 0 14px;color:#3e566b;font-size:17px;line-height:1.8; }
+.method-notes p:last-child { margin-bottom:0; }
+.method-notes strong { font-weight:600;color:#315772; }
+#results .container { max-width:1030px; }
+#results .paper-copy { margin-bottom:25px; }
+.result-tabs { display:flex;justify-content:center;gap:30px;margin:0 auto 17px;border-bottom:1px solid #d3dfe8; }
+.result-tabs button { margin-bottom:-1px;padding:11px 2px;border:0;border-bottom:2px solid transparent;background:none;color:#667a89;font-size:17px;line-height:1.4;cursor:pointer; }
+.result-tabs button[aria-selected="true"] { color:#245b83;border-bottom-color:#245b83;font-weight:600; }
+.result-tabs button:focus-visible,.results-scroll:focus-visible { outline:2px solid #2b8aa0;outline-offset:4px; }
+.split-note { margin:0 0 20px;text-align:left;color:#5b7081;font-size:14px;line-height:1.7; }
+.results-scroll { overflow-x:auto;scrollbar-width:thin;scrollbar-color:#9ab9cc transparent; }
+.results-scroll table { border-collapse:collapse;width:100%;min-width:650px;text-align:right;border-top:2px solid #668194;border-bottom:2px solid #668194; }
+.results-scroll th,.results-scroll td { padding:12px 17px;font-size:16px;line-height:1.5;font-weight:400;font-variant-numeric:tabular-nums;white-space:nowrap;color:#344e63; }
+.results-scroll thead th { padding-top:13px;padding-bottom:13px;border-bottom:1px solid #9db1c0;font-size:14px;font-weight:600;color:#385b75; }
+.results-scroll th:first-child { text-align:left; }
+.results-scroll abbr { text-decoration:none;cursor:help; }
+.results-scroll tr.ours > * { background:#edf4f9;color:#244d6c;font-weight:600; }
+.results-source { margin:12px 0 23px;text-align:left;color:#6a7e8e;font-size:13px;line-height:1.6; }
+@media(max-width:760px) {
+ .paper-copy { font-size:16px;line-height:1.8;margin-bottom:23px; }
+ .method-notes { margin-top:23px; }.method-notes p { font-size:16px; }
+ .result-tabs { gap:28px; }.result-tabs button { font-size:16px; }
+ .results-scroll th,.results-scroll td { padding:12px 15px;font-size:15px; }.results-scroll thead th { font-size:13px; }
+ .split-note { font-size:13px; }.results-source { font-size:12px; }
+}
