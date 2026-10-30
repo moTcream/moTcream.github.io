@@ -27,7 +27,9 @@
 .results-scroll .result-groups th + th { border-left:1px solid #d3dfe8; }
 .results-scroll thead tr:last-child th:nth-child(3),.results-scroll thead tr:last-child th:nth-child(6),.results-scroll tbody td:nth-child(4),.results-scroll tbody td:nth-child(7) { border-right:1px solid #d3dfe8; }
 .results-scroll abbr { text-decoration:none;cursor:help; }
-.results-scroll tr.ours > * { background:#edf4f9;color:#244d6c;font-weight:600; }
+.results-scroll tr.ours > * { background:#edf4f9;color:#244d6c; }
+.results-scroll tr.ours th { font-weight:600; }
+.results-scroll td.best { font-weight:700; }
 .results-source { margin:12px 0 23px;text-align:left;color:#6a7e8e;font-size:13px;line-height:1.6; }
 @media(max-width:760px) {
  .paper-copy { font-size:16px;line-height:1.8;margin-bottom:23px; }
