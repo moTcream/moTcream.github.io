@@ -15,3 +15,5 @@
 .example-play:focus-visible { outline:3px solid #287ba3;outline-offset:-4px;border-radius:12px; }
 @media(prefers-reduced-motion:reduce) { .example-play-icon { transition:none; } }
 
+.example-instruction { margin:0 0 20px;padding:4px 0 4px 18px;border-left:3px solid #6aa7b5;color:#365b76;font-size:19px;line-height:1.7;text-align:left; }
+@media(max-width:700px) { .example-instruction { font-size:17px;padding-left:14px;margin-bottom:18px; } }
